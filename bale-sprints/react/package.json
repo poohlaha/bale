@@ -1,5 +1,5 @@
 {
-  "name": "bale-sprint/react",
+  "name": "@bale-sprint/react",
   "version": "1.0.0",
   "keywords": [
     "react",
@@ -15,6 +15,7 @@
     "node": ">=16"
   },
   "publishConfig": {
+    "registry": "https://registry.npmjs.org",
     "access": "public"
   },
   "scripts": {},

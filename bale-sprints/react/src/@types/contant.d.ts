@@ -3,6 +3,9 @@
  * @date 2023-04-21
  * @author poohlaha
  */
+declare module 'react'
+declare module 'react-dom'
+declare module 'react-router-dom'
 declare module 'react-fastclick'
 declare module 'mobx-react-lite'
 declare module 'antd-mobile'
