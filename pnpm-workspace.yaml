@@ -1,3 +1,4 @@
 packages:
   - 'bale-tools/*'
+  - 'bale-sprints/*'
   - '!**/test/**'
