@@ -1,0 +1,21 @@
+{
+  "name": "bale-sprint/react",
+  "version": "1.0.0",
+  "keywords": [
+    "react",
+    "react",
+    "css",
+    "js",
+    "tsx",
+    "ts"
+  ],
+  "description": "React common files, contains mobile and pc .",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {}
+}

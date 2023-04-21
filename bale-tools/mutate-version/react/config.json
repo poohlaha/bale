@@ -1,0 +1,51 @@
+{
+  "dependencies": {
+    "lib-flexible": "^0.3.2",
+    "axios": "^0.21.1",
+    "crypto-js": "^4.0.0",
+    "mobx": "^5.15.7",
+    "mobx-react-lite": "^2.2.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-fastclick": "^3.0.2",
+    "react-intl": "^5.18.3",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "husky": "^8.0.3",
+    "prettier": "^2.4.1",
+    "lint-staged": "^13.0.3",
+    "jscpd": "^3.4.5",
+    "babel-plugin-import": "^1.13.3",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-jsx-control-statements": "^2.2.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "postcss-aspect-ratio-mini": "^1.1.0",
+    "postcss-write-svg": "^3.0.1"
+  },
+  "tsDependencies": {
+    "typescript": "^4.3.2",
+    "@types/react": "^18.0.12",
+    "@types/react-dom": "^18.0.5",
+    "@types/react-router-dom": "^5.1.7"
+  },
+  "tsDevDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "**/*.{vue,jsx,js,tsx,ts,json,css,md}": ["prettier --write"],
+    "**/*.{vue,jsx,js,tsx,ts}": ["eslint --fix"]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@request/*": ["node_modules/@bale-utils/react-utils/src/mobile/request/*"],
+      "@router/*": ["node_modules/@bale-utils/react-utils/src/common/communal/router/*"],
+      "@communal/*": ["node_modules/@bale-utils/react-utils/src/common/communal/*"],
+      "@hooks/*": ["node_modules/@bale-utils/react-utils/src/common/communal/hooks/*"],
+      "@provider/*": ["node_modules/@bale-utils/react-utils/src/common/communal/provider/*"],
+      "@utils/*": ["node_modules/@bale-utils/react-utils/src/mobile/utils/*"],
+      "@srcCommunal/*": ["src/communal/*"],
+      "@config/*": ["src/communal/config/*"],
+      "@assets/*": ["src/assets/*"],
+      "@route/*": ["src/route/*"],
+      "@stores/*": ["src/sample/stores/*"],
+      "@views/*": ["src/sample/views/*"],
+      "@components/*": ["src/sample/components/*"],
+      "@modules/*": ["src/sample/modules/*"],
+      "@base/*": ["src/sample/base/*"]
+    }
+  }
+}
