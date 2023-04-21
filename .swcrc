@@ -1,6 +1,6 @@
 {
   "jsc": {
-    "baseUrl": "packages",
+    "baseUrl": "bale-tools",
     "parser": {
       "syntax": "typescript"
     },

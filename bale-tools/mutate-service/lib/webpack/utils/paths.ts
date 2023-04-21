@@ -71,6 +71,14 @@ class Paths {
     }
 
     if (!Utils.isBlank(entry)) {
+      if (BalePaths.isAbsoluteURL(entry)) {
+        if (fsExtra.pathExistsSync(entry)) {
+          return entry
+        }
+
+        return getDefaultEntry() || ''
+      }
+
       if (fsExtra.pathExistsSync(path.join(appRootDir, entry))) {
         return path.join(appRootDir, entry) || ''
       }

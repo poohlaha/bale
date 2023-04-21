@@ -14,7 +14,6 @@ import { StoreProvider } from '@stores/index'
 import '@assets/styles/theme/index.less'
 // import 'lib-flexible'
 // import 'core-js/stable'
-import 'antd/dist/antd.css'
 
 interface IAppProps {
   isFirstScreen: boolean

@@ -160,6 +160,7 @@ class Paths {
     const interfaces = os.networkInterfaces()
     for (let inter in interfaces) {
       let int: NetworkInterfaceInfo[] = interfaces[inter] || []
+      // @ts-ignore
       for (const element of int) {
         let { family, address, internal } = element
         if (family === 'IPv4' && address !== '127.0.0.1' && !internal) {

@@ -8,7 +8,7 @@
 import React from 'react'
 import { BrowserRouter, HashRouter, Route } from 'react-router-dom'
 import Exception from '@communal/exception'
-import Layout from '@communal/layout'
+import Layout from '@srcCommunal/layout'
 import ScrollToTop from '@router/scrollToTop'
 import FirstScreen from '@views/pages/first-screen'
 import ThemeProvider from '@communal/provider/theme'

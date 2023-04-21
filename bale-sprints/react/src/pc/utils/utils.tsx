@@ -5,7 +5,10 @@ const Utils = {
    * 从localStorage中设置值
    */
   setLocal: (name: string, item: any, needExpTime = false) => {
-    if (!item) return
+    if (!item || (Array.isArray(item) && item.length === 0)) {
+      window.localStorage.setItem(name, '')
+      return
+    }
 
     if (needExpTime) {
       let data: string = JSON.stringify({

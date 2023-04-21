@@ -5,19 +5,24 @@ const Utils = {
    * 从localStorage中设置值
    */
   setLocal: (name: string, item: any, needExpTime = false) => {
-    if (!item) return
-
-    if (needExpTime) {
-      let data: string = JSON.stringify({
-        data: item,
-        time: new Date().getTime(),
-      })
-
-      window.localStorage.setItem(name, Utils.encrypt(data))
+    if (!item || (Array.isArray(item) && item.length === 0)) {
+      window.localStorage.setItem(name, '')
       return
     }
 
-    window.localStorage.setItem(name, typeof item !== 'string' ? Utils.encrypt(JSON.stringify(item)) : Utils.encrypt(item))
+    let data: any = null
+    if (needExpTime) {
+      data = {
+        data: item,
+        time: new Date().getTime()
+      }
+    } else {
+      data = item
+    }
+
+    if (typeof data !== 'string') data = JSON.stringify(data)
+
+    window.localStorage.setItem(name, Utils.encrypt(data))
   },
 
   /**
@@ -26,8 +31,13 @@ const Utils = {
   getLocal: (name: string, needExpTime = false) => {
     const item = window.localStorage.getItem(name)
     if (!item) return null
-    if (!needExpTime) return Utils.decrypt(item)
-    return item ? JSON.parse(Utils.decrypt(item)) : Utils.decrypt(item)
+
+    const data = Utils.decrypt(item)
+    if (needExpTime) {
+      return JSON.parse(data)
+    }
+
+    return Utils.isStringObject(data) ? JSON.parse(data) : data
   },
 
   /**

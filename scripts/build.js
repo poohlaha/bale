@@ -12,11 +12,11 @@ const path = require('path')
 const skips = ['mutate-version']
 function build() {
   const outputDir = 'dist'
-  shell.exec(`swc packages -d ${outputDir}`)
+  shell.exec(`swc bale-tools -d ${outputDir}`)
 
   // 拷贝 package.json 到目录
   const outputPath = path.join(__dirname, '../', outputDir)
-  const packagesPath = path.join(__dirname, '../', 'packages')
+  const packagesPath = path.join(__dirname, '../', 'bale-tools')
   const dirs = fsExtra.readdirSync(packagesPath)
   for (let dir of dirs) {
     const projectDir = path.join(packagesPath, dir)

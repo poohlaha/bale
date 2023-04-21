@@ -135,7 +135,7 @@ export type Stores = ReturnType<typeof createStore>
 - 引入
 
 ```shell
-  npm install bale-sprint/react
+  npm install @bale-sprint/react
 ```
 
 - api
