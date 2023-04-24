@@ -9,6 +9,7 @@
   "module": {
     "type": "commonjs"
   },
+   "exclude": ["node_modules"],
   "sourceMaps": false,
   "isModule": true,
   "minify": false

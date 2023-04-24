@@ -12,10 +12,13 @@ const path = require('path')
 const skips = ['mutate-version']
 function build() {
   const outputDir = 'dist'
+  const outputPath = path.join(__dirname, '../', outputDir)
+  fsExtra.removeSync(outputPath)
+
   shell.exec(`swc bale-tools -d ${outputDir}`)
 
   // 拷贝 package.json 到目录
-  const outputPath = path.join(__dirname, '../', outputDir)
+
   const packagesPath = path.join(__dirname, '../', 'bale-tools')
   const dirs = fsExtra.readdirSync(packagesPath)
   for (let dir of dirs) {
@@ -32,9 +35,25 @@ function build() {
       if (!fsExtra.pathExistsSync(outputFullPath)) {
         fsExtra.ensureDirSync(outputFullPath)
       }
-      fsExtra.copySync(packageJsonPath, path.join(outputFullPath, 'package.json'))
-      fsExtra.copySync(readMePath, path.join(outputFullPath, 'README.md'))
-      fsExtra.copySync(licensePath, path.join(outputFullPath, 'LICENSE'))
+
+      const outputPackageJsonPath = path.join(outputFullPath, 'package.json')
+      const outputReadmePath = path.join(outputFullPath, 'README.md')
+      const outputLicensePath = path.join(outputFullPath, 'LICENSE')
+
+      if (fsExtra.pathExistsSync(outputPackageJsonPath)) {
+        fsExtra.removeSync(outputPackageJsonPath)
+      }
+
+      if (fsExtra.pathExistsSync(outputReadmePath)) {
+        fsExtra.removeSync(outputReadmePath)
+      }
+
+      if (fsExtra.pathExistsSync(outputLicensePath)) {
+        fsExtra.removeSync(outputLicensePath)
+      }
+      fsExtra.copySync(packageJsonPath, outputPackageJsonPath)
+      fsExtra.copySync(readMePath, outputReadmePath)
+      fsExtra.copySync(licensePath, outputLicensePath)
     }
   }
 }
