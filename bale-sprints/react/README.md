@@ -6,6 +6,9 @@
 ```
 ├── types                                            // *.d.ts 目录
 ├── assets                                           // 资源文件目录
+│   ├── locales                                      // 国际化配置
+│   │   ├── en.toml                                  // 中文
+│   │   └── zh.toml                                  // 英文
 ├── communal                                         // 框架目录
 │   ├── config                                       // 配置文件
 │   │   ├── constant.toml                            // 全局常量类配置文件

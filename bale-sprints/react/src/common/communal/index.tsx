@@ -11,8 +11,9 @@ import ReactDOM from 'react-dom/client'
 import initReactFastclick from 'react-fastclick'
 import Routes from '@router/app'
 import { StoreProvider } from '@stores/index'
-import '@assets/styles/theme/index.less'
-import 'lib-flexible'
+// 在 layout 中引入
+// import '@assets/styles/theme/index.less'
+// import 'lib-flexible'
 
 interface IAppProps {
   isFirstScreen: boolean
