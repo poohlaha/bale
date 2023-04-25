@@ -18,6 +18,7 @@ import ThemeProvider from '@communal/provider/theme'
  */
 const getHashRouter = () => {
   return (
+    // @ts-ignore
     <HashRouter basename={'/'}>
       <Exception>
         <Layout />
@@ -28,6 +29,7 @@ const getHashRouter = () => {
 
 const getBrowserRouter = () => {
   return (
+    // @ts-ignore
     <BrowserRouter basename={process.env.PROJECT_URL} keyLength={12}>
       <Exception>
         <Layout />
@@ -41,6 +43,7 @@ const getBrowserRouter = () => {
  */
 const getFirstRouter = () => {
   return (
+    // @ts-ignore
     <HashRouter basename={'/'}>
       <Exception>
         <ScrollToTop />

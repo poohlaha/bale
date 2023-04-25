@@ -67,7 +67,7 @@ export default class Request {
    * 获取请求数据, headers统一在axios过滤器中处理
    */
   static getRequestHeader(config: RequestConstant) {
-    let url = config.url
+    let url = config.url || ''
 
     // 判断是否需要加密
     let data = config.data || {}
@@ -80,7 +80,8 @@ export default class Request {
       method: config.method?.toString() || MethodEnum.POST.toString(),
       url: url,
       data: data,
-      responseType: config.responseType,
+      responseType: config.responseType || '',
+      headers: config.headers || {}
     }
   }
 
@@ -131,7 +132,9 @@ export default class Request {
       }
     } catch (e: any) {
       console.error(e)
-      TOAST.show({ message: COMMON.getLanguageText('ERROR_MESSAGE'), type: 4 })
+      if (config.showError !== false) {
+        TOAST.show({ message: COMMON.getLanguageText('ERROR_MESSAGE'), type: 4 })
+      }
       return config.fail?.(e, config.params || {})
     }
   }
@@ -151,15 +154,16 @@ export default class Request {
           if (error.code === '5000') {
             PAGE_JUMP.toLoginPage(COMMON.getLanguageText('TOKEN_EXPIRED_ERROR'))
             config.fail?.(error, config.params || {})
-            return
           } else {
-            TOAST.show({ message: error.reason, type: 4 })
+            if (config.showError !== false) {
+              TOAST.show({ message: error.reason, type: 4 })
+            }
             config.fail?.(error, config.params || {})
-            return
           }
-        } else {
+          return
+       } else {
           // 判断是否需要弹出自定义message
-          if (config.params && config.params.message) {
+          if (config.params?.message) {
             TOAST.show({ message: config.params.message })
           }
         }
@@ -176,7 +180,7 @@ export default class Request {
         return
       }
 
-      let resData = null
+      let resData: any = null
       if (Request.isString(res.data)) {
         try {
           resData = JSON.parse(res.data)
@@ -189,17 +193,21 @@ export default class Request {
 
       if (!resData) {
         console.info('没有返回数据')
-        TOAST.show({ message: COMMON.getLanguageText('ERROR_MESSAGE'), type: 4 })
+        if (config.showError !== false) {
+          TOAST.show({ message: COMMON.getLanguageText('ERROR_MESSAGE'), type: 4 })
+        }
         return
       }
 
       // 如果有status字段
       if (resData.status !== null && resData.status !== undefined) {
         if (resData.status.toUpperCase() !== CONSTANT.SUCCESS) {
-          TOAST.show({
-            message: Request.getResponseErrorMessage(resData).reason || COMMON.getLanguageText('ERROR_MESSAGE'),
-            type: 4,
-          })
+          if (config.showError !== false) {
+            TOAST.show({
+              message: Request.getResponseErrorMessage(resData).reason || COMMON.getLanguageText('ERROR_MESSAGE'),
+              type: 4,
+            })
+          }
           return
         }
       }
@@ -222,16 +230,20 @@ export default class Request {
       // 超时
       if (res.errMsg) {
         if (res.errMsg.toLowerCase().indexOf('timeout') !== -1) {
-          TOAST.show({ message: COMMON.getLanguageText('TIMEOUT_MESSAGE'), type: 4 })
+          if (config.showError !== false) {
+            TOAST.show({ message: COMMON.getLanguageText('TIMEOUT_MESSAGE'), type: 4 })
+          }
         }
       } else {
-        TOAST.show({
-          message: Request.getResponseErrorMessage(res.data).reason || COMMON.getLanguageText('ERROR_MESSAGE'),
-          type: 4,
-        })
+        if (config.showError !== false) {
+          TOAST.show({
+            message: Request.getResponseErrorMessage(res.data).reason || COMMON.getLanguageText('ERROR_MESSAGE'),
+            type: 4,
+          })
+        }
       }
 
-      return config.fail && config.fail(res)
+      return config.fail?.(res)
     }
   }
 
@@ -305,8 +317,8 @@ export default class Request {
    * 获取返回错误信息
    */
   static getResponseErrorMessage(data: { [K: string]: any } = {}) {
-    let reason = null
-    let code = null
+    let reason: string
+    let code: number
     try {
       if (!data) {
         return {
@@ -407,7 +419,7 @@ export default class Request {
     }
 
     for (let i = 0; i < queue.length; i++) {
-      let request = queue[i]
+      let request: {[K: string]: any} = queue[i]
       let res = responses[i]
       if (!res) continue
 
@@ -416,7 +428,7 @@ export default class Request {
       }
 
       if (!res) continue
-      request.success && request.success(res.data, request.params || {})
+      request.success?.(res.data, request.params || {})
     }
   }
 
@@ -438,6 +450,6 @@ export default class Request {
    * 判断是不是string类型
    */
   static isString(str: any) {
-    return typeof str == 'string' && str.constructor === String
+    return typeof str === 'string' && str.constructor === String
   }
 }

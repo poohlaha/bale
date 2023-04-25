@@ -34,6 +34,7 @@ interface ConstantComponent {
   responseStream?: boolean
   headers?: { [key: string]: unknown }
   params?: { [key: string]: unknown }
+  showError?: boolean
 }
 
 interface FunctionComponent<T> {
@@ -49,4 +50,5 @@ export type RequestOptions = {
   method: MethodEnum
   data: { [P: string]: unknown }
   responseType: string
+  headers?: { [key: string]: unknown }
 }

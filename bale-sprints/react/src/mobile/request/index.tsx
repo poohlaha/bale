@@ -65,7 +65,7 @@ export default class Request {
    * 获取请求数据, headers统一在axios过滤器中处理
    */
   static getRequestHeader(config: RequestConstant) {
-    let url = config.url
+    let url = config.url || ''
 
     // 判断是否需要加密
     let data = config.data || {}
@@ -76,9 +76,9 @@ export default class Request {
 
     return {
       method: config.method || MethodEnum.POST,
-      url: url,
-      data: data,
-      responseType: config.responseType,
+      url,
+      data,
+      responseType: config.responseType || '',
       baseURL: config.baseURL || process.env.API_ROOT,
       headers: config.headers || {},
     }
@@ -113,7 +113,7 @@ export default class Request {
    * 请求数据
    */
   static async request(config: any = {}) {
-    let options = Request.getRequestHeader(config)
+    let options: RequestOptions = Request.getRequestHeader(config)
 
     // 显示Loading条
     if (Request.getRequestType(config) === RequestTypeEnum.REQUEST) {
@@ -126,12 +126,14 @@ export default class Request {
         return await Request.getResponseData(config, res)
       } else {
         console.error(res)
-        return config.fail && config.fail(res, config.params || {})
+        return config.fail?.(res, config.params || {})
       }
     } catch (e: any) {
       console.error(e)
-      TOAST.show(COMMON.getLanguageText('ERROR_MESSAGE'), 3)
-      return config.fail && config.fail(e, config.params || {})
+      if (config.showError !== false) {
+        TOAST.show(COMMON.getLanguageText('ERROR_MESSAGE'), 3)
+      }
+      return config.fail?.(e, config.params || {})
     }
   }
 
@@ -146,7 +148,7 @@ export default class Request {
       }
 
       if (!res.data) {
-        config.success && config.success(null, {}, config.params || {})
+        config.success?.({}, {}, config.params || {})
         return
       }
 
@@ -156,7 +158,7 @@ export default class Request {
         return
       }
 
-      let resData = null
+      let resData: any = null
       if (Request.isString(res.data)) {
         try {
           resData = JSON.parse(res.data)
@@ -169,7 +171,10 @@ export default class Request {
 
       if (!resData) {
         console.info('没有返回数据')
-        TOAST.show(COMMON.getLanguageText('ERROR_MESSAGE'), 3)
+        if (config.showError !== false) {
+          TOAST.show(COMMON.getLanguageText('ERROR_MESSAGE'), 3)
+        }
+        config.fail?.({})
         return
       }
 
@@ -182,13 +187,15 @@ export default class Request {
             PAGE_JUMP.toLoginPage(COMMON.getLanguageText('TOKEN_EXPIRED_ERROR'))
             config.fail?.(error, config.params || {})
           } else {
-            TOAST.show(error.reason, 3)
+            if (config.showError !== false) {
+              TOAST.show(error.reason, 3)
+            }
             config.fail?.(error, config.params || {})
           }
           return
         } else {
           // 判断是否需要弹出自定义message
-          if (config.params && config.params.message) {
+          if (config.params?.message) {
             TOAST.show(config.params.message)
           }
         }
@@ -210,18 +217,23 @@ export default class Request {
       if (Request.getRequestType(config) === RequestTypeEnum.REQUEST.toString()) {
         TOAST.hide()
       }
+
       console.error(res)
 
       // 超时
       if (res.errMsg) {
         if (res.errMsg.toLowerCase().indexOf('timeout') !== -1) {
-          TOAST.show(COMMON.getLanguageText('TIMEOUT_MESSAGE'), 3)
+          if (config.showError !== false) {
+            TOAST.show(COMMON.getLanguageText('TIMEOUT_MESSAGE'), 3)
+          }
         }
       } else {
-        TOAST.show(Request.getResponseErrorMessage(res.data).reason || COMMON.getLanguageText('ERROR_MESSAGE'), 3)
+        if (config.showError !== false) {
+          TOAST.show(Request.getResponseErrorMessage(res.data).reason || COMMON.getLanguageText('ERROR_MESSAGE'), 3)
+        }
       }
 
-      return config.fail && config.fail(res)
+      return config.fail?.(res)
     }
   }
 
@@ -295,8 +307,8 @@ export default class Request {
    * 获取返回错误信息
    */
   static getResponseErrorMessage(data: { [K: string]: any } = {}) {
-    let reason = null
-    let code = null
+    let reason: string
+    let code: number
     try {
       if (!data) {
         return {
@@ -356,7 +368,7 @@ export default class Request {
    * delete请求
    * @param config
    */
-  static delete(config: any = {}) {
+  static delete(config: RequestConstant) {
     config.method = MethodEnum.DELETE
     return Request.send(config)
   }
@@ -394,7 +406,7 @@ export default class Request {
     }
 
     for (let i = 0; i < queue.length; i++) {
-      let request = queue[i]
+      let request: {[K: string]: any} = queue[i]
       let res = responses[i]
       if (!res) continue
 
@@ -425,6 +437,6 @@ export default class Request {
    * 判断是不是string类型
    */
   static isString(str: any) {
-    return typeof str == 'string' && str.constructor === String
+    return typeof str === 'string' && str.constructor === String
   }
 }

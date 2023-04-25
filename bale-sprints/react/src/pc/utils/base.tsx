@@ -452,7 +452,7 @@ const TOAST = {
     }
 
     getToast(params.message, params.duration, params.type, params.onClose)
-  },
+  }
 }
 
 // 公共模块相关
@@ -461,17 +461,19 @@ const COMMON = {
    * 获取语言文本
    */
   getLanguageText: (name: string, isDom: boolean = false) => {
-    if (!name) return ''
-    const language = isDom
-      ? // eslint-disable-next-line react-hooks/rules-of-hooks
-        useContext(LanguageContext)
-      : Utils.getLocal(CONSTANT.LANGUAGES_NAME) || CONSTANT.LANGUAGES[0]
-    if (language === CONSTANT.LANGUAGES[0]) {
-      return zhCN[name] || ''
-    } else if (language === CONSTANT.LANGUAGES[1]) {
-      return enUS[name] || ''
+    if (Utils.isBlank(name)) return ''
+    try {
+      const language = isDom ? useContext(LanguageContext)
+        : Utils.getLocal(CONSTANT.LANGUAGES_NAME) || CONSTANT.LANGUAGES[0]
+      if (language === CONSTANT.LANGUAGES[0]) {
+        return zhCN[name] || ''
+      } else if (language === CONSTANT.LANGUAGES[1]) {
+        return enUS[name] || ''
+      }
+    } catch (e) {
+      return CONSTANT.LANGUAGES[0]
     }
-  },
+  }
 }
 
 export { EXIT, STORAGE, PAGE_JUMP, ADDRESS, USER, TOAST, COMMON }
