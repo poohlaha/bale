@@ -32,7 +32,7 @@ const App = (props: IAppProps) => {
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 function listen() {
-  if (document.readyState == 'complete') {
+  if (document.readyState === 'complete') {
     // 资源加载完成
     initReactFastclick()
     root.render(<App isFirstScreen={false} />)

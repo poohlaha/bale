@@ -247,10 +247,10 @@ export default class Request {
 
     try {
       Request.export(res.data, contentType, fileName)
-      config.success && config.success({ code: 200 })
+      config.success?.({ code: 200 })
     } catch (e) {
       console.log('文件下载失败')
-      config.success && config.success({ code: 500 })
+      config.success?.({ code: 500 })
     }
   }
 

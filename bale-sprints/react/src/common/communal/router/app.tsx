@@ -7,7 +7,7 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 import React from 'react'
 import { BrowserRouter, HashRouter, Route } from 'react-router-dom'
-import Exception from '@communal/exception'
+import Exception from '../exception'
 import Layout from '@srcCommunal/layout'
 import ScrollToTop from '@router/scrollToTop'
 import FirstScreen from '@views/pages/first-screen'
