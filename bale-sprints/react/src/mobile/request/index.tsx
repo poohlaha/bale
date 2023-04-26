@@ -80,7 +80,7 @@ export default class Request {
       data,
       responseType: config.responseType || '',
       baseURL: config.baseURL || process.env.API_ROOT,
-      headers: config.headers || {},
+      headers: config.headers || {}
     }
   }
 
@@ -117,7 +117,12 @@ export default class Request {
 
     // 显示Loading条
     if (Request.getRequestType(config) === RequestTypeEnum.REQUEST) {
-      TOAST.show(COMMON.getLanguageText('LOADING'), 4, false, 0) // loading
+      TOAST.show({
+        message: COMMON.getLanguageText('LOADING'),
+        type: 4,
+        needTime: false,
+        duration: 0
+      }) // loading
     }
 
     try {
@@ -131,7 +136,7 @@ export default class Request {
     } catch (e: any) {
       console.error(e)
       if (config.showError !== false) {
-        TOAST.show(COMMON.getLanguageText('ERROR_MESSAGE'), 3)
+        TOAST.show({message: COMMON.getLanguageText('ERROR_MESSAGE'), type: 3})
       }
       return config.fail?.(e, config.params || {})
     }
@@ -172,7 +177,7 @@ export default class Request {
       if (!resData) {
         console.info('没有返回数据')
         if (config.showError !== false) {
-          TOAST.show(COMMON.getLanguageText('ERROR_MESSAGE'), 3)
+          TOAST.show({message: COMMON.getLanguageText('ERROR_MESSAGE'), type: 3})
         }
         config.fail?.({})
         return
@@ -188,7 +193,7 @@ export default class Request {
             config.fail?.(error, config.params || {})
           } else {
             if (config.showError !== false) {
-              TOAST.show(error.reason, 3)
+              TOAST.show({message: error.reason, type: 3})
             }
             config.fail?.(error, config.params || {})
           }
@@ -224,12 +229,15 @@ export default class Request {
       if (res.errMsg) {
         if (res.errMsg.toLowerCase().indexOf('timeout') !== -1) {
           if (config.showError !== false) {
-            TOAST.show(COMMON.getLanguageText('TIMEOUT_MESSAGE'), 3)
+            TOAST.show({message: COMMON.getLanguageText('TIMEOUT_MESSAGE'), type: 3})
           }
         }
       } else {
         if (config.showError !== false) {
-          TOAST.show(Request.getResponseErrorMessage(res.data).reason || COMMON.getLanguageText('ERROR_MESSAGE'), 3)
+          TOAST.show({
+            message: Request.getResponseErrorMessage(res.data).reason || COMMON.getLanguageText('ERROR_MESSAGE'),
+            type: 3
+          })
         }
       }
 
@@ -270,8 +278,8 @@ export default class Request {
     try {
       arr.forEach((item: any) => {
         if (item && item.indexOf('=') !== -1 && item.toUpperCase().indexOf(Request.FILENAME) !== -1) {
-          let _arr = item.split('=')
-          fileName = _arr[_arr.length - 1]
+          let items = item.split('=')
+          fileName = items[items.length - 1]
         }
       })
     } catch (e) {
@@ -313,7 +321,7 @@ export default class Request {
       if (!data) {
         return {
           reason: COMMON.getLanguageText('ERROR_MESSAGE'),
-          code: 500,
+          code: 500
         }
       }
 
@@ -333,7 +341,7 @@ export default class Request {
 
     return {
       reason: reason,
-      code: code,
+      code: code
     }
   }
 
@@ -396,12 +404,12 @@ export default class Request {
 
     // 有错误时提示错误
     if (error) {
-      TOAST.show(errors.length > 0 ? errors[0].message : COMMON.getLanguageText('ERROR_MESSAGE'), 3)
+      TOAST.show({message: errors.length > 0 ? errors[0].message : COMMON.getLanguageText('ERROR_MESSAGE'), type: 3})
       return
     }
 
     if (responses.length === 0 || responses.length !== queue.length) {
-      TOAST.show(COMMON.getLanguageText('ERROR_MESSAGE'), 3)
+      TOAST.show({message: COMMON.getLanguageText('ERROR_MESSAGE'), type: 3})
       return
     }
 

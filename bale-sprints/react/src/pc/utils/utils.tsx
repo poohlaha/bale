@@ -13,7 +13,7 @@ const Utils = {
     if (needExpTime) {
       let data: string = JSON.stringify({
         data: item,
-        time: new Date().getTime(),
+        time: new Date().getTime()
       })
 
       window.localStorage.setItem(name, Utils.encrypt(data))
@@ -29,8 +29,10 @@ const Utils = {
   getLocal: (name: string, needExpTime = false) => {
     const item = window.localStorage.getItem(name)
     if (!item) return null
-    if (!needExpTime) return Utils.decrypt(item)
-    return item ? JSON.parse(Utils.decrypt(item)) : Utils.decrypt(item)
+
+    const data = Utils.decrypt(item)
+    if (!needExpTime) return data
+    return item ? JSON.parse(data) : data
   },
 
   /**
@@ -49,7 +51,7 @@ const Utils = {
     if (needExpTime) {
       let data: string = JSON.stringify({
         data: item,
-        time: new Date().getTime(),
+        time: new Date().getTime()
       })
 
       window.sessionStorage.setItem(name, Utils.encrypt(data))
@@ -189,25 +191,6 @@ const Utils = {
     return newArr.length > 0 ? (returnProp === 'all' ? newArr[0] : newArr[0][returnProp]) || '' : ''
   },
 
-  /**
-   * 判断是否是类数组
-   * @param   {any}   target      需要判断对象
-   * @return  {boolean}           是否类数组
-   */
-  isArrayLike: (target: any) => {
-    let len = target && target.length
-    return len && 'number' === typeof len && 0 <= len && len <= Math.pow(2, 53) - 1
-  },
-
-  /**
-   * 判断对象是否包含某直接属性（非原型）
-   * @param   {any}       obj         需要判断对象
-   * @param   {string}    key         需要判断对象
-   * @return  {boolean}               返回是否存在key值
-   */
-  hasKey: (obj: any, key: string) => {
-    return obj !== null && obj.prototype.hasOwnProperty.call(obj, key)
-  },
 
   /**
    * 检验字符串是否为空
@@ -232,28 +215,10 @@ const Utils = {
     return !target || JSON.stringify(target) === '{}'
   },
 
-  /**
-   * 获取对象自有属性名（不包含原型属性）
-   * @param   {any}       obj              对象
-   * @return  {Array}                      返回对象key数组
-   */
-  getKeys: (obj: any) => {
-    if (!Utils.isObject(obj)) {
-      return []
-    }
-    if (Object.keys) {
-      return Object.keys(obj)
-    }
-    let keys = [],
-      key
-    for (key in obj) {
-      if (Utils.hasKey(obj, key)) {
-        keys.push(key)
-      }
-    }
-    return keys
-  },
 
+  /**
+   * 深拷贝
+   */
   deepCopy: (o: any) => {
     if (o instanceof Array) {
       let n: Array<any> = []

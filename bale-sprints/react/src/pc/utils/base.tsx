@@ -204,16 +204,6 @@ const ADDRESS = {
 
 // 存储相关
 const STORAGE = {
-  /**
-   * 清除用户信息
-   */
-  clearUserInfo: () => {
-    // 保存用户信息
-    Utils.removeLocal(SYSTEM.USER_TOKEN_NAME)
-    // 保存Token
-    Utils.removeLocal(SYSTEM.LOCAL_TOKEN_NAME)
-    Utils.clearSessionStorage()
-  },
 
   /**
    * 清除所有信息
@@ -430,11 +420,15 @@ const USER = {
   getUserInfo: () => {
     let userInfo = Utils.getLocal(SYSTEM.USER_TOKEN_NAME)
     if (!userInfo) return null
-    try {
-      userInfo = JSON.parse(userInfo)
-    } catch (e) {
-      userInfo = null
+
+    if (typeof userInfo === 'string') {
+      try {
+        userInfo = JSON.parse(userInfo)
+      } catch (e) {
+        userInfo = null
+      }
     }
+
     return userInfo
   },
 
@@ -452,6 +446,17 @@ const USER = {
     // 保存 TOKEN
     Utils.removeLocal(SYSTEM.LOCAL_TOKEN_NAME)
     Utils.setLocal(SYSTEM.LOCAL_TOKEN_NAME, token)
+  },
+
+  /**
+   * 清除用户信息
+   */
+  clearUserInfo: () => {
+    // 保存用户信息
+    Utils.removeLocal(SYSTEM.USER_TOKEN_NAME)
+    // 保存Token
+    Utils.removeLocal(SYSTEM.LOCAL_TOKEN_NAME)
+    Utils.clearSessionStorage()
   }
 }
 

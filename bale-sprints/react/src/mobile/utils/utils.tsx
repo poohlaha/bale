@@ -33,11 +33,8 @@ const Utils = {
     if (!item) return null
 
     const data = Utils.decrypt(item)
-    if (needExpTime) {
-      return JSON.parse(data)
-    }
-
-    return Utils.isStringObject(data) ? JSON.parse(data) : data
+    if (!needExpTime) return data
+    return item ? JSON.parse(data) : data
   },
 
   /**
@@ -218,60 +215,8 @@ const Utils = {
   },
 
   /**
-   * 缓存数据
-   * @param key -- cache key
-   * @param value -- cache value
-   * @param isSessionStorage --- 是否存储在 sessionStorage
-   */
-  setCache: (key: string, value: any, isSessionStorage = false) => {
-    if (isSessionStorage) {
-      Utils.setSession(Utils.encrypt(key), value, true)
-    } else {
-      Utils.setLocal(Utils.encrypt(key), value, true)
-    }
-  },
-
-  /**
-   * 获取缓存数据
-   * @param key -- cache key
-   * @param expireTime -- 过期时间, 默认 30 天
-   * @param isSessionStorage --- 是否存储在 sessionStorage
-   */
-  getCache: (key: string, expireTime: number = 30 * 24 * 60 * 60 * 1000, isSessionStorage = false) => {
-    let data = isSessionStorage ? Utils.getSession(Utils.encrypt(key), true) || {} : Utils.getLocal(Utils.encrypt(key), true) || {}
-    console.log(data)
-    if (JSON.stringify(data) === '{}') return {}
-
-    let time = data.time || 0
-    let date = new Date().getTime()
-    console.log(date, time)
-    if (date - time >= expireTime) {
-      isSessionStorage ? Utils.removeSession(key) : Utils.removeLocal(key)
-    }
-    return new Date().getTime() - time > expireTime ? {} : data.data || {}
-  },
-
-  /**
-   * 清除缓存
-   */
-  clearCache: (key: string) => {
-    Utils.removeLocal(Utils.encrypt(key))
-  },
-
-  /**
-   * 判断对象是否包含某直接属性（非原型）
-   * @param   {any}       obj         需要判断对象
-   * @param   {string}    key         需要判断对象
-   * @return  {boolean}               返回是否存在key值
-   */
-  hasKey: (obj: any, key: string) => {
-    return obj !== null && obj.prototype.hasOwnProperty.call(obj, key)
-  },
-
-  /**
    * 判断是否普通对象
    * @param   {any}       target         需要判断对象
-   * @return  {boolean}                  返回是否对象
    */
   isObject: (target: any) => {
     return typeof target === 'object'
@@ -285,27 +230,8 @@ const Utils = {
   },
 
   /**
-   * 获取对象自有属性名（不包含原型属性）
-   * @param   {any}       obj              对象
-   * @return  {Array}                      返回对象key数组
+   * 深拷贝
    */
-  getKeys: (obj: any) => {
-    if (!Utils.isObject(obj)) {
-      return []
-    }
-    if (Object.keys) {
-      return Object.keys(obj)
-    }
-    let keys = [],
-      key
-    for (key in obj) {
-      if (Utils.hasKey(obj, key)) {
-        keys.push(key)
-      }
-    }
-    return keys
-  },
-
   deepCopy: (o: any) => {
     if (o instanceof Array) {
       let n: Array<any> = []
