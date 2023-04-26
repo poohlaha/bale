@@ -15,7 +15,7 @@ const EXIT = {
   exit: (props: any) => {
     setTimeout(() => {
       props.history.push({
-        pathname: RouterUrls.SYSTEM.LOGIN_URL,
+        pathname: RouterUrls.SYSTEM.LOGIN_URL
       })
     }, 300)
   },
@@ -26,7 +26,180 @@ const EXIT = {
   logout: (text: string = '', redirectUrl: string = '') => {
     STORAGE.clearUserInfo()
     PAGE_JUMP.toLoginPage(text, redirectUrl)
+  }
+}
+
+// Toast
+const TOAST = {
+  /**
+   * Toast 弹出提示
+   * message -- 内容
+   * needTime -- 是否延迟加载
+   * duration -- 时间 0 为不关闭
+   * time -- 时长
+   * type --- 1 --- info 2 --- success  3 --- warning 4 --- error
+   * onClose -- 关闭函数
+   */
+  show: (
+    {
+      message = '',
+      needTime = false,
+      duration = CONSTANT.ALERT_DURATION,
+      time =200,
+      type = 1,
+      onClose = () => {}
+    }
+  ) => {
+    const getToast = (message: string, duration: number, type: number, onClose: VoidFunction) => {
+      if (type === 3) {
+        // warning
+        Message.warning(message, duration || CONSTANT.ALERT_DURATION, onClose)
+      } else if (type === 4) {
+        // error
+        Message.error(message, duration || CONSTANT.ALERT_DURATION, onClose)
+      } else if (type === 2) {
+        // success
+        Message.success(message, duration || CONSTANT.ALERT_DURATION, onClose)
+      } else {
+        // info
+        Message.info(message, duration || CONSTANT.ALERT_DURATION, onClose)
+      }
+    }
+
+    if (needTime) {
+      setTimeout(() => {
+        getToast(message, duration, type, onClose)
+      }, time)
+
+      return
+    }
+
+    getToast(message, duration, type, onClose)
+  }
+}
+
+// 地址栏相关
+const ADDRESS = {
+  /**
+   * 根据 window.location.href 获取前缀和后缀 URL
+   */
+  getAddress: (url: string = '') => {
+    let address = url || window.location.href
+    let addressReg = /^(https?:\/\/)([0-9a-z.]+)(:[0-9]+)?([/0-9a-z.]+)(\/#)?$/
+    if (address.substr(address.length - 1, address.length) === '/') {
+      address = address.substr(0, address.length - 1)
+    }
+
+    // 如果只有协议和端口
+    if (addressReg.test(address)) {
+      console.log('address:', '')
+      console.log('beforeAddressUrl:', address)
+      return {
+        addressUrl: '',
+        beforeAddressUrl: address
+      }
+    }
+
+    // 判断是否有?
+    let qIndex = address.indexOf('?')
+    let param = ''
+    if (qIndex !== -1) {
+      let addressNoParamUrl = address.substr(0, qIndex)
+      param = address.substr(qIndex, address.length)
+      address = addressNoParamUrl
+    }
+
+    // 判断最后一个字符是否是 `\`
+    let lastChar = address.substr(address.length - 1, address.length)
+    if (lastChar.endsWith('/') || lastChar.endsWith('\\')) {
+      address = address.substr(0, address.length)
+    }
+
+    let lastIndex = address.lastIndexOf('/')
+    let beforeAddressUrl = address.substr(0, lastIndex) // 前缀
+    let spec = beforeAddressUrl.indexOf('#') // #
+    if (spec !== -1) {
+      beforeAddressUrl = beforeAddressUrl.substr(0, spec) + '#'
+    }
+    let addressUrl = address.substr(lastIndex, address.length) // 后缀
+    console.log('addressUrl:', addressUrl)
+    console.log('beforeAddressUrl:', beforeAddressUrl)
+    console.log('param:', param)
+    return {
+      addressUrl,
+      beforeAddressUrl,
+      param,
+      params: ADDRESS.getUrlString(param)
+    }
   },
+
+  /**
+   * 解析 props query
+   */
+  getQueryString: (props: any) => {
+    if (!props) return null
+    return ADDRESS.getUrlString(props.history.location.search)
+  },
+
+  /**
+   * 获取 URL 参数
+   */
+  getUrlString: (url: string) => {
+    if (!url) return {}
+
+    let obj: any = {}
+    const getQueryParams = (url: string = '') => {
+      let params: any = {}
+      if (!url) return params
+
+      let spec = '?'
+      let specIndex = url.indexOf(spec)
+      if (specIndex === -1) return params
+
+      url = url.substring(specIndex, url.length)
+      const t = url.substring(0, 1)
+      const query = t === '?' ? url.substring(1, url.length).split('&') : url.split('&')
+      if (!query.length) return null
+      query.forEach((item: string) => {
+        if (item) {
+          const data: Array<string> = item.split('=')
+          params[data[0]] = data[1] || ''
+        }
+      })
+
+      return params
+    }
+    // 判断是否有redirectUrl
+    let redirectStr: string = 'redirectUrl='
+    const redirectIndex: number = url.indexOf(redirectStr)
+    if (redirectIndex !== -1) {
+      let item = url.substr(redirectIndex + redirectStr.length, url.length)
+      let prefixUrl = url.substr(0, redirectIndex)
+      obj[redirectStr.substr(0, redirectStr.length - 1)] = item
+      let otherParams = getQueryParams(prefixUrl)
+      return {
+        ...obj,
+        ...otherParams
+      }
+    }
+
+    return getQueryParams(url)
+  },
+
+  /**
+   * 根据名称获取浏览器参数
+   */
+  getAddressQueryString: (name: string) => {
+    if (!name) return null
+    let after = window.location.search
+    after = after.substr(1) || window.location.hash.split('?')[1]
+    if (!after) return null
+    if (after.indexOf(name) === -1) return null
+    let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+    let r = decodeURI(after).match(reg)
+    if (!r) return null
+    return r[2]
+  }
 }
 
 // 存储相关
@@ -52,7 +225,7 @@ const STORAGE = {
 
   judgeTokenExpired: () => {
     return !Utils.getLocal(SYSTEM.USER_TOKEN_NAME)
-  },
+  }
 }
 
 // 页面跳转相关
@@ -136,18 +309,18 @@ const PAGE_JUMP = {
    * @param callback --- 跳转后回调
    */
   redirect: ({
-    props = {},
-    state = {},
-    text = '',
-    jumpUrl = '',
-    needJumpBack = true,
-    jumpBackUrl = '',
-    needDecryptJumpUrl = false,
-    needPrefixAddress = true,
-    needWindowJump = true,
-    isReplace = true,
-    callback = null,
-  }) => {
+               props = {},
+               state = {},
+               text = '',
+               jumpUrl = '',
+               needJumpBack = true,
+               jumpBackUrl = '',
+               needDecryptJumpUrl = false,
+               needPrefixAddress = true,
+               needWindowJump = true,
+               isReplace = true,
+               callback = null
+             }) => {
     if (!jumpUrl) return
     const _needJumpBack = needJumpBack === null || needJumpBack === undefined ? true : needJumpBack
     const _needDecryptJumpUrl = needDecryptJumpUrl === null || needDecryptJumpUrl === undefined ? true : needDecryptJumpUrl
@@ -180,7 +353,7 @@ const PAGE_JUMP = {
       isReplace: _isReplace,
       text,
       needWindowJump: _needWindowJump,
-      callback,
+      callback
     })
   },
 
@@ -209,7 +382,7 @@ const PAGE_JUMP = {
         jumpUrl: Utils.encrypt(redirectUrl + paramUrl),
         needJumpBack: false,
         needDecryptJumpUrl: true,
-        isReplace,
+        isReplace
       })
     } else {
       PAGE_JUMP.goBack(props)
@@ -246,131 +419,7 @@ const PAGE_JUMP = {
     }
 
     PAGE_JUMP.jump({}, url, {}, text, needWindowJump, isReplace)
-  },
-}
-
-// 地址栏相关
-const ADDRESS = {
-  /**
-   * 根据 window.location.href 获取前缀和后缀 URL
-   */
-  getAddress: (url: string = '') => {
-    let address = url || window.location.href
-    let addressReg = /^(https?:\/\/)([0-9a-z.]+)(:[0-9]+)?([/0-9a-z.]+)(\/#)?$/
-    if (address.substr(address.length - 1, address.length) === '/') {
-      address = address.substr(0, address.length - 1)
-    }
-
-    // 如果只有协议和端口
-    if (addressReg.test(address)) {
-      console.log('address:', '')
-      console.log('beforeAddressUrl:', address)
-      return {
-        addressUrl: '',
-        beforeAddressUrl: address,
-      }
-    }
-
-    // 判断是否有?
-    let qIndex = address.indexOf('?')
-    let param = ''
-    if (qIndex !== -1) {
-      let addressNoParamUrl = address.substr(0, qIndex)
-      param = address.substr(qIndex, address.length)
-      address = addressNoParamUrl
-    }
-
-    // 判断最后一个字符是否是 `\`
-    let lastChar = address.substr(address.length - 1, address.length)
-    if (lastChar.endsWith('/') || lastChar.endsWith('\\')) {
-      address = address.substr(0, address.length)
-    }
-
-    let lastIndex = address.lastIndexOf('/')
-    let beforeAddressUrl = address.substr(0, lastIndex) // 前缀
-    let spec = beforeAddressUrl.indexOf('#') // #
-    if (spec !== -1) {
-      beforeAddressUrl = beforeAddressUrl.substr(0, spec) + '#'
-    }
-    let addressUrl = address.substr(lastIndex, address.length) // 后缀
-    console.log('addressUrl:', addressUrl)
-    console.log('beforeAddressUrl:', beforeAddressUrl)
-    console.log('param:', param)
-    return {
-      addressUrl,
-      beforeAddressUrl,
-      param,
-      params: ADDRESS.getUrlString(param),
-    }
-  },
-
-  /**
-   * 解析 props query
-   */
-  getQueryString: (props: any) => {
-    if (!props) return null
-    return ADDRESS.getUrlString(props.history.location.search)
-  },
-
-  /**
-   * 获取 URL 参数
-   */
-  getUrlString: (url: string) => {
-    if (!url) return {}
-
-    let obj: any = {}
-    const getQueryParams = (url: string = '') => {
-      let params: any = {}
-      if (!url) return params
-
-      let spec = '?'
-      let specIndex = url.indexOf(spec)
-      if (specIndex === -1) return params
-
-      url = url.substring(specIndex, url.length)
-      const t = url.substring(0, 1)
-      const query = t === '?' ? url.substring(1, url.length).split('&') : url.split('&')
-      if (!query.length) return null
-      query.forEach((item: string) => {
-        if (item) {
-          const data: Array<string> = item.split('=')
-          params[data[0]] = data[1] || ''
-        }
-      })
-
-      return params
-    }
-    // 判断是否有redirectUrl
-    let redirectStr: string = 'redirectUrl='
-    const redirectIndex: number = url.indexOf(redirectStr)
-    if (redirectIndex !== -1) {
-      let item = url.substr(redirectIndex + redirectStr.length, url.length)
-      let prefixUrl = url.substr(0, redirectIndex)
-      obj[redirectStr.substr(0, redirectStr.length - 1)] = item
-      let otherParams = getQueryParams(prefixUrl)
-      return {
-        ...obj,
-        ...otherParams,
-      }
-    }
-
-    return getQueryParams(url)
-  },
-
-  /**
-   * 根据名称获取浏览器参数
-   */
-  getAddressQueryString: (name: string) => {
-    if (!name) return null
-    let after = window.location.search
-    after = after.substr(1) || window.location.hash.split('?')[1]
-    if (!after) return null
-    if (after.indexOf(name) === -1) return null
-    let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
-    let r = decodeURI(after).match(reg)
-    if (!r) return null
-    return r[2]
-  },
+  }
 }
 
 // 用户相关
@@ -403,55 +452,6 @@ const USER = {
     // 保存 TOKEN
     Utils.removeLocal(SYSTEM.LOCAL_TOKEN_NAME)
     Utils.setLocal(SYSTEM.LOCAL_TOKEN_NAME, token)
-  },
-}
-
-// Toast
-const TOAST = {
-  /**
-   * Toast 弹出提示
-   * message -- 内容
-   * needTime -- 是否延迟加载
-   * duration -- 时间 0 为不关闭
-   * time -- 时长
-   * type --- 1 --- info 2 --- success  3 --- warning 4 --- error
-   * onClose -- 关闭函数
-   */
-  show: (
-    params: any = {
-      message: '',
-      needTime: false,
-      duration: CONSTANT.ALERT_DURATION,
-      time: 200,
-      type: 1,
-      onClose: Function,
-    }
-  ) => {
-    const getToast = (message: string, duration: number, type: number, onClose: () => void) => {
-      if (type === 3) {
-        // warning
-        Message.warning(message, duration || CONSTANT.ALERT_DURATION, onClose)
-      } else if (type === 4) {
-        // error
-        Message.error(message, duration || CONSTANT.ALERT_DURATION, onClose)
-      } else if (type === 2) {
-        // success
-        Message.success(message, duration || CONSTANT.ALERT_DURATION, onClose)
-      } else {
-        // info
-        Message.info(message, duration || CONSTANT.ALERT_DURATION, onClose)
-      }
-    }
-
-    if (params.needTime) {
-      setTimeout(() => {
-        getToast(params.message, params.duration, params.type, params.onClose)
-      }, params.time)
-
-      return
-    }
-
-    getToast(params.message, params.duration, params.type, params.onClose)
   }
 }
 
@@ -463,6 +463,7 @@ const COMMON = {
   getLanguageText: (name: string, isDom: boolean = false) => {
     if (Utils.isBlank(name)) return ''
     try {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       const language = isDom ? useContext(LanguageContext)
         : Utils.getLocal(CONSTANT.LANGUAGES_NAME) || CONSTANT.LANGUAGES[0]
       if (language === CONSTANT.LANGUAGES[0]) {
