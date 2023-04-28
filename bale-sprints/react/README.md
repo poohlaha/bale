@@ -39,6 +39,7 @@
 - 在 `communal` 下创建 `layout.tsx` 文件, 编写路由, 参考如下:
 
 ```typescript
+import { Route, Routes } from 'react-router-dom'
 const RenderRoutes = (routes: RouteInterface[]) => {
   // 判断没用的路由, 跳转到404
   let usedRoutes: Array<RouteInterface> = []
@@ -50,26 +51,27 @@ const RenderRoutes = (routes: RouteInterface[]) => {
 
   if (usedRoutes.length > 0) {
     return (
-      <Suspense fallback={<Loading />}>
-        <Switch>
-          {routes.map((route: RouteInterface, i) => {
-            return (
-              <Route
-                key={route.name || i}
-                path={route.path}
-                exact={route.exact}
-                render={(props: RouteComponentProps) => {
-                  let query = {}
-                  return <route.component {...props} query={query} routes={route.routes || []} />
-                }}
-              />
-            )
-          })}
-        </Switch>
-      </Suspense>
+      <Routes>
+        {
+          routes.map((route: RouteInterface, index: number) => {
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={
+                    <Suspense fallback={<Loading show={true} />}>
+                        <ScrollToTop />
+                        <route.component routes={route.routes || []} />
+                    </Suspense>
+                  }>
+                 </Route>
+               )
+          })
+        }
+    </Routes>
     )
   } else {
-    return NotFound
+    return <Route element={<NotFound />} />
   }
 }
 
@@ -101,12 +103,7 @@ const Layout = (): ReactElement => {
   )
 
   const render = () => {
-    return (
-      <ThemeProvider>
-        <ScrollToTop />
-        {RenderRoutes(routes)}
-      </ThemeProvider>
-    )
+    return RenderRoutes(routes)
   }
 
   return render()
