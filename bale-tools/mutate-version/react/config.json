@@ -9,7 +9,7 @@
     "react-dom": "^18.2.0",
     "react-fastclick": "^3.0.2",
     "react-intl": "^5.18.3",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^6.10.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
@@ -31,8 +31,7 @@
   "tsDependencies": {
     "typescript": "^4.3.2",
     "@types/react": "^18.0.12",
-    "@types/react-dom": "^18.0.5",
-    "@types/react-router-dom": "^5.1.7"
+    "@types/react-dom": "^18.0.5"
   },
   "tsDevDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.26.0",
