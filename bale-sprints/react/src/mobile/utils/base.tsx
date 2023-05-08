@@ -25,7 +25,7 @@ const EXIT = {
    * 退出微信
    */
   exitWX: () => {
-    STORAGE.clearUserInfo()
+    USER.clearUserInfo()
     // @ts-ignore
     if (window.WeixinJSBridge) {
       setTimeout(function () {
@@ -56,7 +56,7 @@ const EXIT = {
       Utils.removeLocal(`${SYSTEM.OPEN_ID}_${SYSTEM.LOCAL_TOKEN}`)
       Utils.removeLocal(`${SYSTEM.OPEN_ID}_${SYSTEM.USER_TOKEN}`)
       EXIT.exit(props)
-      TOAST.show(CONSTANT.TOKEN_EXPIRED_ERROR, 1, true)
+      TOAST.show({message: CONSTANT.TOKEN_EXPIRED_ERROR, type: 1, needTime: true})
     } else {
       callback?.()
     }
@@ -66,7 +66,7 @@ const EXIT = {
    * 退出登陆
    */
   logout: (text: string = '', redirectUrl: string = '') => {
-    STORAGE.clearUserInfo()
+    USER.clearUserInfo()
     PAGE_JUMP.toLoginPage(text, redirectUrl)
   }
 }
@@ -542,7 +542,7 @@ const PAGE_JUMP = {
   toLoginPage: (text: string = '', redirectUrl: string = '', needWindowJump: boolean = true, isReplace: boolean = true) => {
     let adds = ADDRESS.getAddress()
     let openId = USER.getOpenId()
-    STORAGE.clearUserInfo()
+    USER.clearUserInfo()
 
     let url = ''
     if (redirectUrl) {
@@ -580,7 +580,7 @@ const PAGE_JUMP = {
   toAccountLoginPage: (redirectUrl?: string, text: string = '', needWindowJump: boolean = true, isReplace: boolean = true) => {
     console.info(`toAccountLoginPage: ${USER.getOpenId()}`)
     let adds = ADDRESS.getAddress()
-    STORAGE.clearUserInfo()
+    USER.clearUserInfo()
 
     let url = ''
     if (redirectUrl) {

@@ -24,7 +24,7 @@ const EXIT = {
    * 退出登陆
    */
   logout: (text: string = '', redirectUrl: string = '') => {
-    STORAGE.clearUserInfo()
+    USER.clearUserInfo()
     PAGE_JUMP.toLoginPage(text, redirectUrl)
   }
 }
@@ -50,7 +50,7 @@ const TOAST = {
       onClose = () => {}
     }
   ) => {
-    const getToast = (message: string, duration: number, type: number, onClose: VoidFunction) => {
+    const getToast = (message: string, duration: number, type: number, onClose: any) => {
       if (type === 3) {
         // warning
         Message.warning(message, duration || CONSTANT.ALERT_DURATION, onClose)
@@ -399,7 +399,7 @@ const PAGE_JUMP = {
    */
   toLoginPage: (text: string = '', redirectUrl: string = '', needWindowJump: boolean = true, isReplace: boolean = true) => {
     let adds = ADDRESS.getAddress()
-    STORAGE.clearUserInfo()
+    USER.clearUserInfo()
 
     let url = ''
     if (redirectUrl) {
