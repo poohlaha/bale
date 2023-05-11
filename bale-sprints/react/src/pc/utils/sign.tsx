@@ -41,32 +41,7 @@ const Signature = {
       padding: CryptoJS.pad.Pkcs7,
     })
     return CryptoJS.enc.Utf8.stringify(decrypt).toString()
-  },
-
-  /**
-   * 生成文件上传签名
-   */
-  signUpload: (headers: any = {}) => {
-    const timestamp = new Date().getTime() // 时间戳
-    const nonce = Utils.generateUUID().toString()
-    headers['timestamp'] = timestamp
-    headers['nonce'] = nonce
-    headers['signature'] = Signature.hmacSha256Encrypt(`${timestamp}&${nonce}`)
-  },
-
-  /**
-   * hmacSha256加密
-   */
-  hmacSha256Encrypt: (data: string = '') => {
-    let hash = CryptoJS.HmacSHA256(data, SYSTEM.SIGNATURE.MHMAC_SHA256_PUBLIC_KEY)
-    return CryptoJS.enc.Hex.stringify(hash)
-    // return CryptoJS.HmacSHA256(data, SYSTEM.SIGNATURE.MHMAC_SHA256_PUBLIC_KEY)
-  },
-
-  /**
-   * hmacSha256解密
-   */
-  hmacSha256Decrypt: (data: any = {}) => {},
+  }
 }
 
 /**
