@@ -16,6 +16,7 @@ import Rollup from '../rollup'
 import { ICookCompilerOptions, ICompileTsOptions } from './utils/type'
 import { IRollupOptions } from '../rollup/types'
 import { Logger as BaleLogger, Utils, Paths, ThreadPool } from '@bale-tools/utils'
+import shell from "shelljs/shell";
 
 // logger
 const Logger = new BaleLogger(CookPaths.getLoggerName())
@@ -90,14 +91,24 @@ class CookCompile {
    * compile ts
    */
   private async _compileTsWithProject(done: Function): Promise<void> {
-    return await new CompileTs({
-      mode: this._opts.mode,
-      appRootDir: this._appRootDir,
-      outputDir: this._outputDir,
-      excludes: this._excludes || [],
-      ...this._tsSettings,
-      done,
-    }).compile()
+    // 判断根目录下是否有 .swcrc 文件
+    let swcrcFile = path.resolve(this._appRootDir, '.swcrc')
+    if (fsExtra.pathExistsSync(swcrcFile)) {
+      Logger.info('Use swc to compile ts project ...')
+      fsExtra.removeSync(this._outputDir)
+      shell.exec(`swc ${this._opts.entry} -d ${this._outputDir}`)
+      Logger.info('Compile ts project Successfully !')
+      return done?.()
+    } else {
+      return await new CompileTs({
+        mode: this._opts.mode,
+        appRootDir: this._appRootDir,
+        outputDir: this._outputDir,
+        excludes: this._excludes || [],
+        ...this._tsSettings,
+        done,
+      }).compile()
+    }
   }
 
   /**
@@ -202,7 +213,11 @@ class CookCompile {
       // ts 项目直接编译
       if (this._type === this._types[1]) {
         return await this._compileTsWithProject(async () => {
-          await this._rollup(this._rollupSettings)
+          if (!Utils.isObjectNull(this._rollupSettings)) {
+            await this._rollup(this._rollupSettings)
+          } else {
+            this._done?.()
+          }
           Logger.info('End to Compile File .')
         })
       }
