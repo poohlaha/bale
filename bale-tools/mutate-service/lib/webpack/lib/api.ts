@@ -95,6 +95,7 @@ export default class WebpackApi {
         symlinks: false, // 项目不使用 symlinks（例如 npm link 或者 yarn link）
         fallback: {
           crypto: false,
+          ...(this._settings.resolveFallback || {})
         },
         alias: clonedOpts.alias || {},
       },

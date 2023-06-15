@@ -30,6 +30,7 @@ export interface IApiSettingOptions {
   useSourceMap?: boolean // 是否使用源码 生产环境默认为 false
   routerMode?: 'hash' | 'history' // 路由 hash | history 生产环境为 history
   noParse?: Array<string> | Function // noParse 属性
+  resolveFallback: object // resolve.fallback
   experiments?: IExperimentsOptions | undefined | boolean // experiments 配置 本地启动默认为 true, doc see `https://webpack.js.org/configuration/experiments/#experiments`
   generateReport?: boolean // 生产环境是否生成报告 默认为 true
   visitSuffixUrl?: string // 访问路径后缀
