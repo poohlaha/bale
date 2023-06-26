@@ -210,8 +210,9 @@ MutateVersion.prototype.rewriteBabelConfig = function () {
   // 读取 .babelrc 文件
   let babelConfig = {}
   try {
-    const babelrc = fsExtra.readFileSync(path.join(__dirname, this.opts.language, 'articles', this.babelFileName), 'utf-8')
-    babelConfig = JSON.parse(babelrc)
+    babelConfig = require(path.join(__dirname, this.opts.language, 'articles', this.babelFileName));
+    // const babelrc = fsExtra.readFileSync(path.join(__dirname, this.opts.language, 'articles', this.babelFileName), 'utf-8')
+    // babelConfig = JSON.parse(babelrc)
   } catch (e) {
     Logger.error(`read ${this.babelFileName} error !`, e)
   }
@@ -225,7 +226,7 @@ MutateVersion.prototype.rewriteBabelConfig = function () {
   }
 
   // 在 app 根目录写入文件
-  fsExtra.writeFileSync(path.join(this.appRootDir, this.babelFileName), JSON.stringify(babelConfig, null, 2) + os.EOL)
+  fsExtra.writeFileSync(path.join(this.appRootDir, this.babelFileName), 'module.exports = ' + JSON.stringify(babelConfig, null, 2) + os.EOL)
 }
 
 // clean
