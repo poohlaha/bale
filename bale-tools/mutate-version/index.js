@@ -38,7 +38,7 @@ const MutateVersion = function MutateVersion(opts = {}) {
   this.defaultBabelImportPlugins = ['antd-mobile', 'vant']
   this.useTypescript = this.needTypescript(this.opts.useTypescript)
   this.babelImportPluginName = this.getBabelImportPlugin(this.opts.babelImportPluginName)
-  this.babelFileName = '.babelrc'
+  this.babelFileName = 'babel.config.js'
   this.init()
 }
 
