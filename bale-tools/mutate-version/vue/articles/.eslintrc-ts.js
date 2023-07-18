@@ -5,10 +5,17 @@ module.exports = {
     node: true
   },
   parser: 'vue-eslint-parser',
-  extends: ['plugin:vue/essential', 'plugin:vue/strongly-recommended', 'eslint:recommended', 'plugin:prettier/recommended'],
+  extends: [
+    'plugin:vue/essential',
+    'plugin:vue/strongly-recommended',
+    'eslint:recommended',
+    '@vue/typescript/recommended',
+    'plugin:prettier/recommended'
+  ],
   parserOptions: {
-    parser: '@babel/eslint-parser',
+    parser: '@typescript-eslint/parser'
   },
+  plugins: ['@typescript-eslint', 'vue', 'prettier'],
   rules: {
     'prettier/prettier': 1, // 错误
     'no-alert': 0, // 禁止使用alert confirm prompt
@@ -188,6 +195,10 @@ module.exports = {
     'no-extra-boolean-cast': 0, // 禁止不必要的bool转换
     'no-new': 0, // 禁止在使用new构造一个实例后不赋值
     quotes: ['error', 'single'], // 强制使用单引号
+    '@typescript-eslint/no-empty-function': ['off'],
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-inferrable-types': 'off',
+    '@typescript-eslint/ban-types': 'off',
     'vue/script-indent': 0,
     'vue/require-prop-type-constructor': 0,
     'vue/no-use-v-if-with-v-for': 0,

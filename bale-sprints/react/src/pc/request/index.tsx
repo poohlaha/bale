@@ -81,7 +81,8 @@ export default class Request {
       url: url,
       data: data,
       responseType: config.responseType || '',
-      headers: config.headers || {}
+      headers: config.headers || {},
+      type: config.type || 'json'
     }
   }
 

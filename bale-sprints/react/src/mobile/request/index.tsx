@@ -80,7 +80,8 @@ export default class Request {
       data,
       responseType: config.responseType || '',
       baseURL: config.baseURL || process.env.API_ROOT,
-      headers: config.headers || {}
+      headers: config.headers || {},
+      type: config.type || 'json'
     }
   }
 
