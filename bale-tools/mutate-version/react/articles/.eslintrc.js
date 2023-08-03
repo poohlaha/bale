@@ -6,21 +6,21 @@ module.exports = {
     es6: true,
     // "jquery": true
     jest: true,
-    'jsx-control-statements/jsx-control-statements': true,
+    'jsx-control-statements/jsx-control-statements': true
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
-      experimentalObjectRestSpread: true,
-    },
+      experimentalObjectRestSpread: true
+    }
   },
   globals: {
     // "wx": "readonly",
     $log: true,
     $http: true,
-    $paraphrase: true,
+    $paraphrase: true
   },
   extends: [
     'eslint:recommended',
@@ -122,7 +122,7 @@ module.exports = {
     'no-undef-init': 2, // 变量初始化时不能直接给它赋值为undefined
     'no-undefined': 0, // 不能使用undefined
     'no-unexpected-multiline': 2, // 避免多行表达式
-    'no-underscore-dangle': 2, // 标识符不能以_开头或结尾
+    'no-underscore-dangle': 0, // 标识符不能以_开头或结尾
     'no-unneeded-ternary': 2, // 禁止不必要的嵌套 var isYes = answer === 1 ? true : false;
     'no-unreachable': 2, // 不能有无法执行的代码
     'no-unused-expressions': 0, // 禁止无用的表达式
@@ -140,7 +140,7 @@ module.exports = {
     'brace-style': [1, '1tbs'], // 大括号风格
     'callback-return': 1, // 避免多次调用回调什么的
     camelcase: 2, // 强制驼峰法命名
-    'comma-dangle': [2, 'never'], // 对象字面量项尾不能有逗号
+    'comma-dangle': [1, 'never'], // 对象字面量项尾不能有逗号
     'comma-spacing': 0, // 逗号前后的空格
     'comma-style': [2, 'last'], // 逗号风格，换行时在行首还是行尾
     complexity: [0, 11], // 循环复杂度
