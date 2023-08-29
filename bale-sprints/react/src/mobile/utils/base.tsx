@@ -590,7 +590,27 @@ const PAGE_JUMP = {
     }
 
     PAGE_JUMP.jump({}, url, {}, text, needWindowJump, isReplace)
-  }
+  },
+
+  /**
+   * 通过window跳转
+   * @param url 路径
+   * @param needPrefix 是否需要前缀
+   * @param isReplace 是否替换
+   */
+  toWindowPage(url: string = '', needPrefix = false, isReplace = false) {
+    if (Utils.isBlank(url)) return
+    if (needPrefix) {
+      let { beforeAddressUrl } = ADDRESS.getAddress()
+      url = beforeAddressUrl + url
+    }
+
+    if (isReplace) {
+      window.location.replace(url)
+    } else {
+      window.location.href = url
+    }
+  },
 }
 
 // 公共模块相关

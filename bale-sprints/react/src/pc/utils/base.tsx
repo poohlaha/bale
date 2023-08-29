@@ -251,14 +251,23 @@ const PAGE_JUMP = {
   },
 
   /**
-   * 通过 window 跳转
-   * @param url
-   * @param callback
+   * 通过window跳转
+   * @param url 路径
+   * @param needPrefix 是否需要前缀
+   * @param isReplace 是否替换
    */
-  toPageByWindow: (url: string, callback?: Function) => {
-    let adds = ADDRESS.getAddress()
-    window.location.replace(adds.beforeAddressUrl + url)
-    callback?.()
+  toWindowPage(url: string = '', needPrefix = false, isReplace = false) {
+    if (Utils.isBlank(url)) return
+    if (needPrefix) {
+      let { beforeAddressUrl } = ADDRESS.getAddress()
+      url = beforeAddressUrl + url
+    }
+
+    if (isReplace) {
+      window.location.replace(url)
+    } else {
+      window.location.href = url
+    }
   },
 
   /**
