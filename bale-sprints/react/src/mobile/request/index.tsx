@@ -160,9 +160,14 @@ export default class Request {
 
       // 返回流
       if (config.responseStream) {
-        Request.downloadFile(config, res)
-        return
+        if (config.needDownload) {
+          Request.downloadFile(config, res)
+          return
+        } else {
+          return config.success?.(res.data || null, config.params || {})
+        }
       }
+
 
       let resData: any = null
       if (Request.isString(res.data)) {

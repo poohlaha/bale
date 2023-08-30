@@ -32,6 +32,7 @@ interface ConstantComponent {
   type?: string
   responseType?: string
   responseStream?: boolean
+  needDownload?: boolean
   headers?: { [key: string]: unknown }
   params?: { [key: string]: unknown }
   showError?: boolean
