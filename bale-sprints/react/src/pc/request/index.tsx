@@ -213,6 +213,13 @@ export default class Request {
         }
       }
 
+      if (resData.code !== '0' && resData.code !== 0) {
+        TOAST.show({
+          message: Request.getResponseErrorMessage(resData).reason || COMMON.getLanguageText('ERROR_MESSAGE'),
+          type: 4
+        })
+      }
+
       let data = resData.data || resData.result || {}
       // 判断是否是登录和登出, 如果是登录, 则保存token, 登出则清除localStorage
       if (config.ident === IdentEnum.LOGIN) {
