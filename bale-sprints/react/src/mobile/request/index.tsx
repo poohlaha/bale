@@ -164,7 +164,7 @@ export default class Request {
           Request.downloadFile(config, res)
           return
         } else {
-          return config.success?.(res.data || null, config.params || {})
+          return config.success?.(res.data || null, res, config.params || {})
         }
       }
 
@@ -221,7 +221,7 @@ export default class Request {
               type: 4
             })
           }
-          
+
           return config.fail?.(res.data || {})
         }
       }
