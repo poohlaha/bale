@@ -214,10 +214,15 @@ export default class Request {
 
       if (resData.code !== null && resData.code !== undefined) {
         if (resData.code !== '0' && resData.code !== 0) {
-          TOAST.show({
-            message: Request.getResponseErrorMessage(resData).reason || COMMON.getLanguageText('ERROR_MESSAGE'),
-            type: 4
-          })
+          // 判断 token 是否过期
+          if (resData.code !== SYSTEM.TOKEN_EXPIRED_CODE) {
+            TOAST.show({
+              message: Request.getResponseErrorMessage(resData).reason || COMMON.getLanguageText('ERROR_MESSAGE'),
+              type: 4
+            })
+          }
+          
+          return config.fail?.(res.data || {})
         }
       }
 
