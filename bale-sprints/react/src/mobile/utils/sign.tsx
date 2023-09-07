@@ -64,7 +64,9 @@ const setHeaders = (config: any = {}) => {
   // @ts-ignore
   headers[CONSTANT.REQUEST.X_REQUESTED_WITH] = CONSTANT.REQUEST.DEFAULT_X_REQUESTED_WITH
   // @ts-ignore
-  headers[SYSTEM.TOKEN_NAME] = Utils.getLocal(`${SYSTEM.OPEN_ID}_${SYSTEM.LOCAL_TOKEN}`) || ''
+  if (SYSTEM.NEED_TOKEN) {
+    headers[SYSTEM.TOKEN_NAME] = Utils.getLocal(`${SYSTEM.OPEN_ID}_${SYSTEM.LOCAL_TOKEN}`) || ''
+  }
 
   if (type) {
     // @ts-ignore
