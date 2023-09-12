@@ -11,6 +11,7 @@ interface MutateOptions {
   language: String // 语言, 'react' | 'vue'
   useTypescript: Boolean // 是否使用 typescript
   babelImportPluginName: '' // antd-mobile | vant
+  babelImportPluginOpts: [] // 其他第三方插件数组
 }
 ```
 

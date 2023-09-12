@@ -28,6 +28,7 @@ const babelImportPlugins = {
     language: String, // 语言, 'react' | 'vue'
     useTypescript: Boolean, // 是否使用 typescript
     babelImportPluginName: '', // antd-mobile | vant
+    babelImportPluginOpts: [], // other plugins array
   }
  */
 const MutateVersion = function MutateVersion(opts = {}) {
@@ -205,12 +206,13 @@ MutateVersion.prototype.getBabelImportPlugin = function (babelImportPluginName =
 
 // 获取 babel config 配置
 MutateVersion.prototype.rewriteBabelConfig = function () {
-  if (BaleUtils.Utils.isBlank(this.babelImportPluginName)) return
+  let babelImportPluginOpts = this.opts.babelImportPluginOpts || []
+  if (BaleUtils.Utils.isBlank(this.babelImportPluginName) && babelImportPluginOpts.length === 0) return
 
   // 读取 .babelrc 文件
   let babelConfig = {}
   try {
-    babelConfig = require(path.join(__dirname, this.opts.language, 'articles', this.babelFileName));
+    babelConfig = require(path.join(__dirname, this.opts.language, 'articles', this.babelFileName))
     // const babelrc = fsExtra.readFileSync(path.join(__dirname, this.opts.language, 'articles', this.babelFileName), 'utf-8')
     // babelConfig = JSON.parse(babelrc)
   } catch (e) {
@@ -224,6 +226,10 @@ MutateVersion.prototype.rewriteBabelConfig = function () {
   if (babelPlugins.length > 0) {
     plugins.push(babelPlugins)
   }
+
+  // other plugins
+  plugins = [...plugins, ...babelImportPluginOpts]
+  babelConfig.plugins = plugins
 
   // 在 app 根目录写入文件
   fsExtra.writeFileSync(path.join(this.appRootDir, this.babelFileName), 'module.exports = ' + JSON.stringify(babelConfig, null, 2) + os.EOL)
