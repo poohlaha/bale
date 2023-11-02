@@ -245,8 +245,8 @@ const ADDRESS = {
       let addresses = address.split(projectUrl) || []
       if (addresses.length === 2) {
         return {
-          addressUrl: addresses[0] + '/' + projectUrl,
-          beforeAddressUrl: addresses[1],
+          beforeAddressUrl: addresses[0] + projectUrl,
+          addressUrl: addresses[1],
         }
       }
     }
