@@ -85,6 +85,19 @@ const ADDRESS = {
    */
   getAddress: (url: string = '') => {
     let address = url || window.location.href
+
+    // 判断有没有项目名
+    let projectUrl = process.env.PROJECT_URL || '/'
+    if (projectUrl !== '/') {
+      let addresses = address.split(projectUrl) || []
+      if (addresses.length === 2) {
+        return {
+          addressUrl: addresses[0] + '/' + projectUrl,
+          beforeAddressUrl: addresses[1],
+        }
+      }
+    }
+
     let addressReg = /^(https?:\/\/)([0-9a-z.]+)(:[0-9]+)?([/0-9a-z.]+)(\/#)?$/
     if (address.substr(address.length - 1, address.length) === '/') {
       address = address.substr(0, address.length - 1)
