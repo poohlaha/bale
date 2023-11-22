@@ -21,5 +21,9 @@
     "wasm-utils",
     "utils",
     "bale"
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  }
 }
