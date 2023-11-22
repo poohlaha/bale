@@ -6,7 +6,7 @@
 To use `wasm`, first import this to your file:
 
 ```ts
-import __wbg_init, {UtilsHandler, SignatureHandler, DateHandler} from '../../pkg/wasm_utils.js'
+import __wbg_init, {UtilsHandler, SignatureHandler, DateHandler} from '@bale-wasm/utils/lib/bale_wasm_utils.js'
 ```
 
 Next, add this to your file:
