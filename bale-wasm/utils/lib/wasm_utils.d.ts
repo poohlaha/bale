@@ -1,6 +1,12 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
+*
+*  浏览器是否支持 `wasm`
+* @returns {boolean}
+*/
+export function is_support_wasm(): boolean;
+/**
 */
 export class DateHandler {
   free(): void;
@@ -107,6 +113,84 @@ export class SignatureHandler {
 }
 /**
 */
+export class StorageHandler {
+  free(): void;
+/**
+*
+*     存储到 `LocalStorage`
+*    
+* @param {string} name
+* @param {any} item
+* @returns {boolean}
+*/
+  static set_local(name: string, item: any): boolean;
+/**
+*
+*     从 `LocalStorage` 中取值
+*    
+* @param {string} name
+* @returns {any}
+*/
+  static get_local(name: string): any;
+/**
+*
+*     清空 `LocalStorage` 中取值
+*    
+* @returns {boolean}
+*/
+  static clear_local(): boolean;
+/**
+*
+*    存储到 `SessionStorage`
+*     
+* @param {string} name
+* @param {any} item
+* @returns {boolean}
+*/
+  static set_session(name: string, item: any): boolean;
+/**
+*
+*    从 `SessionStorage` 中取值
+*     
+* @param {string} name
+* @returns {any}
+*/
+  static get_session(name: string): any;
+/**
+*
+*    清空 `SessionStorage` 中取值
+*     
+* @returns {boolean}
+*/
+  static clear_session(): boolean;
+/**
+*
+*    存储到 `Cookie`
+*     
+* @param {string} name
+* @param {any} item
+* @param {bigint | undefined} [expires]
+* @returns {boolean}
+*/
+  static set_cookie(name: string, item: any, expires?: bigint): boolean;
+/**
+*
+*    从 `Cookie` 中取值
+*     
+* @param {string} name
+* @returns {any}
+*/
+  static get_cookie(name: string): any;
+/**
+*
+*    清空 `Cookie` 中取值
+*     
+* @returns {boolean}
+*/
+  static clear_cookie(): boolean;
+}
+/**
+*/
 export class UtilsHandler {
   free(): void;
 /**
@@ -141,6 +225,42 @@ export class UtilsHandler {
 * @returns {string}
 */
   static format_float(num: number, digit?: number): string;
+/**
+*
+*     深拷贝
+*    
+* @param {any} value
+* @returns {any}
+*/
+  static deep_copy(value: any): any;
+/**
+*
+*     首字母转大写
+*    
+* @param {string} str
+* @returns {string}
+*/
+  static capitalize_first_char(str: string): string;
+/**
+*
+*      驼峰转换下划线
+*      str: 要转换的字符串
+*      spec: 字符, 默认为_
+*    
+* @param {string} str
+* @param {string | undefined} [spec]
+* @returns {string}
+*/
+  static hump_with_line(str: string, spec?: string): string;
+/**
+*
+*     格式化手机号码
+*    
+* @param {string} phone
+* @param {string | undefined} [spec]
+* @returns {string}
+*/
+  static format_phone(phone: string, spec?: string): string;
 }
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
@@ -155,15 +275,30 @@ export interface InitOutput {
   readonly signaturehandler_decrypt: (a: number, b: number, c: number) => void;
   readonly signaturehandler_encode: (a: number, b: number, c: number) => void;
   readonly signaturehandler_decode: (a: number, b: number, c: number) => void;
+  readonly storagehandler_set_local: (a: number, b: number, c: number, d: number) => void;
+  readonly storagehandler_get_local: (a: number, b: number, c: number) => void;
+  readonly storagehandler_clear_local: (a: number) => void;
+  readonly storagehandler_set_session: (a: number, b: number, c: number, d: number) => void;
+  readonly storagehandler_get_session: (a: number, b: number, c: number) => void;
+  readonly storagehandler_clear_session: (a: number) => void;
+  readonly storagehandler_set_cookie: (a: number, b: number, c: number, d: number, e: number, f: number) => void;
+  readonly storagehandler_get_cookie: (a: number, b: number, c: number) => void;
+  readonly storagehandler_clear_cookie: (a: number) => void;
   readonly utilshandler_generate_uuid: (a: number) => void;
   readonly utilshandler_is_blank: (a: number, b: number) => number;
   readonly utilshandler_format_integer: (a: number, b: number) => void;
   readonly utilshandler_format_float: (a: number, b: number, c: number, d: number) => void;
+  readonly utilshandler_deep_copy: (a: number, b: number) => void;
+  readonly utilshandler_capitalize_first_char: (a: number, b: number, c: number) => void;
+  readonly utilshandler_hump_with_line: (a: number, b: number, c: number, d: number) => void;
+  readonly utilshandler_format_phone: (a: number, b: number, c: number, d: number) => void;
+  readonly is_support_wasm: (a: number) => void;
   readonly __wbg_signaturehandler_free: (a: number) => void;
+  readonly __wbg_storagehandler_free: (a: number) => void;
   readonly __wbg_utilshandler_free: (a: number) => void;
-  readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_export_0: (a: number, b: number) => number;
   readonly __wbindgen_export_1: (a: number, b: number, c: number, d: number) => number;
+  readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_export_2: (a: number, b: number, c: number) => void;
   readonly __wbindgen_export_3: (a: number) => void;
 }

@@ -1,6 +1,6 @@
 {
   "name": "@bale-wasm/utils",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "poohlaha",
   "description": "wasm utils with rust.",
   "license": "MIT/Apache-2.0",
