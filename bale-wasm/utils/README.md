@@ -17,6 +17,10 @@ if (typeof WebAssembly === 'object' && typeof WebAssembly.instantiate === 'funct
 
 To use `wasm`, first import this to your file:
 
+```shell
+  npm install @bale-wasm/utils
+```
+
 ```ts
 import __wbg_init, {is_support_wasm, UtilsHandler, SignatureHandler, DateHandler, StorageHandler} from '@bale-wasm/utils/lib/wasm_utils'
 ```
