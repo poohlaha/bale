@@ -18,7 +18,7 @@ if (typeof WebAssembly === 'object' && typeof WebAssembly.instantiate === 'funct
 To use `wasm`, first import this to your file:
 
 ```shell
-  npm install @bale-wasm/tools
+npm install @bale-wasm/tools
 ```
 
 ```ts
