@@ -95,6 +95,7 @@ UtilsHandler.capitalize_first_char('test1234567') // Test1234567
 
 ```ts
 UtilsHandler.hump_with_line('testItemManager', '-') // test-item-manager
+UtilsHandler.hump_with_line('testItemManager', undefined) // test_item_manager
 ```
 
 - 格式化手机号码
@@ -115,7 +116,7 @@ let decrypt = SignatureHandler.decrypt(encrypt)
 ```
 
 - `Base64` 加减密
- `Base64` 必须为 `4` 的倍数, 且不包括除 `+`、`/`、`=` 外的特殊字符
+  `Base64` 必须为 `4` 的倍数, 且不包括除 `+`、`/`、`=` 外的特殊字符
 
 ```ts
 let data = {'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true,'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com'},{'name':'Baidu','url':'http://www.baidu.com'},{'name':'SoSo','url':'http://www.SoSo.com'}]}
@@ -183,7 +184,7 @@ let current_date = DateHandler.get_current_date('%Y%m%d') // 20231122
 - 存储和获取 `LocalStorage` 中的数据
 
 ```ts
- let localData1 = {'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true,'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com'},{'name':'Baidu','url':'http://www.baidu.com'},{'name':'SoSo','url':'http://www.SoSo.com'}]}
+let localData1 = {'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true,'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com'},{'name':'Baidu','url':'http://www.baidu.com'},{'name':'SoSo','url':'http://www.SoSo.com'}]}
 let localDataSuccess1 = StorageHandler.set_local('localData1', localData1)
 let localDataValue1 = StorageHandler.get_local('localData1')
 
@@ -236,4 +237,3 @@ StorageHandler.clear_cookie()
 
 # License
 Apache License, Version 2.0 ([LICENSE](LICENSE) or https://apache.org/licenses/LICENSE-2.0)
-

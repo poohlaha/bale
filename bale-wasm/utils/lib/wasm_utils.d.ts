@@ -245,7 +245,7 @@ export class UtilsHandler {
 *
 *      驼峰转换下划线
 *      str: 要转换的字符串
-*      spec: 字符, 默认为_
+*      spec: 字符, 默认为 `_`
 *    
 * @param {string} str
 * @param {string | undefined} [spec]
@@ -267,14 +267,6 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly __wbg_datehandler_free: (a: number) => void;
-  readonly datehandler_format: (a: number, b: number, c: number, d: number, e: number, f: number, g: number) => void;
-  readonly datehandler_get_date_by_timestamp: (a: number, b: number, c: number, d: number) => void;
-  readonly datehandler_get_current_date: (a: number, b: number, c: number) => void;
-  readonly signaturehandler_encrypt: (a: number, b: number, c: number) => void;
-  readonly signaturehandler_decrypt: (a: number, b: number, c: number) => void;
-  readonly signaturehandler_encode: (a: number, b: number, c: number) => void;
-  readonly signaturehandler_decode: (a: number, b: number, c: number) => void;
   readonly storagehandler_set_local: (a: number, b: number, c: number, d: number) => void;
   readonly storagehandler_get_local: (a: number, b: number, c: number) => void;
   readonly storagehandler_clear_local: (a: number) => void;
@@ -284,6 +276,7 @@ export interface InitOutput {
   readonly storagehandler_set_cookie: (a: number, b: number, c: number, d: number, e: number, f: number) => void;
   readonly storagehandler_get_cookie: (a: number, b: number, c: number) => void;
   readonly storagehandler_clear_cookie: (a: number) => void;
+  readonly __wbg_storagehandler_free: (a: number) => void;
   readonly utilshandler_generate_uuid: (a: number) => void;
   readonly utilshandler_is_blank: (a: number, b: number) => number;
   readonly utilshandler_format_integer: (a: number, b: number) => void;
@@ -292,15 +285,22 @@ export interface InitOutput {
   readonly utilshandler_capitalize_first_char: (a: number, b: number, c: number) => void;
   readonly utilshandler_hump_with_line: (a: number, b: number, c: number, d: number) => void;
   readonly utilshandler_format_phone: (a: number, b: number, c: number, d: number) => void;
-  readonly is_support_wasm: (a: number) => void;
-  readonly __wbg_signaturehandler_free: (a: number) => void;
-  readonly __wbg_storagehandler_free: (a: number) => void;
   readonly __wbg_utilshandler_free: (a: number) => void;
-  readonly __wbindgen_export_0: (a: number, b: number) => number;
-  readonly __wbindgen_export_1: (a: number, b: number, c: number, d: number) => number;
+  readonly datehandler_format: (a: number, b: number, c: number, d: number, e: number, f: number, g: number) => void;
+  readonly datehandler_get_date_by_timestamp: (a: number, b: number, c: number, d: number) => void;
+  readonly datehandler_get_current_date: (a: number, b: number, c: number) => void;
+  readonly __wbg_datehandler_free: (a: number) => void;
+  readonly signaturehandler_encrypt: (a: number, b: number, c: number) => void;
+  readonly signaturehandler_decrypt: (a: number, b: number, c: number) => void;
+  readonly signaturehandler_encode: (a: number, b: number, c: number) => void;
+  readonly signaturehandler_decode: (a: number, b: number, c: number) => void;
+  readonly __wbg_signaturehandler_free: (a: number) => void;
+  readonly is_support_wasm: (a: number) => void;
+  readonly __wbindgen_malloc: (a: number, b: number) => number;
+  readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
-  readonly __wbindgen_export_2: (a: number, b: number, c: number) => void;
-  readonly __wbindgen_export_3: (a: number) => void;
+  readonly __wbindgen_free: (a: number, b: number, c: number) => void;
+  readonly __wbindgen_exn_store: (a: number) => void;
 }
 
 export type SyncInitInput = BufferSource | WebAssembly.Module;
