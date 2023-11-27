@@ -55,3 +55,19 @@ let opts: {[K: string]: any}  = {
     form: formData
 }
 ```
+
+## 打包
+在 `webpack` 中添加
+
+```js
+module.exports = {
+  // ...其他配置
+  experiments: {
+    asyncWebAssembly: true,
+  },
+};
+```
+
+# License
+Apache License, Version 2.0 ([LICENSE](LICENSE) or https://apache.org/licenses/LICENSE-2.0)
+
