@@ -116,6 +116,8 @@ export default class WebpackApi {
     if (this._script === MutatePaths.getScripts()[0]) {
       // start
       this._opts.experiments = this._getExperiments() || {}
+    } else {
+      this._opts.experiments = this._settings.experiments || {}
     }
   }
 
