@@ -318,6 +318,8 @@ export default class WebpackApi {
               ecma: 5,
               comparisons: false,
               inline: 2,
+              drop_console: true,
+              drop_debugger: true
             },
             mangle: {
               safari10: true,
