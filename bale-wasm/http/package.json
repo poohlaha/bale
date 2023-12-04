@@ -1,0 +1,24 @@
+{
+  "name": "@bale-wasm/http",
+  "version": "0.1.0",
+  "author": "poohlaha",
+  "description": "use `rust` develop `wasm` `http` by `Web API Request`.",
+  "license": "MIT/Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/poohlaha/wasm.git"
+  },
+  "module": "lib/wasm_http.js",
+  "homepage": "https://github.com/poohlaha/wasm/tree/main/packages/wasm-http",
+  "types": "lib/wasm_http.d.ts",
+  "keywords": [
+    "wasm",
+    "wasm-http",
+    "http",
+    "bale"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  }
+}
