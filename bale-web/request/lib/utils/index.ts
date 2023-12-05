@@ -20,5 +20,4 @@ export default class Utils {
   static isObjectNull(target: { [K: string]: any } = {}): boolean {
     return !target || JSON.stringify(target) === '{}'
   }
-
 }

@@ -1,0 +1,24 @@
+{
+  "name": "@bale-web/request",
+  "version": "0.1.0",
+  "author": "poohlaha",
+  "description": "send request use Web API Request",
+  "keywords": [
+    "request",
+    "web",
+    "api"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poohlaha/bale.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "scripts": {
+    "format": "npx prettier --write ."
+  },
+  "dependencies": {
+  }
+}

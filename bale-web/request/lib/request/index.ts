@@ -149,6 +149,7 @@ export class HttpRequest {
    * @param props
    * @param fetchProps
    */
+  // @ts-ignore
   public static async send(props: IHttpRequestProps, fetchProps?: IHttpRequestFetchProps): Promise<void> {
     // response
     let response: HttpResponse = {
@@ -193,8 +194,10 @@ export class HttpRequest {
     // timeout
     let controller: AbortController = new AbortController()
     let timeout: number = props.timeout
-    let timeoutId = null
-    if (timeout !== FOREVER_TIMEOUT) { // 不过期
+    let timeoutId: number = -1
+    if (timeout !== FOREVER_TIMEOUT) {
+      // 不过期
+      // @ts-ignore
       timeoutId = setTimeout(() => {
         controller.abort()
         console.error(`Request aborted due to timeout: ${timeout}s !`)
@@ -275,13 +278,13 @@ export class HttpRequest {
       }
 
       HttpRequest.executeFn(isSuccess ? props.success : props.failed, httpResponse)
-    } catch (err) {
+    } catch (err: any) {
       console.error(`Error while get response: ${err.message}`)
       httpResponse.status = 500
       httpResponse.error = `Error while get response: ${err.message}`
       HttpRequest.executeFn(props.failed, httpResponse)
     } finally {
-      if (timeoutId !== null) {
+      if (timeoutId !== -1) {
         clearTimeout(timeoutId)
       }
     }
@@ -338,7 +341,8 @@ export class HttpRequest {
 
     // timeout
     if (props.timeout !== undefined && props.timeout !== null) {
-      if (props.timeout === FOREVER_TIMEOUT) { // -1 为不过期
+      if (props.timeout === FOREVER_TIMEOUT) {
+        // -1 为不过期
         requestProps.timeout = FOREVER_TIMEOUT
       } else if (props.timeout > 0) {
         requestProps.timeout = props.timeout
@@ -375,7 +379,7 @@ export class HttpRequest {
       redirect: RequestRedirect.FOLLOW,
       referrer: '',
       referrerPolicy: ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN,
-      signal: null,
+      signal: undefined,
     }
 
     if (props === null || props === undefined) {
