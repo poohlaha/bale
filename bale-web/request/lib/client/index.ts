@@ -202,7 +202,7 @@ export class HttpRequest {
       }
     }
 
-    let opts: {[K: string]: any} = {
+    let opts: { [K: string]: any } = {
       method: props.method,
       headers: props.headers,
       ...requestFetchProps,
@@ -487,7 +487,8 @@ export class HttpRequest {
       requestHeaders.append(CONTENT_TYPE, CONTENT_TYPE_VALUE.TEXT)
     } else if (type === Type.HTML) {
       requestHeaders.append(CONTENT_TYPE, CONTENT_TYPE_VALUE.HTML)
-    } else { // default `json`
+    } else {
+      // default `json`
       requestHeaders.append(CONTENT_TYPE, CONTENT_TYPE_VALUE.JSON)
     }
 

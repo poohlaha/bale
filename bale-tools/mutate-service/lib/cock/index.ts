@@ -16,7 +16,7 @@ import Rollup from '../rollup'
 import { ICookCompilerOptions, ICompileTsOptions } from './utils/type'
 import { IRollupOptions } from '../rollup/types'
 import { Logger as BaleLogger, Utils, Paths, ThreadPool } from '@bale-tools/utils'
-import shell from "shelljs/shell";
+import shell from 'shelljs/shell'
 
 // logger
 const Logger = new BaleLogger(CookPaths.getLoggerName())

@@ -8,9 +8,4 @@ import { HttpRequest } from './lib/client'
 
 export { HttpRequest }
 
-export type {
-  IHttpRequestProps,
-  IHttpRequestFetchProps,
-  HttpResponse
-} from './lib/client'
-
+export type { IHttpRequestProps, IHttpRequestFetchProps, HttpResponse } from './lib/client'
