@@ -56,7 +56,7 @@ npm install @bale-web/request
     文档地址: https://developer.mozilla.org/en-US/docs/Web/API/Request/integrity
 
   - mode
-    分为: `same-origin`、`cors`、`no-cors`, `navigate` 默认为 `no-cors`。
+    分为: `same-origin`、`cors`、`no-cors`, `navigate` 默认为 `cors`。
     文档地址: https://developer.mozilla.org/zh-CN/docs/Web/API/Request/mode
 
   - redirect
@@ -76,8 +76,7 @@ npm install @bale-web/request
 - 普通请求
 
 ```ts
-import {HttpRequest} from '@bale-web/request'
-import type {IHttpRequestProps} from '@bale-web/request'
+import {HttpRequest, IHttpRequestProps, HttpResponse} from '@bale-web/request'
 
 let opts: IHttpRequestProps = {
   url: 'https://api.github.com/repos/rustwasm/wasm-bindgen/branches/master',
@@ -87,15 +86,67 @@ let opts: IHttpRequestProps = {
   },
 }
 
-let response = await HttpRequest.send(opts)
+let response: HttpResponse = await HttpRequest.send(opts)
 console.log(response)
+```
+
+- 普通请求(带`成功` 、`失败` 函数)
+
+```ts
+import {HttpRequest, IHttpRequestProps, HttpResponse} from '@bale-web/request'
+
+let opts: IHttpRequestProps = {
+  url: 'https://api.github.com/repos/rustwasm/wasm-bindgen/branches/master',
+  method: 'get',
+  headers: {
+    Accept: 'application/vnd.github.v3+json',
+  },
+  success: (response: HttpResponse) => {
+    console.log('success: ', response)
+  },
+  failed: (response: HttpResponse) => {
+    console.error('failed: ', response)
+  }
+}
+
+await HttpRequest.send(opts)
+```
+
+- 普通请求(带 `fetch` 参数)
+
+```ts
+import {HttpRequest, IHttpRequestProps, IHttpRequestFetchProps, HttpResponse} from '@bale-web/request'
+let fetchOps: IHttpRequestFetchProps = {
+  cache: 'no-cache',
+  credentials: 'omit',
+  integrity: '',
+  mode: 'CORS',
+  redirect: '',
+  referrer: 'origin-when-cross-origin',
+  referrerPolicy: 'origin-when-cross-origin'
+}
+
+let opts: IHttpRequestProps = {
+  url: 'https://api.github.com/repos/rustwasm/wasm-bindgen/branches/master',
+  method: 'get',
+  headers: {
+    Accept: 'application/vnd.github.v3+json',
+  },
+  success: (response: HttpResponse) => {
+    console.log('success: ', response)
+  },
+  failed: (response: HttpResponse) => {
+    console.error('failed: ', response)
+  }
+}
+
+await HttpRequest.send(opts, fetchOps)
 ```
 
 - `FormData` 请求
 
 ```ts
-import {HttpRequest} from '@bale-web/request'
-import type {IHttpRequestProps} from '@bale-web/request'
+import {HttpRequest, IHttpRequestProps, HttpResponse} from '@bale-web/request'
 
 let formData = new FormData()
 formData.append('file', file) // file 为需要上传的文件
@@ -106,6 +157,7 @@ let updateOpts: any = {
   url: 'https://example.com/api/upload/',
   method: 'post',
   data: formData,
+  type: '2'
 }
 
 let response = await HttpRequest.send(opts)

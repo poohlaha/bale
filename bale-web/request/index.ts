@@ -4,12 +4,13 @@
  * @author poohlaha
  */
 
-import { HttpRequest } from './lib/request'
+import { HttpRequest } from './lib/client'
 
 export { HttpRequest }
 
 export type {
   IHttpRequestProps,
-  IHttpRequestFetchProps
-} from './lib/request';
+  IHttpRequestFetchProps,
+  HttpResponse
+} from './lib/client'
 

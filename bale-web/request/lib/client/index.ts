@@ -15,10 +15,10 @@
 import Utils from '../utils'
 
 enum Method {
-  GET = 'GET',
-  POST = 'POST',
-  PUT = 'PUT',
-  DELETE = 'DELETE',
+  GET = 'get',
+  POST = 'post',
+  PUT = 'put',
+  DELETE = 'delete',
 }
 
 export interface IHttpRequestProps {
@@ -27,19 +27,19 @@ export interface IHttpRequestProps {
   data?: any
   type?: string
   timeout?: number
-  headers?: Map<string, string>
+  headers?: { [K: string]: string }
   success?: Function
   failed?: Function
 }
 
 export interface IHttpRequestFetchProps {
-  cache: string
-  credentials: string
-  integrity: string
-  mode: string
-  redirect: string
-  referrer: string
-  referrerPolicy: string
+  cache?: string
+  credentials?: string
+  integrity?: string
+  mode?: string
+  redirect?: string
+  referrer?: string
+  referrerPolicy?: string
 }
 
 interface IRequestProps {
@@ -104,7 +104,7 @@ enum ReferrerPolicy {
   UNSAFE_URL = 'unsafe-url',
 }
 
-interface HttpResponse {
+export interface HttpResponse {
   status: number
   headers: Map<string, string>
   body: JSON | Blob | string | number | Array<any> | null | any
@@ -150,7 +150,7 @@ export class HttpRequest {
    * @param fetchProps
    */
   // @ts-ignore
-  public static async send(props: IHttpRequestProps, fetchProps?: IHttpRequestFetchProps): Promise<void> {
+  public static async send(props: IHttpRequestProps, fetchProps?: IHttpRequestFetchProps): Promise<HttpResponse> {
     // response
     let response: HttpResponse = {
       status: SUCCESS_CODE,
@@ -161,10 +161,10 @@ export class HttpRequest {
 
     // not support
     if (!HttpRequest.isSupport()) {
-      response.status = 500
+      response.status = -999
       response.error = 'The browser does not support `Web API request` !'
       HttpRequest.executeFn(props.failed, response)
-      return
+      return response
     }
 
     let requestProps: IRequestProps = HttpRequest.validate(props)
@@ -174,7 +174,7 @@ export class HttpRequest {
       response.status = 500
       response.error = '`url` field in `props` is empty !'
       HttpRequest.executeFn(props.failed, response)
-      return
+      return response
     }
 
     return await HttpRequest.getResponse(requestProps, response, fetchProps)
@@ -187,9 +187,31 @@ export class HttpRequest {
    * @param fetchProps
    * @private
    */
-  private static async getResponse(props: IRequestProps, httpResponse: HttpResponse, fetchProps?: IHttpRequestFetchProps): Promise<void> {
+  private static async getResponse(props: IRequestProps, httpResponse: HttpResponse, fetchProps?: IHttpRequestFetchProps): Promise<HttpResponse> {
     // fetch options
     let requestFetchProps: IRequestFetchProps = HttpRequest.prepareFetchOptions(fetchProps)
+
+    // body
+    let body = props.body || null
+    let requestBody: string | Blob | FormData | ArrayBuffer | URLSearchParams = ''
+    if (body !== null && body !== undefined) {
+      if (body instanceof Blob || body instanceof FormData || body instanceof ArrayBuffer || body instanceof URLSearchParams) {
+        requestBody = body
+      } else {
+        requestBody = JSON.stringify(body)
+      }
+    }
+
+    let opts: {[K: string]: any} = {
+      method: props.method,
+      headers: props.headers,
+      ...requestFetchProps,
+    }
+
+    // Request with GET/HEAD method cannot have bod
+    if (props.method !== 'get') {
+      opts.body = requestBody
+    }
 
     // timeout
     let controller: AbortController = new AbortController()
@@ -197,20 +219,17 @@ export class HttpRequest {
     let timeoutId: number = -1
     if (timeout !== FOREVER_TIMEOUT) {
       // 不过期
+      requestFetchProps.signal = controller.signal
+
       // @ts-ignore
       timeoutId = setTimeout(() => {
         controller.abort()
         console.error(`Request aborted due to timeout: ${timeout}s !`)
-      }, timeout)
+      }, timeout * 1000)
     }
 
     // request
-    let request: Request = new Request(props.url, {
-      method: Method[props.method],
-      body: props.body || null,
-      headers: props.headers,
-      ...requestFetchProps,
-    })
+    let request: Request = new Request(props.url, opts)
 
     try {
       let response: Response = await fetch(request)
@@ -220,7 +239,7 @@ export class HttpRequest {
         httpResponse.status = response.status
         httpResponse.error = `response error, status code: ${response.status}, status text: ${response.statusText || ''} !`
         HttpRequest.executeFn(props.failed, httpResponse)
-        return
+        return httpResponse
       }
 
       // response headers
@@ -278,11 +297,13 @@ export class HttpRequest {
       }
 
       HttpRequest.executeFn(isSuccess ? props.success : props.failed, httpResponse)
+      return httpResponse
     } catch (err: any) {
       console.error(`Error while get response: ${err.message}`)
       httpResponse.status = 500
       httpResponse.error = `Error while get response: ${err.message}`
       HttpRequest.executeFn(props.failed, httpResponse)
+      return httpResponse
     } finally {
       if (timeoutId !== -1) {
         clearTimeout(timeoutId)
@@ -313,28 +334,28 @@ export class HttpRequest {
 
     // method
     if (!Utils.isBlank(props.method)) {
-      let method: Method = (props.method || '').toUpperCase() as Method
-      if (Object.values(Method).includes(method)) {
-        requestProps.method = Method[method]
+      let key = HttpRequest.getKeyByEnumValue(props.method || '', Method)
+      if (key !== undefined) {
+        requestProps.method = Method[key]
       }
     }
 
     // body
-    if (!props.data) {
+    if (props.data) {
       requestProps.body = props.data
     }
 
     // type
     if (!Utils.isBlank(props.type)) {
-      let type: Type = (props.type || '').toUpperCase() as Type
-      if (Object.values(Type).includes(type)) {
-        requestProps.type = Type[type]
+      let key = HttpRequest.getKeyByEnumValue(props.type || '', Type)
+      if (key !== undefined) {
+        requestProps.type = Type[key]
       }
     }
 
     // headers
     if (props.headers !== undefined && props.headers !== null) {
-      if (props.headers.size > 0) {
+      if (!Utils.isObjectNull(props.headers)) {
         requestProps.headers = HttpRequest.prepareHeaders(props.headers, requestProps.type)
       }
     }
@@ -375,7 +396,7 @@ export class HttpRequest {
       cache: RequestCache.DEFAULT,
       credentials: RequestCredentials.SAME_ORIGIN,
       integrity: '',
-      mode: RequestMode.NO_CORS,
+      mode: RequestMode.CORS,
       redirect: RequestRedirect.FOLLOW,
       referrer: '',
       referrerPolicy: ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN,
@@ -388,51 +409,51 @@ export class HttpRequest {
 
     // cache
     if (!Utils.isBlank(props.cache)) {
-      let cache: RequestCache = (props.cache || '').toUpperCase() as RequestCache
-      if (Object.values(RequestCache).includes(cache)) {
-        fetchProps.cache = RequestCache[cache]
+      let key = HttpRequest.getKeyByEnumValue(props.cache || '', RequestCache)
+      if (key !== undefined) {
+        fetchProps.cache = RequestCache[key]
       }
     }
 
     // credentials
     if (!Utils.isBlank(props.credentials)) {
-      let credentials: RequestCredentials = (props.credentials || '').toUpperCase() as RequestCredentials
-      if (Object.values(RequestCredentials).includes(credentials)) {
-        fetchProps.credentials = RequestCredentials[credentials]
+      let key = HttpRequest.getKeyByEnumValue(props.credentials || '', RequestCredentials)
+      if (key !== undefined) {
+        fetchProps.credentials = RequestCredentials[key]
       }
     }
 
     // integrity
     if (!Utils.isBlank(props.integrity)) {
-      fetchProps.integrity = props.integrity
+      fetchProps.integrity = props.integrity || ''
     }
 
     // mode
     if (!Utils.isBlank(props.mode)) {
-      let mode: RequestMode = (props.mode || '').toUpperCase() as RequestMode
-      if (Object.values(RequestMode).includes(mode)) {
-        fetchProps.credentials = RequestMode[mode]
+      let key = HttpRequest.getKeyByEnumValue(props.mode || '', RequestMode)
+      if (key !== undefined) {
+        fetchProps.mode = RequestMode[key]
       }
     }
 
     // redirect
     if (!Utils.isBlank(props.redirect)) {
-      let redirect: RequestRedirect = (props.redirect || '').toUpperCase() as RequestRedirect
-      if (Object.values(RequestRedirect).includes(redirect)) {
-        fetchProps.credentials = RequestRedirect[redirect]
+      let key = HttpRequest.getKeyByEnumValue(props.redirect || '', RequestRedirect)
+      if (key !== undefined) {
+        fetchProps.redirect = RequestRedirect[key]
       }
     }
 
     // referrer
     if (!Utils.isBlank(props.referrer)) {
-      fetchProps.referrer = props.referrer
+      fetchProps.referrer = props.referrer || ''
     }
 
     // referrerPolicy
     if (!Utils.isBlank(props.referrerPolicy)) {
-      let referrerPolicy: ReferrerPolicy = (props.referrerPolicy || '').toUpperCase() as ReferrerPolicy
-      if (Object.values(ReferrerPolicy).includes(referrerPolicy)) {
-        fetchProps.referrerPolicy = ReferrerPolicy[referrerPolicy]
+      let key = HttpRequest.getKeyByEnumValue(props.referrerPolicy || '', ReferrerPolicy)
+      if (key !== undefined) {
+        fetchProps.referrerPolicy = ReferrerPolicy[key]
       }
     } else {
       fetchProps.referrerPolicy = ReferrerPolicy.NONE
@@ -445,18 +466,18 @@ export class HttpRequest {
    * 设置请求 Headers, 默认为 json
    * @private
    */
-  private static prepareHeaders(headers: Map<string, string>, type: Type): Headers {
+  private static prepareHeaders(headers: { [K: string]: string }, type: Type): Headers {
     let requestHeaders: Headers = new Headers()
 
-    headers.forEach((value: string, key: string) => {
-      if (!Utils.isBlank(value) && !Utils.isBlank(key)) {
-        requestHeaders.append(key.toLowerCase(), value.toLowerCase())
+    let keys: Array<string> = Object.keys(headers) || []
+    keys.forEach((key: string) => {
+      let value: string = headers[key] || ''
+      if (!Utils.isBlank(key) && !Utils.isBlank(value)) {
+        requestHeaders.append(key, value)
       }
     })
 
-    if (type === Type.JSON) {
-      requestHeaders.append(CONTENT_TYPE, CONTENT_TYPE_VALUE.JSON)
-    } else if (type === Type.FORM_SUBMIT) {
+    if (type === Type.FORM_SUBMIT) {
       requestHeaders.append(CONTENT_TYPE, CONTENT_TYPE_VALUE.FORM_SUBMIT)
     } else if (type === Type.FORM_DATA) {
       requestHeaders.append(CONTENT_TYPE, CONTENT_TYPE_VALUE.FORM_DATA)
@@ -466,6 +487,8 @@ export class HttpRequest {
       requestHeaders.append(CONTENT_TYPE, CONTENT_TYPE_VALUE.TEXT)
     } else if (type === Type.HTML) {
       requestHeaders.append(CONTENT_TYPE, CONTENT_TYPE_VALUE.HTML)
+    } else { // default `json`
+      requestHeaders.append(CONTENT_TYPE, CONTENT_TYPE_VALUE.JSON)
     }
 
     return requestHeaders
@@ -482,5 +505,26 @@ export class HttpRequest {
         console.error('execute function error, `fn` is not a `function` !')
       }
     }
+  }
+
+  /**
+   * 根据枚举 key 获取 value
+   * @param value
+   * @param enumType
+   * @private
+   */
+  private static getKeyByEnumValue<T extends string>(value: string, enumType: { [key: string]: T }): T | undefined {
+    if (!Object.values(enumType).includes(value.toLowerCase() as T)) {
+      return undefined
+    }
+
+    const keys = Object.keys(enumType) || []
+    for (const key of keys) {
+      if (enumType[key].toLowerCase() === value.toLowerCase()) {
+        return key as T
+      }
+    }
+
+    return undefined
   }
 }
