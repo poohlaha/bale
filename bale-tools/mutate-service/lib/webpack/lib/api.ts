@@ -307,31 +307,34 @@ export default class WebpackApi {
         )
       }
 
-      const threads = os.cpus() === undefined ? 1 : os.cpus().length
-      minimizer.push(
-        new TerserWebpackPlugin({
-          parallel: threads > 1 ? threads - 1 : 1,
-          extractComments: false,
-          terserOptions: {
-            sourceMap: false,
-            compress: {
-              ecma: 5,
-              comparisons: false,
-              inline: 2,
-              drop_console: true,
-              drop_debugger: true
+      let useTerserWebpackPlugin = MutatePaths.getBooleanValue(this._settings.useTerserWebpackPlugin, true)
+      if (useTerserWebpackPlugin) {
+        const threads = os.cpus() === undefined ? 1 : os.cpus().length
+        minimizer.push(
+          new TerserWebpackPlugin({
+            parallel: threads > 1 ? threads - 1 : 1,
+            extractComments: false,
+            terserOptions: {
+              sourceMap: false,
+              compress: {
+                ecma: 5,
+                comparisons: false,
+                inline: 2,
+                drop_console: true,
+                drop_debugger: true
+              },
+              mangle: {
+                safari10: true,
+              },
+              output: {
+                ecma: 5,
+                comments: false,
+                ascii_only: true,
+              },
             },
-            mangle: {
-              safari10: true,
-            },
-            output: {
-              ecma: 5,
-              comments: false,
-              ascii_only: true,
-            },
-          },
-        })
-      )
+          })
+        )
+      }
     }
 
     // 图片压缩 see: https://www.npmjs.com/package/image-minimizer-webpack-plugin?activeTab=readme
