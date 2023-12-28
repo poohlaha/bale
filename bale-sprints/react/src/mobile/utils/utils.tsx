@@ -226,7 +226,7 @@ const Utils = {
    * 判断对象是否为空
    */
   isObjectNull: (target: { [K: string]: any } = {}) => {
-    return JSON.stringify(target) === '{}'
+    return !target || (JSON.stringify(target) === '{}' && (Object.keys(target) || []).length === 0)
   },
 
   /**

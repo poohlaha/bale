@@ -1,0 +1,35 @@
+{
+  "name": "@bale-tools/mutate-minimize",
+  "version": "1.0.3",
+  "author": "poohlaha",
+  "description": "mutate minimize files.",
+  "keywords": [
+    "js",
+    "css",
+    "html"
+  ],
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poohlaha/bale-tools.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "scripts": {
+    "format": "npx prettier --write ."
+  },
+  "bin": {
+    "bale-mutate-minimize": "bin/index.js"
+  },
+  "dependencies": {
+    "commander": "^9.4.1",
+    "@bale-tools/utils": "^2.0.5",
+    "chalk": "^4.1.2",
+    "fs-extra": "^10.1.0",
+    "clean-css": "^5.3.1",
+    "uglify-js": "^3.17.4",
+    "html-minifier": "^4.0.0"
+  }
+}

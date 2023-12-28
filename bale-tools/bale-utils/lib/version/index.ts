@@ -32,9 +32,10 @@ class Version {
       if (Utils.isBlank(packageName)) return []
       const command = process.platform === 'win32' ? 'npm.cmd' : 'npm'
       const versionStr = spawn(command, ['view', packageName, 'versions'])
-      versionStr.stdout.on('data', data => {
+      versionStr.stdout.on('data', (data = []) => {
+        Logger.info('versions: ', data)
         try {
-          let versionStdout = data.toString()
+          let versionStdout = (data || []).toString()
           versionStdout = versionStdout.replace('\n', '')
           let versions = eval(versionStdout)
           versions = versions.sort((a, b) => a - b)

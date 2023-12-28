@@ -1,6 +1,6 @@
 {
   "name": "@bale-tools/mutate-service",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "author": "poohlaha",
   "description": "mutate service pack.",
   "keywords": [
@@ -60,7 +60,6 @@
     "add-asset-html-webpack-plugin": "^5.0.2",
     "css-loader": "^6.7.2",
     "css-minimizer-webpack-plugin": "^4.2.2",
-    "clean-css": "^5.3.1",
     "html-webpack-plugin": "^5.5.0",
     "inline-chunk-html-plugin": "^1.1.1",
     "px2rem-loader": "^0.1.9",
@@ -95,8 +94,6 @@
     "clean-webpack-plugin": "^4.0.0",
     "workbox-webpack-plugin": "^6.5.4",
     "terser-webpack-plugin": "^5.3.6",
-    "uglify-js": "^3.17.4",
-    "html-minifier": "^4.0.0",
     "typescript": "^4.8.4",
     "compressing": "^1.6.3",
     "lodash": "^4.17.21",
