@@ -1,6 +1,6 @@
 {
   "name": "@bale-tools/utils",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "author": "poohlaha",
   "description": "@bale-tools utils",
   "main": "index.js",
@@ -11,7 +11,7 @@
   "scripts": {
     "format": "npx prettier --write ."
   },
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.2",
     "shelljs": "^0.8.5",

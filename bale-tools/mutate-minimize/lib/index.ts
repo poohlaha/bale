@@ -106,7 +106,7 @@ class Minimize {
       Logger.error(`File path is not exists, current is ${filePath} .`)
     }
 
-    const extList: Array<string> = this._getExcludeMinExts()
+    const extList: Array<string> = this._getExcludeMinExts() || []
     if (this._JS_REG.test(filePath)) {
       // js
       this._minJs(filePath, extList)

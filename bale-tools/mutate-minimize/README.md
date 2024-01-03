@@ -7,13 +7,16 @@
 - bin
 
 ```shell
--e, --entry <entry> Add an entry file or dir.
+-e, --entry, Add an entry file or dir.
+-exts, Exclude file exts, more use `,`.
+-u, --update, Update package.
 ```
 
 examples:
 
 ```shell
-bale-mutate-minimize -e src
+bale-mutate-minimize -e src -exts '.cms.js' # task
+bale-mutate-minimize -u # update
 ```
 
 - nodejs
@@ -24,7 +27,7 @@ examples:
 const Minimize = require('./index')
 
 async function compile() {
-  Minimize('/Users/smile/Downloads/webApp')
+  Minimize('/Users/smile/Downloads/webApp', [])
 }
 
 compile()

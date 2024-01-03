@@ -58,6 +58,13 @@ class Paths {
   }
 
   /**
+   * 获取命令列表
+   */
+  public getCommandList(): Array<string> {
+    return this._args || []
+  }
+
+  /**
    * 获取 app 目录
    */
   public resolve(relativePath: string = ''): string {
@@ -240,6 +247,31 @@ class Paths {
    */
   public install() {
     shell.exec(`${this.hasYarn() ? 'yarn' : 'npm'} install`)
+  }
+
+  /**
+   * 根据包名安装依赖
+   * @param packageName 要安装的包名称
+   * @param version 要安装的包版本
+   * @param isGlobal 是否需要全局安装, 默认为 false
+   */
+  public installPackage(packageName: string, version: string, isGlobal: boolean = false) {
+    if (Utils.isBlank(packageName)) {
+      return
+    }
+
+    let command = ''
+    if (this.hasYarn()) {
+      command = `yarn ${isGlobal ? 'global' : ''} add ${packageName}`
+    } else {
+      command = `npm install ${isGlobal ? '-g' : ''} ${packageName}`
+    }
+
+    if (!Utils.isBlank(version)) {
+      command += (`@${version}`)
+    }
+
+    shell.exec(command)
   }
 
   /**

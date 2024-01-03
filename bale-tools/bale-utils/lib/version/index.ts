@@ -156,6 +156,51 @@ class Version {
       done?.()
     }
   }
+
+  /**
+   * 更新
+   * @param packageName 包名
+   * @param packageVersion 版本
+   * @param isGlobal 是否全局安装
+   * @param done 完成后的回调函数
+   */
+  public update(packageName: string, packageVersion: string, isGlobal: boolean = false, done?: Function) {
+    let commandList = Paths.getCommandList() || []
+    let needUpdate = false
+    for(let command of commandList) {
+      let _command = (command || '').trim()
+      if (_command === '-u' || _command === '--update') {
+        needUpdate = true
+      }
+    }
+
+    if (!needUpdate) {
+      done?.(false)
+      return
+    }
+
+    this.getVersionList(packageName, versions => {
+      Logger.info(`versions: ${JSON.stringify(versions)}`)
+      if (versions.length === 0 || Utils.isBlank(packageName)) {
+        Logger.info(`no need to update ${packageName} !`)
+        done?.(true)
+        return
+      }
+
+      const maxVersion = versions[versions.length - 1]
+      const version = packageVersion || ''
+      if (version !== maxVersion) {
+        // 安装
+        Logger.info(`install ${packageName} version: ${maxVersion}`)
+        Paths.installPackage(packageName, maxVersion, isGlobal)
+        Logger.info(`update ${packageName} from ${version} to ${maxVersion} successfully !`)
+      } else {
+        Logger.info(`no need to update ${packageName} !`)
+      }
+
+      done?.(true)
+    })
+  }
 }
 
 export default new Version()

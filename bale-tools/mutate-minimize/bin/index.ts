@@ -24,7 +24,11 @@ class MinimizeService {
   private readonly _appRootDir: string
   constructor() {
     this._appRootDir = Paths.getAppRootDir()
-    this.build()
+    Version.update(packageJson.name, packageJson.version, true, (hasUpdate: boolean) => {
+      if (!hasUpdate) {
+        this.build()
+      }
+    })
   }
 
   private _getProps(appRootDir: string = ''): { [K: string]: any } {
@@ -37,17 +41,30 @@ class MinimizeService {
       return { entry: '' }
     }
 
-    return { entry }
+    const exts = commander.exts || ''
+    let excludeMinExts: Array<string> = []
+    if (exts.indexOf(',')) {
+      let arr = exts.split(',') || []
+      if (arr.length > 0) {
+        for (let a of arr) {
+          if (!Utils.isBlank(a)) {
+            excludeMinExts.push((a || '').trim())
+          }
+        }
+      }
+    }
+
+    return { entry, excludeMinExts }
   }
 
   public build() {
-    const { entry } = this._getProps(this._appRootDir) || {}
+    const { entry, excludeMinExts } = this._getProps(this._appRootDir) || {}
     Logger.info(`Begin to build file: ${chalk.cyan(entry)} .`)
     if (Utils.isBlank(entry)) {
       return
     }
 
-    return Minimize(entry, [])
+    return Minimize(entry, excludeMinExts || [])
   }
 }
 
