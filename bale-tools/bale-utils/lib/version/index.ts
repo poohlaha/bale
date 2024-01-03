@@ -33,7 +33,7 @@ class Version {
       const command = process.platform === 'win32' ? 'npm.cmd' : 'npm'
       const versionStr = spawn(command, ['view', packageName, 'versions'])
       versionStr.stdout.on('data', (data = []) => {
-        Logger.info('versions: ', data)
+        Logger.info(`versions: ${JSON.stringify(data)}`)
         try {
           let versionStdout = (data || []).toString()
           versionStdout = versionStdout.replace('\n', '')
