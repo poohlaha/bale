@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "lib-flexible": "^0.3.2",
-    "axios": "^0.21.1",
+    "@bale-web/request": "^0.1.0",
     "crypto-js": "^4.0.0",
     "mobx": "^5.15.7",
     "mobx-react-lite": "^2.2.2",
