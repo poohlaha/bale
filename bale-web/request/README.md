@@ -28,6 +28,9 @@ npm install @bale-web/request
   - type
     可选 `string` 类型, `0(JSON)` 、`1(FORM_SUBMIT)`、`2(FORM_DATA)`、`3(BLOB)`、`4(TEXT)`、`3(HTML)`, 默认为 `0(JSON)`。
 
+  - responseType
+    可选 `string` 类型, `0(JSON)` 、`1(FORM_SUBMIT)`、`2(FORM_DATA)`、`3(BLOB)`、`4(TEXT)`、`3(HTML)`, 默认为 `0(JSON)`。
+
   - timeout
     可选 `number` 类型, 定义 `超时时间`, `-1` 为 `不超时`, 默认为 `30s`。
 
@@ -158,6 +161,7 @@ let updateOpts: any = {
   method: 'post',
   data: formData,
   type: '2',
+  responseType: '2'
 }
 
 let response = await HttpRequest.send(opts)

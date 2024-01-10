@@ -26,6 +26,7 @@ export interface IHttpRequestProps {
   method?: string
   data?: any
   type?: string
+  responseType?: string
   timeout?: number
   headers?: { [K: string]: string }
   success?: Function
@@ -48,6 +49,7 @@ interface IRequestProps {
   body: any
   headers: Headers
   type: Type
+  responseType: Type
   timeout: number
   success: Function | null
   failed: Function | null
@@ -254,7 +256,7 @@ export class HttpRequest {
 
       let isSuccess = false
       // response type
-      if (props.type === Type.JSON) {
+      if (props.responseType === Type.JSON) {
         try {
           httpResponse.body = await response.json()
           isSuccess = true
@@ -262,7 +264,7 @@ export class HttpRequest {
           console.error('Error while get response:', err)
           httpResponse.error = `Error while get response: ${err.message}`
         }
-      } else if (props.type === Type.FORM_SUBMIT) {
+      } else if (props.responseType === Type.FORM_SUBMIT) {
         try {
           httpResponse.body = await response.text()
           isSuccess = true
@@ -270,7 +272,7 @@ export class HttpRequest {
           console.error('Error while get response:', err)
           httpResponse.error = `Error while get response: ${err.message}`
         }
-      } else if (props.type === Type.FORM_DATA) {
+      } else if (props.responseType === Type.FORM_DATA) {
         try {
           httpResponse.body = await response.formData()
           isSuccess = true
@@ -278,7 +280,7 @@ export class HttpRequest {
           console.error('Error while get response:', err)
           httpResponse.error = `Error while get response: ${err.message}`
         }
-      } else if (props.type === Type.BLOB) {
+      } else if (props.responseType === Type.BLOB) {
         try {
           httpResponse.body = await response.blob()
           isSuccess = true
@@ -322,6 +324,7 @@ export class HttpRequest {
       body: null,
       headers: new Headers(),
       type: Type.JSON,
+      responseType: Type.JSON,
       timeout: DEFAULT_TIMEOUT,
       success: null,
       failed: null,
@@ -350,6 +353,14 @@ export class HttpRequest {
       let key = HttpRequest.getKeyByEnumValue(props.type || '', Type)
       if (key !== undefined) {
         requestProps.type = Type[key]
+      }
+    }
+
+    // response type
+    if (!Utils.isBlank(props.responseType)) {
+      let key = HttpRequest.getKeyByEnumValue(props.responseType || '', Type)
+      if (key !== undefined) {
+        requestProps.responseType = Type[key]
       }
     }
 
