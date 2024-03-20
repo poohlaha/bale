@@ -10,16 +10,15 @@ const fsExtra = require('fs-extra')
 const path = require('path')
 
 const skips = ['mutate-version']
-function build() {
-  const outputDir = 'dist'
-  const outputPath = path.join(__dirname, '../', outputDir)
-  fsExtra.removeSync(outputPath)
+const outputDir = 'dist'
+const outputPath = path.join(__dirname, '../', outputDir)
 
-  shell.exec(`swc bale-tools -d ${outputDir}`)
+function build(packageName = '') {
+  shell.exec(`swc ${packageName} -d ${outputDir}`)
 
   // 拷贝 package.json 到目录
 
-  const packagesPath = path.join(__dirname, '../', 'bale-tools')
+  const packagesPath = path.join(__dirname, '../', packageName)
   const dirs = fsExtra.readdirSync(packagesPath)
   for (let dir of dirs) {
     const projectDir = path.join(packagesPath, dir)
@@ -58,4 +57,10 @@ function build() {
   }
 }
 
-module.exports = build()
+function run() {
+  fsExtra.removeSync(outputPath)
+
+  build('bale-tools')
+  build('bale-web')
+}
+module.exports = run()

@@ -30,3 +30,4 @@ yarn-debug.log*
 yarn-error.log*
 node_modules
 pnpm-lock.yaml
+bale-web/request/**/*.js
