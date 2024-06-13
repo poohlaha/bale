@@ -226,6 +226,9 @@ export class HttpRequest {
       // @ts-ignore
       timeoutId = setTimeout(() => {
         controller.abort()
+        httpResponse.status = 666
+        httpResponse.error = 'Error while get response: can not connect server !'
+        HttpRequest.executeFn(props.failed, httpResponse)
         console.error(`Request aborted due to timeout: ${timeout}s !`)
       }, timeout * 1000)
     }

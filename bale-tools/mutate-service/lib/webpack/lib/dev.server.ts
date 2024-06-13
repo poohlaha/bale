@@ -78,15 +78,18 @@ export default class DevServer {
   }
 
   private _getProxy(appRoot: string = '', proxy: object = {}): object {
+    let proxys: {[K: string]: any} = {}
     if (_.isEmpty(proxy) || !proxy) {
+      proxys = { ...proxys, ...proxy }
       appRoot = Paths.getAppRootDir(appRoot)
       const proxySetup = path.join(appRoot, MutatePaths.getProxySetup() || '')
       if (fsExtra.pathExistsSync(proxySetup)) {
-        proxy = require(proxySetup) || {}
+        let _proxy = require(proxySetup) || {}
+        proxys = { ...proxys, ..._proxy }
       }
     }
 
-    return proxy || {}
+    return proxys || {}
   }
 
   public getOpts(): object {

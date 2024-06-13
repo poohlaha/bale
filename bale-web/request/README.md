@@ -161,7 +161,7 @@ let updateOpts: any = {
   method: 'post',
   data: formData,
   type: '2',
-  responseType: '2'
+  responseType: '2',
 }
 
 let response = await HttpRequest.send(opts)
