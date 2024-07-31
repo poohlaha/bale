@@ -221,7 +221,7 @@ export class HttpRequest {
     let timeoutId: number = -1
     if (timeout !== FOREVER_TIMEOUT) {
       // 不过期
-      requestFetchProps.signal = controller.signal
+      opts.signal = controller.signal
 
       // @ts-ignore
       timeoutId = setTimeout(() => {
