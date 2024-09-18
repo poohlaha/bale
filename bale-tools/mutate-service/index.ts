@@ -6,7 +6,6 @@
 import WebpackCompiler from './lib/webpack'
 import WebpackDllCompiler from './lib/webpack/dll'
 import CockCompiler from './lib/cock'
-import Minimize from './lib/min'
 import Rollup from './lib/rollup'
 
-export { WebpackCompiler, WebpackDllCompiler, CockCompiler, Minimize, Rollup }
+export { WebpackCompiler, WebpackDllCompiler, CockCompiler, Rollup }

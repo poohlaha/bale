@@ -13,7 +13,7 @@ import Compressing from 'compressing'
 import DevServer from './lib/dev.server'
 import MutatePaths from './utils/paths'
 import WebpackApI from './lib/api'
-import Minimize from '../min'
+import { Minimize } from '@bale-tools/mutate-minimize'
 import { Logger as BaleLogger, Utils, Paths, ThreadPool } from '@bale-tools/utils'
 import { IApiOptions, ICompressOptions } from './utils/type'
 
@@ -148,12 +148,11 @@ class WebpackCompiler {
     }
 
     // 开启多线程打包
-    const minimize = new Minimize()
     const threadPool = new ThreadPool(5, true, done)
     let tasks: Array<any> = []
     for (let file of fileList) {
       tasks.push({
-        task: () => minimize.compress(file), // compress
+        task: () => new Minimize(file), // compress
       })
     }
 
