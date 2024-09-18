@@ -64,8 +64,12 @@ export default class WebpackApi {
       entry = MutatePaths.getDefaultEntryFile(this._appRootDir, clonedOpts.entry || '')
     }
 
-    if (!fsExtra.pathExistsSync(entry)) {
-      Logger.throw(`Entry Point does not exist, current is ${entry.replace(this._appRootDir, '')} !`)
+    if (_.isObject(clonedOpts.entry)) {
+      entry = clonedOpts.entry || {}
+    } else {
+      if (!fsExtra.pathExistsSync(entry)) {
+        Logger.throw(`Entry Point does not exist, current is ${entry.replace(this._appRootDir, '')} !`)
+      }
     }
 
     // output

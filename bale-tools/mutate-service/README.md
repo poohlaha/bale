@@ -57,7 +57,7 @@ export interface IApiSettingOptions {
   experiments?: IExperimentsOptions | undefined | boolean // experiments 配置 本地启动默认为 true, doc see `https://webpack.js.org/configuration/experiments/#experiments`
   generateReport?: boolean // 生产环境是否生成报告 默认为 true
   visitSuffixUrl?: string // 访问路径后缀
-  providePlugin?: { [K: string]: any } // 访问全局亦是插件
+  providePlugin?: { [K: string]: any } // 访问全局变量插件
   definePlugin?: object // 注入环境变量插件
   jsLoader?: 'babel-loader' | 'esbuild-loader' | 'swc-loader' | undefined | null // js loader, default `babel-loader`
   jsLoaderInclude?: Array<any> // js loader include
@@ -196,8 +196,19 @@ export interface ICompileTsOptions {
   entryDir?: string // entry point, 默认为 src 或 lib
   outputDir?: string // 输出目录, 默认为 dist
   excludes?: Array<string> // 过滤的文件夹目录, 默认为 node_modules
-  useDeclaration?: boolean // 是否生在 .d.ts 文件
+  useDeclaration?: boolean // 是否生成 .d.ts 文件
   done?: Function // 完成后的回调
+}
+
+// rollup options
+export interface IRollupOptions {
+    formats?: Array<string> | string // 输出格式, 单个直接输入, 多个用数组: ['umd', 'es', 'amd', 'iife', 'cjs', 'system'] | 'all', `all` 为输出多个格式
+    appRootDir?: string // 项目根目录
+    input?: string // rollup 输入
+    output?: { [K: string]: any } // rollup 输出
+    min?: boolean // 是否最小化, 默认为 true
+    plugins?: Array<any> // rollup plugins
+    done?: Function // 完成后的回调
 }
 
 // compile options
