@@ -133,15 +133,9 @@ const Utils = {
     if (!date) return ''
 
     if (!(date instanceof Date)) {
-      switch (typeof date) {
-        case 'string':
-          date = new Date(date.replace(/-/, '/'))
-          break
-        case 'number':
-          date = new Date(date)
-          break
-      }
+      date = new Date(date)
     }
+
     // @ts-ignore
     if (!(date instanceof Date)) return
     let dict = {

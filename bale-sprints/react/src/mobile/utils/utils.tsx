@@ -129,14 +129,10 @@ const Utils = {
   formatDateStr: (date: any, format: string = 'yyyy-MM-dd') => {
     if (!date) return ''
 
-    switch (typeof date) {
-      case 'string':
-        date = new Date(date.replace(/-/, '/'))
-        break
-      case 'number':
-        date = new Date(date)
-        break
+    if (!(date instanceof Date)) {
+      date = new Date(date)
     }
+
     // @ts-ignore
     if (!(date instanceof Date)) return
     let dict = {
