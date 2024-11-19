@@ -9,6 +9,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "allowSyntheticDefaultImports": true,
+    "exactOptionalPropertyTypes": false,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
