@@ -39,7 +39,7 @@
     "@typescript-eslint/eslint-plugin": "^8.18.0",
     "@typescript-eslint/parser": "^8.18.0",
     "@vue/cli-plugin-typescript": "~5.0.8",
-    "@vue/eslint-config-typescript": "^14.0.4"
+    "@vue/eslint-config-typescript": "^14.1.4"
   },
   "husky": {
     "hooks": {
