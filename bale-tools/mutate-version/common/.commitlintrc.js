@@ -3,7 +3,7 @@ module.exports = {
     parserOpts: {
       headerPattern: /^(\w*)(?:\((.*)\))?:\s(.*)$/,
       headerCorrespondence: ['type', 'scope', 'subject'],
-    }
+    },
   },
   rules: {
     'type-empty': [2, 'never'],
@@ -14,5 +14,5 @@ module.exports = {
       'always',
       ['build', 'feat', 'fix', 'update', 'docs', 'style', 'refactor', 'test', 'chore', 'revert', 'review'],
     ],
-  }
+  },
 }

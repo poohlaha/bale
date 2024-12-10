@@ -16,7 +16,7 @@ const EXIT = {
   exit: (props: any) => {
     setTimeout(() => {
       props.history.push({
-        pathname: RouterUrls.LOGIN_URL
+        pathname: RouterUrls.LOGIN_URL,
       })
     }, 300)
   },
@@ -56,7 +56,7 @@ const EXIT = {
       Utils.removeLocal(`${SYSTEM.OPEN_ID}_${SYSTEM.LOCAL_TOKEN}`)
       Utils.removeLocal(`${SYSTEM.OPEN_ID}_${SYSTEM.USER_TOKEN}`)
       EXIT.exit(props)
-      TOAST.show({message: CONSTANT.TOKEN_EXPIRED_ERROR, type: 1, needTime: true})
+      TOAST.show({ message: CONSTANT.TOKEN_EXPIRED_ERROR, type: 1, needTime: true })
     } else {
       callback?.()
     }
@@ -68,7 +68,7 @@ const EXIT = {
   logout: (text: string = '', redirectUrl: string = '') => {
     USER.clearUserInfo()
     PAGE_JUMP.toLoginPage(text, redirectUrl)
-  }
+  },
 }
 
 // 用户相关
@@ -137,7 +137,7 @@ const USER = {
   getOpenId: () => {
     // 保存用户信息
     return Utils.getLocal(SYSTEM.OPEN_ID) || ''
-  }
+  },
 }
 
 // Toast
@@ -152,15 +152,7 @@ const TOAST = {
    * @param className --- 遮罩层样式
    * @param onAfterClose -- 关闭函数
    */
-  show: ({
-           message = '',
-           type = 1,
-           needTime = false,
-           duration = 2000,
-           maskClickable = true,
-           className = '',
-           onAfterClose = () => {}
-         }) => {
+  show: ({ message = '', type = 1, needTime = false, duration = 2000, maskClickable = true, className = '', onAfterClose = () => {} }) => {
     const getToast = (message: string, duration: number, type: number, maskClickable: boolean, className: string, onAfterClose?: Function) => {
       if (type === 2) {
         // 成功
@@ -172,7 +164,7 @@ const TOAST = {
           maskClassName: className || CONSTANT.SKINS[0],
           afterClose: () => {
             onAfterClose?.()
-          }
+          },
         })
       } else if (type === 3) {
         // 失败
@@ -184,7 +176,7 @@ const TOAST = {
           maskClassName: className || CONSTANT.SKINS[0],
           afterClose: () => {
             onAfterClose?.()
-          }
+          },
         })
       } else if (type === 4) {
         // loading
@@ -196,7 +188,7 @@ const TOAST = {
           maskClassName: className || CONSTANT.SKINS[0],
           afterClose: () => {
             onAfterClose?.()
-          }
+          },
         })
       } else {
         // 默认提示
@@ -207,7 +199,7 @@ const TOAST = {
           maskClassName: className || CONSTANT.SKINS[0],
           afterClose: () => {
             onAfterClose?.()
-          }
+          },
         })
       }
     }
@@ -228,7 +220,7 @@ const TOAST = {
    */
   hide: () => {
     Toast.clear()
-  }
+  },
 }
 
 // 地址栏相关
@@ -262,7 +254,7 @@ const ADDRESS = {
       console.log('beforeAddressUrl:', address)
       return {
         addressUrl: '',
-        beforeAddressUrl: address
+        beforeAddressUrl: address,
       }
     }
 
@@ -295,7 +287,7 @@ const ADDRESS = {
       addressUrl,
       beforeAddressUrl,
       param,
-      params: ADDRESS.getUrlString(param)
+      params: ADDRESS.getUrlString(param),
     }
   },
 
@@ -345,7 +337,7 @@ const ADDRESS = {
       let otherParams = getQueryParams(prefixUrl)
       return {
         ...obj,
-        ...otherParams
+        ...otherParams,
       }
     }
 
@@ -365,19 +357,18 @@ const ADDRESS = {
     let r = decodeURI(after).match(reg)
     if (!r) return null
     return r[2]
-  }
+  },
 }
 
 // 存储相关
 const STORAGE = {
-
   /**
    * 清除所有信息
    */
   clear: () => {
     Utils.clearLocalStorage()
     Utils.clearSessionStorage()
-  }
+  },
 }
 
 // 页面跳转相关
@@ -411,7 +402,7 @@ const PAGE_JUMP = {
       TOAST.show({
         message: text,
         type: 1,
-        needTime: true
+        needTime: true,
       })
     }
   },
@@ -454,18 +445,18 @@ const PAGE_JUMP = {
    * @param callback --- 跳转后回调
    */
   redirect: ({
-               props = {},
-               state = {},
-               text = '',
-               jumpUrl = '',
-               needJumpBack = true,
-               jumpBackUrl = '',
-               needDecryptJumpUrl = false,
-               needPrefixAddress = true,
-               needWindowJump = true,
-               isReplace = true,
-               callback = null,
-             }) => {
+    props = {},
+    state = {},
+    text = '',
+    jumpUrl = '',
+    needJumpBack = true,
+    jumpBackUrl = '',
+    needDecryptJumpUrl = false,
+    needPrefixAddress = true,
+    needWindowJump = true,
+    isReplace = true,
+    callback = null,
+  }) => {
     if (!jumpUrl) return
     const _needJumpBack = needJumpBack === null || needJumpBack === undefined ? true : needJumpBack
     const _needDecryptJumpUrl = needDecryptJumpUrl === null || needDecryptJumpUrl === undefined ? true : needDecryptJumpUrl
@@ -498,7 +489,7 @@ const PAGE_JUMP = {
       isReplace: _isReplace,
       text,
       needWindowJump: _needWindowJump,
-      callback
+      callback,
     })
   },
 
@@ -527,7 +518,7 @@ const PAGE_JUMP = {
         jumpUrl: Utils.encrypt(redirectUrl + paramUrl),
         needJumpBack: false,
         needDecryptJumpUrl: true,
-        isReplace
+        isReplace,
       })
     } else {
       PAGE_JUMP.goBack(props)
@@ -635,8 +626,7 @@ const COMMON = {
     if (Utils.isBlank(name)) return ''
     try {
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      const language = isDom ? useContext(LanguageContext)
-        : Utils.getLocal(CONSTANT.LANGUAGES_NAME) || CONSTANT.LANGUAGES[0]
+      const language = isDom ? useContext(LanguageContext) : Utils.getLocal(CONSTANT.LANGUAGES_NAME) || CONSTANT.LANGUAGES[0]
       if (language === CONSTANT.LANGUAGES[0]) {
         return zhCN[name] || ''
       } else if (language === CONSTANT.LANGUAGES[1]) {
@@ -645,7 +635,7 @@ const COMMON = {
     } catch (e) {
       return CONSTANT.LANGUAGES[0]
     }
-  }
+  },
 }
 
 export { EXIT, STORAGE, PAGE_JUMP, ADDRESS, USER, TOAST, COMMON }

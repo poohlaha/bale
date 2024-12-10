@@ -15,7 +15,7 @@ const EXIT = {
   exit: (props: any) => {
     setTimeout(() => {
       props.history.push({
-        pathname: RouterUrls.SYSTEM.LOGIN_URL
+        pathname: RouterUrls.SYSTEM.LOGIN_URL,
       })
     }, 300)
   },
@@ -26,7 +26,7 @@ const EXIT = {
   logout: (text: string = '', redirectUrl: string = '') => {
     USER.clearUserInfo()
     PAGE_JUMP.toLoginPage(text, redirectUrl)
-  }
+  },
 }
 
 // Toast
@@ -40,16 +40,7 @@ const TOAST = {
    * type --- 1 --- info 2 --- success  3 --- warning 4 --- error
    * onClose -- 关闭函数
    */
-  show: (
-    {
-      message = '',
-      needTime = false,
-      duration = CONSTANT.ALERT_DURATION,
-      time =200,
-      type = 1,
-      onClose = () => {}
-    }
-  ) => {
+  show: ({ message = '', needTime = false, duration = CONSTANT.ALERT_DURATION, time = 200, type = 1, onClose = () => {} }) => {
     const getToast = (message: string, duration: number, type: number, onClose: any) => {
       if (type === 3) {
         // warning
@@ -75,7 +66,7 @@ const TOAST = {
     }
 
     getToast(message, duration, type, onClose)
-  }
+  },
 }
 
 // 地址栏相关
@@ -109,7 +100,7 @@ const ADDRESS = {
       console.log('beforeAddressUrl:', address)
       return {
         addressUrl: '',
-        beforeAddressUrl: address
+        beforeAddressUrl: address,
       }
     }
 
@@ -142,7 +133,7 @@ const ADDRESS = {
       addressUrl,
       beforeAddressUrl,
       param,
-      params: ADDRESS.getUrlString(param)
+      params: ADDRESS.getUrlString(param),
     }
   },
 
@@ -192,7 +183,7 @@ const ADDRESS = {
       let otherParams = getQueryParams(prefixUrl)
       return {
         ...obj,
-        ...otherParams
+        ...otherParams,
       }
     }
 
@@ -212,12 +203,11 @@ const ADDRESS = {
     let r = decodeURI(after).match(reg)
     if (!r) return null
     return r[2]
-  }
+  },
 }
 
 // 存储相关
 const STORAGE = {
-
   /**
    * 清除所有信息
    */
@@ -228,7 +218,7 @@ const STORAGE = {
 
   judgeTokenExpired: () => {
     return !Utils.getLocal(SYSTEM.USER_TOKEN_NAME)
-  }
+  },
 }
 
 // 页面跳转相关
@@ -321,18 +311,18 @@ const PAGE_JUMP = {
    * @param callback --- 跳转后回调
    */
   redirect: ({
-               props = {},
-               state = {},
-               text = '',
-               jumpUrl = '',
-               needJumpBack = true,
-               jumpBackUrl = '',
-               needDecryptJumpUrl = false,
-               needPrefixAddress = true,
-               needWindowJump = true,
-               isReplace = true,
-               callback = null
-             }) => {
+    props = {},
+    state = {},
+    text = '',
+    jumpUrl = '',
+    needJumpBack = true,
+    jumpBackUrl = '',
+    needDecryptJumpUrl = false,
+    needPrefixAddress = true,
+    needWindowJump = true,
+    isReplace = true,
+    callback = null,
+  }) => {
     if (!jumpUrl) return
     const _needJumpBack = needJumpBack === null || needJumpBack === undefined ? true : needJumpBack
     const _needDecryptJumpUrl = needDecryptJumpUrl === null || needDecryptJumpUrl === undefined ? true : needDecryptJumpUrl
@@ -365,7 +355,7 @@ const PAGE_JUMP = {
       isReplace: _isReplace,
       text,
       needWindowJump: _needWindowJump,
-      callback
+      callback,
     })
   },
 
@@ -394,7 +384,7 @@ const PAGE_JUMP = {
         jumpUrl: Utils.encrypt(redirectUrl + paramUrl),
         needJumpBack: false,
         needDecryptJumpUrl: true,
-        isReplace
+        isReplace,
       })
     } else {
       PAGE_JUMP.goBack(props)
@@ -431,7 +421,7 @@ const PAGE_JUMP = {
     }
 
     PAGE_JUMP.jump({}, url, {}, text, needWindowJump, isReplace)
-  }
+  },
 }
 
 // 用户相关
@@ -479,7 +469,7 @@ const USER = {
     // 保存Token
     Utils.removeLocal(SYSTEM.LOCAL_TOKEN_NAME)
     Utils.clearSessionStorage()
-  }
+  },
 }
 
 // 公共模块相关
@@ -491,8 +481,7 @@ const COMMON = {
     if (Utils.isBlank(name)) return ''
     try {
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      const language = isDom ? useContext(LanguageContext)
-        : Utils.getLocal(CONSTANT.LANGUAGES_NAME) || CONSTANT.LANGUAGES[0]
+      const language = isDom ? useContext(LanguageContext) : Utils.getLocal(CONSTANT.LANGUAGES_NAME) || CONSTANT.LANGUAGES[0]
       if (language === CONSTANT.LANGUAGES[0]) {
         return zhCN[name] || ''
       } else if (language === CONSTANT.LANGUAGES[1]) {
@@ -501,7 +490,7 @@ const COMMON = {
     } catch (e) {
       return CONSTANT.LANGUAGES[0]
     }
-  }
+  },
 }
 
 export { EXIT, STORAGE, PAGE_JUMP, ADDRESS, USER, TOAST, COMMON }

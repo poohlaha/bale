@@ -11,7 +11,6 @@ import CookPaths from './utils/paths'
 import CompileTs from './project/compile-ts'
 import CompileJs from './module/compile-js'
 import CompileStyle from './module/compile-style'
-import CompileVue from './module/compile-vue'
 import Rollup from '../rollup'
 import { ICookCompilerOptions, ICompileTsOptions } from './utils/type'
 import { IRollupOptions } from '../rollup/types'
@@ -126,13 +125,7 @@ class CookCompile {
   /**
    * compile vue
    */
-  private async _compileWithVue(filePath: string = ''): Promise<void> {
-    return await new CompileVue({
-      appRootDir: this._appRootDir,
-      mode: this._mode,
-      filePath,
-    }).compile()
-  }
+  private async _compileWithVue(filePath: string = ''): Promise<void> {}
 
   /**
    * compile style

@@ -13,7 +13,7 @@ const Utils = {
     if (needExpTime) {
       let data: string = JSON.stringify({
         data: item,
-        time: new Date().getTime()
+        time: new Date().getTime(),
       })
 
       window.localStorage.setItem(name, Utils.encrypt(data))
@@ -51,7 +51,7 @@ const Utils = {
     if (needExpTime) {
       let data: string = JSON.stringify({
         data: item,
-        time: new Date().getTime()
+        time: new Date().getTime(),
       })
 
       window.sessionStorage.setItem(name, Utils.encrypt(data))
@@ -185,7 +185,6 @@ const Utils = {
     return newArr.length > 0 ? (returnProp === 'all' ? newArr[0] : newArr[0][returnProp]) || '' : ''
   },
 
-
   /**
    * 检验字符串是否为空
    */
@@ -208,7 +207,6 @@ const Utils = {
   isObjectNull: (target: { [K: string]: any } = {}) => {
     return !target || (JSON.stringify(target) === '{}' && (Object.keys(target) || []).length === 0)
   },
-
 
   /**
    * 深拷贝

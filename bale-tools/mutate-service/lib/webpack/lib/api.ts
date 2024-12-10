@@ -99,7 +99,7 @@ export default class WebpackApi {
         symlinks: false, // 项目不使用 symlinks（例如 npm link 或者 yarn link）
         fallback: {
           crypto: false,
-          ...(this._settings.resolveFallback || {})
+          ...(this._settings.resolveFallback || {}),
         },
         alias: clonedOpts.alias || {},
       },
@@ -325,7 +325,7 @@ export default class WebpackApi {
                 comparisons: false,
                 inline: 2,
                 drop_console: true,
-                drop_debugger: true
+                drop_debugger: true,
               },
               mangle: {
                 safari10: true,

@@ -167,7 +167,7 @@ class Version {
   public update(packageName: string, packageVersion: string, isGlobal: boolean = false, done?: Function) {
     let commandList = Paths.getCommandList() || []
     let needUpdate = false
-    for(let command of commandList) {
+    for (let command of commandList) {
       let _command = (command || '').trim()
       if (_command === '-u' || _command === '--update') {
         needUpdate = true

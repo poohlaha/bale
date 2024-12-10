@@ -3,15 +3,16 @@
 use `rust` develop `wasm` `http` by `Web API Request`。
 
 ## Usage
+
 It is necessary to determine whether the browser supports `wasm`：
 
 ```ts
 if (typeof WebAssembly === 'object' && typeof WebAssembly.instantiate === 'function') {
-    // 浏览器支持WebAssembly
-    console.log('WebAssembly is supported')
+  // 浏览器支持WebAssembly
+  console.log('WebAssembly is supported')
 } else {
-    // 浏览器不支持WebAssembly
-    console.log('WebAssembly is not supported')
+  // 浏览器不支持WebAssembly
+  console.log('WebAssembly is not supported')
 }
 ```
 
@@ -22,7 +23,7 @@ npm install @bale-wasm/http
 ```
 
 ```ts
-import {send} from '@bale-wasm/http/lib/wasm_http'
+import { send } from '@bale-wasm/http/lib/wasm_http'
 ```
 
 ## Explanation
@@ -85,13 +86,14 @@ import {send} from '@bale-wasm/http/lib/wasm_http'
 ## Examples
 
 - 普通请求
+
 ```ts
-let opts: {[K: string]: any} = {
-    url: 'https://api.github.com/repos/rustwasm/wasm-bindgen/branches/master',
-    method: 'get',
-    headers: {
-      Accept: 'application/vnd.github.v3+json'
-    }
+let opts: { [K: string]: any } = {
+  url: 'https://api.github.com/repos/rustwasm/wasm-bindgen/branches/master',
+  method: 'get',
+  headers: {
+    Accept: 'application/vnd.github.v3+json',
+  },
 }
 
 let response = await send(opts, null)
@@ -99,6 +101,7 @@ console.log(response)
 ```
 
 - `FormData` 请求
+
 ```ts
 let formData = new FormData()
 formData.append('file', file) // file 为需要上传的文件
@@ -108,10 +111,9 @@ formData.append('text', '测试')
 let updateOpts: any = {
   url: 'https://example.com/api/upload/',
   method: 'post',
-  form: formData
+  form: formData,
 }
 
 let response = await send(opts, null)
 console.log(response)
 ```
-

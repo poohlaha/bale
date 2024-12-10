@@ -78,7 +78,7 @@ export default class DevServer {
   }
 
   private _getProxy(appRoot: string = '', proxy: object = {}): object {
-    let proxys: {[K: string]: any} = {}
+    let proxys: { [K: string]: any } = {}
     if (_.isEmpty(proxy) || !proxy) {
       proxys = { ...proxys, ...proxy }
       appRoot = Paths.getAppRootDir(appRoot)

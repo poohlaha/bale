@@ -2,24 +2,19 @@ module.exports = {
   root: true,
   env: {
     es6: true,
-    node: true
+    node: true,
   },
   parser: 'vue-eslint-parser',
-  extends: [
-    'plugin:vue/essential',
-    'plugin:vue/strongly-recommended',
-    'eslint:recommended',
-    '@vue/typescript/recommended',
-    'plugin:prettier/recommended'
-  ],
+  extends: ['plugin:vue/essential', 'plugin:vue/strongly-recommended', 'eslint:recommended', '@vue/typescript/recommended', 'plugin:prettier/recommended'],
   parserOptions: {
-    parser: '@typescript-eslint/parser'
+    parser: '@typescript-eslint/parser',
   },
   plugins: ['@typescript-eslint', 'vue', 'prettier'],
   rules: {
     'prettier/prettier': 1, // 错误
     'no-alert': 0, // 禁止使用alert confirm prompt
     'no-array-constructor': 2, // 禁止使用数组构造器
+    'no-async-promise-executor': 'off',
     'no-bitwise': 0, // 禁止使用按位运算符
     'no-caller': 1, // 禁止使用arguments.caller或arguments.callee
     'no-catch-shadow': 2, // 禁止catch子句参数与外部作用域变量同名
@@ -186,8 +181,8 @@ module.exports = {
     'no-duplicate-imports': [
       1,
       {
-        includeExports: true
-      }
+        includeExports: true,
+      },
     ], // 不允许重复导入
     'no-inline-comments': 0, // 禁止行内备注
     'no-trailing-spaces': 0, // 一行结束后面不要有空格
@@ -210,11 +205,11 @@ module.exports = {
         html: {
           void: 'always',
           normal: 'any',
-          component: 'any'
+          component: 'any',
         },
         svg: 'always',
-        math: 'always'
-      }
-    ]
-  }
+        math: 'always',
+      },
+    ],
+  },
 }

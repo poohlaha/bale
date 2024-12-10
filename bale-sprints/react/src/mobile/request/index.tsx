@@ -81,7 +81,7 @@ export default class Request {
       responseType: config.responseType || '',
       baseURL: config.baseURL || process.env.API_ROOT,
       headers: config.headers || {},
-      type: config.type || 'json'
+      type: config.type || 'json',
     }
   }
 
@@ -122,7 +122,7 @@ export default class Request {
         message: COMMON.getLanguageText('LOADING'),
         type: 4,
         needTime: false,
-        duration: 0
+        duration: 0,
       }) // loading
     }
 
@@ -137,7 +137,7 @@ export default class Request {
     } catch (e: any) {
       console.error(e)
       if (config.showError !== false) {
-        TOAST.show({message: COMMON.getLanguageText('ERROR_MESSAGE'), type: 3})
+        TOAST.show({ message: COMMON.getLanguageText('ERROR_MESSAGE'), type: 3 })
       }
       return config.fail?.(e, config.params || {})
     }
@@ -168,7 +168,6 @@ export default class Request {
         }
       }
 
-
       let resData: any = null
       if (Request.isString(res.data)) {
         try {
@@ -183,7 +182,7 @@ export default class Request {
       if (!resData) {
         console.info('没有返回数据')
         if (config.showError !== false) {
-          TOAST.show({message: COMMON.getLanguageText('ERROR_MESSAGE'), type: 3})
+          TOAST.show({ message: COMMON.getLanguageText('ERROR_MESSAGE'), type: 3 })
         }
         config.fail?.({})
         return
@@ -199,7 +198,7 @@ export default class Request {
             config.fail?.(error, config.params || {})
           } else {
             if (config.showError !== false) {
-              TOAST.show({message: error.reason, type: 3})
+              TOAST.show({ message: error.reason, type: 3 })
             }
             config.fail?.(error, config.params || {})
           }
@@ -218,7 +217,7 @@ export default class Request {
           if (resData.code !== SYSTEM.TOKEN_EXPIRED_CODE) {
             TOAST.show({
               message: Request.getResponseErrorMessage(resData).reason || COMMON.getLanguageText('ERROR_MESSAGE'),
-              type: 4
+              type: 4,
             })
           }
 
@@ -249,14 +248,14 @@ export default class Request {
       if (res.errMsg) {
         if (res.errMsg.toLowerCase().indexOf('timeout') !== -1) {
           if (config.showError !== false) {
-            TOAST.show({message: COMMON.getLanguageText('TIMEOUT_MESSAGE'), type: 3})
+            TOAST.show({ message: COMMON.getLanguageText('TIMEOUT_MESSAGE'), type: 3 })
           }
         }
       } else {
         if (config.showError !== false) {
           TOAST.show({
             message: Request.getResponseErrorMessage(res.data).reason || COMMON.getLanguageText('ERROR_MESSAGE'),
-            type: 3
+            type: 3,
           })
         }
       }
@@ -341,7 +340,7 @@ export default class Request {
       if (!data) {
         return {
           reason: COMMON.getLanguageText('ERROR_MESSAGE'),
-          code: 500
+          code: 500,
         }
       }
 
@@ -361,7 +360,7 @@ export default class Request {
 
     return {
       reason: reason,
-      code: code
+      code: code,
     }
   }
 
@@ -424,17 +423,17 @@ export default class Request {
 
     // 有错误时提示错误
     if (error) {
-      TOAST.show({message: errors.length > 0 ? errors[0].message : COMMON.getLanguageText('ERROR_MESSAGE'), type: 3})
+      TOAST.show({ message: errors.length > 0 ? errors[0].message : COMMON.getLanguageText('ERROR_MESSAGE'), type: 3 })
       return
     }
 
     if (responses.length === 0 || responses.length !== queue.length) {
-      TOAST.show({message: COMMON.getLanguageText('ERROR_MESSAGE'), type: 3})
+      TOAST.show({ message: COMMON.getLanguageText('ERROR_MESSAGE'), type: 3 })
       return
     }
 
     for (let i = 0; i < queue.length; i++) {
-      let request: {[K: string]: any} = queue[i]
+      let request: { [K: string]: any } = queue[i]
       let res = responses[i]
       if (!res) continue
 

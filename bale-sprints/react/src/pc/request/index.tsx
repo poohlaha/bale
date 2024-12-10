@@ -82,7 +82,7 @@ export default class Request {
       data: data,
       responseType: config.responseType || '',
       headers: config.headers || {},
-      type: config.type || 'json'
+      type: config.type || 'json',
     }
   }
 
@@ -162,7 +162,7 @@ export default class Request {
             config.fail?.(error, config.params || {})
           }
           return
-       } else {
+        } else {
           // 判断是否需要弹出自定义message
           if (config.params?.message) {
             TOAST.show({ message: config.params.message })
@@ -223,7 +223,7 @@ export default class Request {
           if (resData.code !== SYSTEM.TOKEN_EXPIRED_CODE) {
             TOAST.show({
               message: Request.getResponseErrorMessage(resData).reason || COMMON.getLanguageText('ERROR_MESSAGE'),
-              type: 4
+              type: 4,
             })
           }
 
@@ -438,7 +438,7 @@ export default class Request {
     }
 
     for (let i = 0; i < queue.length; i++) {
-      let request: {[K: string]: any} = queue[i]
+      let request: { [K: string]: any } = queue[i]
       let res = responses[i]
       if (!res) continue
 

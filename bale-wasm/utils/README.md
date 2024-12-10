@@ -3,15 +3,16 @@
 use `rust` develop `wasm` utils。
 
 ## Usage
+
 It is necessary to determine whether the browser supports `wasm`：
 
 ```ts
 if (typeof WebAssembly === 'object' && typeof WebAssembly.instantiate === 'function') {
-    // 浏览器支持WebAssembly
-    console.log('WebAssembly is supported')
+  // 浏览器支持WebAssembly
+  console.log('WebAssembly is supported')
 } else {
-    // 浏览器不支持WebAssembly
-    console.log('WebAssembly is not supported')
+  // 浏览器不支持WebAssembly
+  console.log('WebAssembly is not supported')
 }
 ```
 
@@ -22,7 +23,7 @@ npm install @bale-wasm/utils
 ```
 
 ```ts
-import __wbg_init, {is_support_wasm, UtilsHandler, SignatureHandler, DateHandler, StorageHandler} from '@bale-wasm/utils/lib/wasm_utils'
+import __wbg_init, { is_support_wasm, UtilsHandler, SignatureHandler, DateHandler, StorageHandler } from '@bale-wasm/utils/lib/wasm_utils'
 ```
 
 Next, add this to your file:
@@ -41,15 +42,15 @@ __wbg_init.init()
 
 ## Examples
 
-* 判断是否支持 `wasm`
+- 判断是否支持 `wasm`
 
 ```ts
 is_support_wasm()
 ```
 
-* UtilsHandler
+- UtilsHandler
 
-- 创建 `UUID`
+* 创建 `UUID`
 
 ```ts
 UtilsHandler.generate_uuid()
@@ -73,13 +74,145 @@ UtilsHandler.format_integer(number3) // -12,234,345
 
 ```ts
 // object
-let data = {'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true, callback: () => {console.log('test')},'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com', callback: () => {console.log('test')}},{'name':'Baidu','url':'http://www.baidu.com', callback: () => {console.log('test')}},{'name':'SoSo','url':'http://www.SoSo.com', callback: () => {console.log('test')}}]}
+let data = {
+  name: 'BeJson',
+  url: 'http://www.bejson.com',
+  page: 88,
+  isNonProfit: true,
+  callback: () => {
+    console.log('test')
+  },
+  address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+  links: [
+    {
+      name: 'Google',
+      url: 'http://www.google.com',
+      callback: () => {
+        console.log('test')
+      },
+    },
+    {
+      name: 'Baidu',
+      url: 'http://www.baidu.com',
+      callback: () => {
+        console.log('test')
+      },
+    },
+    {
+      name: 'SoSo',
+      url: 'http://www.SoSo.com',
+      callback: () => {
+        console.log('test')
+      },
+    },
+  ],
+}
 let dataCloned = UtilsHandler.deep_copy(data) || {}
 dataCloned.name = 'zhangsan'
 data.name = '李四'
 
 // array
-let arr = [{'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true, callback: () => {console.log('test')},'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com', callback: () => {console.log('test')}},{'name':'Baidu','url':'http://www.baidu.com', callback: () => {console.log('test')}},{'name':'SoSo','url':'http://www.SoSo.com', callback: () => {console.log('test')}}]}, {'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true, callback: () => {console.log('test')},'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com', callback: () => {console.log('test')}},{'name':'Baidu','url':'http://www.baidu.com', callback: () => {console.log('test')}},{'name':'SoSo','url':'http://www.SoSo.com', callback: () => {console.log('test')}}]}, {'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true, callback: () => {console.log('test')},'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com', callback: () => {console.log('test')}},{'name':'Baidu','url':'http://www.baidu.com', callback: () => {console.log('test')}},{'name':'SoSo','url':'http://www.SoSo.com', callback: () => {console.log('test')}}]}]
+let arr = [
+  {
+    name: 'BeJson',
+    url: 'http://www.bejson.com',
+    page: 88,
+    isNonProfit: true,
+    callback: () => {
+      console.log('test')
+    },
+    address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+    links: [
+      {
+        name: 'Google',
+        url: 'http://www.google.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+      {
+        name: 'Baidu',
+        url: 'http://www.baidu.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+      {
+        name: 'SoSo',
+        url: 'http://www.SoSo.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+    ],
+  },
+  {
+    name: 'BeJson',
+    url: 'http://www.bejson.com',
+    page: 88,
+    isNonProfit: true,
+    callback: () => {
+      console.log('test')
+    },
+    address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+    links: [
+      {
+        name: 'Google',
+        url: 'http://www.google.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+      {
+        name: 'Baidu',
+        url: 'http://www.baidu.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+      {
+        name: 'SoSo',
+        url: 'http://www.SoSo.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+    ],
+  },
+  {
+    name: 'BeJson',
+    url: 'http://www.bejson.com',
+    page: 88,
+    isNonProfit: true,
+    callback: () => {
+      console.log('test')
+    },
+    address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+    links: [
+      {
+        name: 'Google',
+        url: 'http://www.google.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+      {
+        name: 'Baidu',
+        url: 'http://www.baidu.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+      {
+        name: 'SoSo',
+        url: 'http://www.SoSo.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+    ],
+  },
+]
 let arrCloned = UtilsHandler.deep_copy(arr) || []
 arr[0].name = 'zhangsan'
 arrCloned[0].name = '李四'
@@ -105,9 +238,9 @@ UtilsHandler.format_phone('13200000000', undefined) // 132 0000 0000
 UtilsHandler.format_phone('13200000000', '-') // 132-0000-0000
 ```
 
-* SignatureHandler
+- SignatureHandler
 
-- `AES` 加减密
+* `AES` 加减密
   `AES` 数据块大小为 `128bit`
 
 ```ts
@@ -119,18 +252,30 @@ let decrypt = SignatureHandler.decrypt(encrypt)
   `Base64` 必须为 `4` 的倍数, 且不包括除 `+`、`/`、`=` 外的特殊字符
 
 ```ts
-let data = {'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true,'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com'},{'name':'Baidu','url':'http://www.baidu.com'},{'name':'SoSo','url':'http://www.SoSo.com'}]}
+let data = {
+  name: 'BeJson',
+  url: 'http://www.bejson.com',
+  page: 88,
+  isNonProfit: true,
+  address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+  links: [
+    { name: 'Google', url: 'http://www.google.com' },
+    { name: 'Baidu', url: 'http://www.baidu.com' },
+    { name: 'SoSo', url: 'http://www.SoSo.com' },
+  ],
+}
 let encode = SignatureHandler.encode(JSON.stringify(data))
 let decode = SignatureHandler.decode(encode)
 ```
 
-* DateHandler
+- DateHandler
 
-- `Date`
+* `Date`
+
   - %Y: 表示四位数的年份，例如 2023。
   - %y: 表示两位数的年份，范围是 00 到 99。
   - %m: 表示两位数的月份，范围是 01 到 12。
-  - %_m: 表示不补零的月份，范围是 1 到 12
+  - %\_m: 表示不补零的月份，范围是 1 到 12
   - %d: 表示两位数的日期，范围是 01 到 31。
   - %e: 表示两位数的日期，范围是 1 到 31。
   - %H: 表示两位数的小时，范围是 00 到 23。
@@ -152,6 +297,7 @@ let decode = SignatureHandler.decode(encode)
   - %z: 表示时区偏移，如 +0800 表示东八区，也就是相对于 UTC 的偏移时间
 
   例:
+
   - %Y-%m-%d %H:%M:%S => 2014-11-28 12:00:09
   - %a %b %e %T %Y => Fri Nov 28 12:00:09 2014
   - %a %b %e %I:%M:%S %Y => Fri Nov 28 00:00:09 2014
@@ -179,16 +325,64 @@ let format_date11 = DateHandler.format('2023-2-7 7:23:35', '%Y-%m-%d %H:%M:%S', 
 let current_date = DateHandler.get_current_date('%Y%m%d') // 20231122
 ```
 
-* StorageHandler
+- StorageHandler
 
-- 存储和获取 `LocalStorage` 中的数据
+* 存储和获取 `LocalStorage` 中的数据
 
 ```ts
-let localData1 = {'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true,'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com'},{'name':'Baidu','url':'http://www.baidu.com'},{'name':'SoSo','url':'http://www.SoSo.com'}]}
+let localData1 = {
+  name: 'BeJson',
+  url: 'http://www.bejson.com',
+  page: 88,
+  isNonProfit: true,
+  address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+  links: [
+    { name: 'Google', url: 'http://www.google.com' },
+    { name: 'Baidu', url: 'http://www.baidu.com' },
+    { name: 'SoSo', url: 'http://www.SoSo.com' },
+  ],
+}
 let localDataSuccess1 = StorageHandler.set_local('localData1', localData1)
 let localDataValue1 = StorageHandler.get_local('localData1')
 
-let localData2 = [{'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true,'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com'},{'name':'Baidu','url':'http://www.baidu.com'},{'name':'SoSo','url':'http://www.SoSo.com'}]}, {'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true,'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com'},{'name':'Baidu','url':'http://www.baidu.com'},{'name':'SoSo','url':'http://www.SoSo.com'}]}, {'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true,'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com'},{'name':'Baidu','url':'http://www.baidu.com'},{'name':'SoSo','url':'http://www.SoSo.com'}]}]
+let localData2 = [
+  {
+    name: 'BeJson',
+    url: 'http://www.bejson.com',
+    page: 88,
+    isNonProfit: true,
+    address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+    links: [
+      { name: 'Google', url: 'http://www.google.com' },
+      { name: 'Baidu', url: 'http://www.baidu.com' },
+      { name: 'SoSo', url: 'http://www.SoSo.com' },
+    ],
+  },
+  {
+    name: 'BeJson',
+    url: 'http://www.bejson.com',
+    page: 88,
+    isNonProfit: true,
+    address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+    links: [
+      { name: 'Google', url: 'http://www.google.com' },
+      { name: 'Baidu', url: 'http://www.baidu.com' },
+      { name: 'SoSo', url: 'http://www.SoSo.com' },
+    ],
+  },
+  {
+    name: 'BeJson',
+    url: 'http://www.bejson.com',
+    page: 88,
+    isNonProfit: true,
+    address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+    links: [
+      { name: 'Google', url: 'http://www.google.com' },
+      { name: 'Baidu', url: 'http://www.baidu.com' },
+      { name: 'SoSo', url: 'http://www.SoSo.com' },
+    ],
+  },
+]
 let localDataSuccess2 = StorageHandler.set_local('localData2', localData2)
 let localDataValue2 = StorageHandler.get_local('localData2')
 ```
@@ -196,11 +390,59 @@ let localDataValue2 = StorageHandler.get_local('localData2')
 - 存储和获取 `SessionStorage` 中的数据
 
 ```ts
-let sessionData1 = {'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true,'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com'},{'name':'Baidu','url':'http://www.baidu.com'},{'name':'SoSo','url':'http://www.SoSo.com'}]}
+let sessionData1 = {
+  name: 'BeJson',
+  url: 'http://www.bejson.com',
+  page: 88,
+  isNonProfit: true,
+  address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+  links: [
+    { name: 'Google', url: 'http://www.google.com' },
+    { name: 'Baidu', url: 'http://www.baidu.com' },
+    { name: 'SoSo', url: 'http://www.SoSo.com' },
+  ],
+}
 let sessionDataSuccess1 = StorageHandler.set_session('sessionData1', sessionData1)
 let sessionDataValue1 = StorageHandler.get_session('sessionData1')
 
-let sessionData2 = [{'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true,'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com'},{'name':'Baidu','url':'http://www.baidu.com'},{'name':'SoSo','url':'http://www.SoSo.com'}]}, {'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true,'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com'},{'name':'Baidu','url':'http://www.baidu.com'},{'name':'SoSo','url':'http://www.SoSo.com'}]}, {'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true,'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com'},{'name':'Baidu','url':'http://www.baidu.com'},{'name':'SoSo','url':'http://www.SoSo.com'}]}]
+let sessionData2 = [
+  {
+    name: 'BeJson',
+    url: 'http://www.bejson.com',
+    page: 88,
+    isNonProfit: true,
+    address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+    links: [
+      { name: 'Google', url: 'http://www.google.com' },
+      { name: 'Baidu', url: 'http://www.baidu.com' },
+      { name: 'SoSo', url: 'http://www.SoSo.com' },
+    ],
+  },
+  {
+    name: 'BeJson',
+    url: 'http://www.bejson.com',
+    page: 88,
+    isNonProfit: true,
+    address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+    links: [
+      { name: 'Google', url: 'http://www.google.com' },
+      { name: 'Baidu', url: 'http://www.baidu.com' },
+      { name: 'SoSo', url: 'http://www.SoSo.com' },
+    ],
+  },
+  {
+    name: 'BeJson',
+    url: 'http://www.bejson.com',
+    page: 88,
+    isNonProfit: true,
+    address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+    links: [
+      { name: 'Google', url: 'http://www.google.com' },
+      { name: 'Baidu', url: 'http://www.baidu.com' },
+      { name: 'SoSo', url: 'http://www.SoSo.com' },
+    ],
+  },
+]
 let sessionDataSuccess2 = StorageHandler.set_session('sessionData2', sessionData2)
 let sessionDataValue2 = StorageHandler.get_session('sessionData2')
 ```
@@ -208,11 +450,122 @@ let sessionDataValue2 = StorageHandler.get_session('sessionData2')
 - 存储和获取 `Cookie` 中的数据
 
 ```ts
-let cookieData1 = {'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true,'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com'},{'name':'Baidu','url':'http://www.baidu.com'},{'name':'SoSo','url':'http://www.SoSo.com'}]}
+let cookieData1 = {
+  name: 'BeJson',
+  url: 'http://www.bejson.com',
+  page: 88,
+  isNonProfit: true,
+  address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+  links: [
+    { name: 'Google', url: 'http://www.google.com' },
+    { name: 'Baidu', url: 'http://www.baidu.com' },
+    { name: 'SoSo', url: 'http://www.SoSo.com' },
+  ],
+}
 let cookieDataSuccess1 = StorageHandler.set_cookie('cookieData1', cookieData1)
 let cookieDataValue1 = StorageHandler.get_cookie('cookieData1')
 
-let cookieData2 = [{'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true, callback: () => {console.log('test')},'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com', callback: () => {console.log('test')}},{'name':'Baidu','url':'http://www.baidu.com', callback: () => {console.log('test')}},{'name':'SoSo','url':'http://www.SoSo.com', callback: () => {console.log('test')}}]}, {'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true, callback: () => {console.log('test')},'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com', callback: () => {console.log('test')}},{'name':'Baidu','url':'http://www.baidu.com', callback: () => {console.log('test')}},{'name':'SoSo','url':'http://www.SoSo.com', callback: () => {console.log('test')}}]}, {'name':'BeJson','url':'http://www.bejson.com','page':88,'isNonProfit':true, callback: () => {console.log('test')},'address':{'street':'科技园路.','city':'江苏苏州','country':'中国'},'links':[{'name':'Google','url':'http://www.google.com', callback: () => {console.log('test')}},{'name':'Baidu','url':'http://www.baidu.com', callback: () => {console.log('test')}},{'name':'SoSo','url':'http://www.SoSo.com', callback: () => {console.log('test')}}]}]
+let cookieData2 = [
+  {
+    name: 'BeJson',
+    url: 'http://www.bejson.com',
+    page: 88,
+    isNonProfit: true,
+    callback: () => {
+      console.log('test')
+    },
+    address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+    links: [
+      {
+        name: 'Google',
+        url: 'http://www.google.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+      {
+        name: 'Baidu',
+        url: 'http://www.baidu.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+      {
+        name: 'SoSo',
+        url: 'http://www.SoSo.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+    ],
+  },
+  {
+    name: 'BeJson',
+    url: 'http://www.bejson.com',
+    page: 88,
+    isNonProfit: true,
+    callback: () => {
+      console.log('test')
+    },
+    address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+    links: [
+      {
+        name: 'Google',
+        url: 'http://www.google.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+      {
+        name: 'Baidu',
+        url: 'http://www.baidu.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+      {
+        name: 'SoSo',
+        url: 'http://www.SoSo.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+    ],
+  },
+  {
+    name: 'BeJson',
+    url: 'http://www.bejson.com',
+    page: 88,
+    isNonProfit: true,
+    callback: () => {
+      console.log('test')
+    },
+    address: { street: '科技园路.', city: '江苏苏州', country: '中国' },
+    links: [
+      {
+        name: 'Google',
+        url: 'http://www.google.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+      {
+        name: 'Baidu',
+        url: 'http://www.baidu.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+      {
+        name: 'SoSo',
+        url: 'http://www.SoSo.com',
+        callback: () => {
+          console.log('test')
+        },
+      },
+    ],
+  },
+]
 let cookieDataSuccess2 = StorageHandler.set_cookie('cookieData2', cookieData2)
 let cookieDataValue2 = StorageHandler.get_cookie('cookieData2')
 ```
@@ -236,6 +589,7 @@ StorageHandler.clear_cookie()
 ```
 
 ## 打包
+
 在 `webpack5` 中添加
 
 ```js
@@ -244,8 +598,9 @@ module.exports = {
   experiments: {
     asyncWebAssembly: true,
   },
-};
+}
 ```
 
 # License
+
 Apache License, Version 2.0 ([LICENSE](LICENSE) or https://apache.org/licenses/LICENSE-2.0)

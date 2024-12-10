@@ -12,10 +12,14 @@ let commands = {
 }
 
 export default function () {
-  program.usage('[options]')
-    .option(`-e, ${commands.entry} <entry>`, 'Add an entry file or dir.').parse(process.argv)
-    .option(`-exts, ${commands.exts} <exts>`, 'Exclude file exts, more use `,`.').parse(process.argv)
-    .option(`-u, ${commands.update} <update>`, 'Update package.').parse(process.argv)
+  program
+    .usage('[options]')
+    .option(`-e, ${commands.entry} <entry>`, 'Add an entry file or dir.')
+    .parse(process.argv)
+    .option(`-exts, ${commands.exts} <exts>`, 'Exclude file exts, more use `,`.')
+    .parse(process.argv)
+    .option(`-u, ${commands.update} <update>`, 'Update package.')
+    .parse(process.argv)
 
   return program.opts()
 }

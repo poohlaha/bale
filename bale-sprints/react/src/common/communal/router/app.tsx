@@ -74,11 +74,7 @@ const Routes: React.FC<IRoutesProps> = (props: IRoutesProps) => {
     return getFirstRouter()
   }
 
-  return (
-    <ThemeProvider>
-      {getRouter()}
-    </ThemeProvider>
-  )
+  return <ThemeProvider>{getRouter()}</ThemeProvider>
 }
 
 export default Routes

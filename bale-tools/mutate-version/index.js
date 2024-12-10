@@ -33,7 +33,7 @@ const babelImportPlugins = {
  */
 const MutateVersion = function MutateVersion(opts = {}) {
   this.appRootDir = BaleUtils.Paths.getAppRootDir()
-  this.languages = ['react', 'vue']
+  this.languages = ['react', 'vue', 'vue3']
   this.commonDir = 'common'
   this.opts = _.cloneDeep(opts) || {}
   this.defaultBabelImportPlugins = ['antd-mobile', 'vant']

@@ -41,7 +41,7 @@ const Signature = {
       padding: CryptoJS.pad.Pkcs7,
     })
     return CryptoJS.enc.Utf8.stringify(decrypt).toString()
-  }
+  },
 }
 
 /**

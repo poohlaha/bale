@@ -1,0 +1,54 @@
+{
+  "dependencies": {
+    "lib-flexible": "^0.3.2",
+    "axios": "^1.7.9",
+    "crypto-js": "^4.2.0",
+    "fastclick": "^1.0.6",
+    "vant": "^4.9.10",
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.2",
+    "vuex": "^4.1.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "@babel/eslint-parser": "^7.25.9",
+    "@vue/compiler-sfc": "^3.5.13",
+    "toml": "^3.0.0",
+    "jscpd": "^4.0.5",
+    "core-js": "^3.8.3",
+    "lib-flexible": "^0.3.2",
+    "husky": "^9.1.7",
+    "prettier": "^3.4.2",
+    "lint-staged": "^15.2.10",
+    "@commitlint/cli": "^19.6.0",
+    "@vue/cli-plugin-babel": "~5.0.8",
+    "@vue/cli-plugin-eslint": "~5.0.8",
+    "@vue/cli-plugin-router": "~5.0.8",
+    "eslint": "^9.16.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-vue": "^9.32.0",
+    "postcss-aspect-ratio-mini": "^1.1.0",
+    "postcss-write-svg": "^3.0.1"
+  },
+  "tsDependencies": {
+    "typescript": "^5.7.2"
+  },
+  "tsDevDependencies": {
+    "@babel/preset-typescript": "^7.26.0",
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@typescript-eslint/parser": "^8.18.0",
+    "@vue/cli-plugin-typescript": "~5.0.8",
+    "@vue/eslint-config-typescript": "^14.0.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "**/*.{vue,jsx,js,tsx,ts,json,css,md}": ["prettier --write"],
+    "**/*.{vue,jsx,js,tsx,ts}": ["eslint --fix"]
+  }
+}

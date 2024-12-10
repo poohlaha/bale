@@ -14,7 +14,7 @@ const Utils = {
     if (needExpTime) {
       data = {
         data: item,
-        time: new Date().getTime()
+        time: new Date().getTime(),
       }
     } else {
       data = item

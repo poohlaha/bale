@@ -268,7 +268,7 @@ class Paths {
     }
 
     if (!Utils.isBlank(version)) {
-      command += (`@${version}`)
+      command += `@${version}`
     }
 
     shell.exec(command)

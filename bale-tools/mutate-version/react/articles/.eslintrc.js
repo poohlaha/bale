@@ -6,21 +6,21 @@ module.exports = {
     es6: true,
     // "jquery": true
     jest: true,
-    'jsx-control-statements/jsx-control-statements': true
+    'jsx-control-statements/jsx-control-statements': true,
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
-      experimentalObjectRestSpread: true
-    }
+      experimentalObjectRestSpread: true,
+    },
   },
   globals: {
     // "wx": "readonly",
     $log: true,
     $http: true,
-    $paraphrase: true
+    $paraphrase: true,
   },
   extends: [
     'eslint:recommended',
@@ -39,6 +39,7 @@ module.exports = {
     eqeqeq: ['error', 'allow-null'], //要求使用 === 和 !==
     'no-alert': 0, // 禁止使用alert confirm prompt
     'no-array-constructor': 2, // 禁止使用数组构造器
+    'no-async-promise-executor': 'off',
     'no-bitwise': 0, // 禁止使用按位运算符
     'no-caller': 1, // 禁止使用arguments.caller或arguments.callee
     'no-catch-shadow': 2, // 禁止catch子句参数与外部作用域变量同名
@@ -204,8 +205,8 @@ module.exports = {
     'no-duplicate-imports': [
       1,
       {
-        includeExports: true
-      }
+        includeExports: true,
+      },
     ], // 不允许重复导入
     'no-inline-comments': 0, // 禁止行内备注
     'no-trailing-spaces': 0, // 一行结束后面不要有空格
@@ -219,6 +220,6 @@ module.exports = {
     '@typescript-eslint/ban-types': 'off',
     'jsx-control-statements/jsx-use-if-tag': 0,
     'react-hooks/rules-of-hooks': 'error', // 检查 Hook 的规则
-    'react-hooks/exhaustive-deps': 'warn' // 检查 effect 的依赖
-  }
+    'react-hooks/exhaustive-deps': 'warn', // 检查 effect 的依赖
+  },
 }

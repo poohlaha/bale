@@ -1,5 +1,6 @@
 # React 框架公用文件
-  提取 `React` 框架公用文件, 在 `pc` 或 `mobile` 中引用, 减少代码量, `React` 版本为 `18.x`。
+
+提取 `React` 框架公用文件, 在 `pc` 或 `mobile` 中引用, 减少代码量, `React` 版本为 `18.x`。
 
 ## Frameworks Project Structure Src
 
@@ -52,23 +53,21 @@ const RenderRoutes = (routes: RouteInterface[]) => {
   if (usedRoutes.length > 0) {
     return (
       <Routes>
-        {
-          routes.map((route: RouteInterface, index: number) => {
-              return (
-                <Route
-                  key={index}
-                  path={route.path}
-                  element={
-                    <Suspense fallback={<Loading show={true} />}>
-                        <ScrollToTop />
-                        <route.component routes={route.routes || []} />
-                    </Suspense>
-                  }>
-                 </Route>
-               )
-          })
-        }
-    </Routes>
+        {routes.map((route: RouteInterface, index: number) => {
+          return (
+            <Route
+              key={index}
+              path={route.path}
+              element={
+                <Suspense fallback={<Loading show={true} />}>
+                  <ScrollToTop />
+                  <route.component routes={route.routes || []} />
+                </Suspense>
+              }
+            ></Route>
+          )
+        })}
+      </Routes>
     )
   } else {
     return <Route element={<NotFound />} />
@@ -95,12 +94,9 @@ const switchSkin = (skin: string = '') => {
 const Layout = (): ReactElement => {
   const { commonStore } = useStore()
 
-  useEffect(
-    () => {
-      switchSkin(commonStore.skin)
-    },
-    [commonStore.skin]
-  )
+  useEffect(() => {
+    switchSkin(commonStore.skin)
+  }, [commonStore.skin])
 
   const render = () => {
     return RenderRoutes(routes)
@@ -132,6 +128,7 @@ export type Stores = ReturnType<typeof createStore>
 - 在项目根目录下添加 `tsconfig.path.json` 文件
 
 ## 使用
+
 - 引入
 
 ```shell
@@ -139,12 +136,13 @@ export type Stores = ReturnType<typeof createStore>
 ```
 
 - api
-  * 在 `tsconfig.path.json` 中配置别名后, 可直接通过别名引入相关文件, 参考如下:
+  - 在 `tsconfig.path.json` 中配置别名后, 可直接通过别名引入相关文件, 参考如下:
 
 ```typescript
-import {useMount} from '@hooks/useMount'
+import { useMount } from '@hooks/useMount'
 ```
-   * 别名参考如下(在 `paths` 下配置):
+
+- 别名参考如下(在 `paths` 下配置):
 
 ```json
 {

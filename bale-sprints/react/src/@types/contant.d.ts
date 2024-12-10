@@ -20,4 +20,3 @@ declare module '@communal/*'
 declare module '@router/*'
 declare module '@views/*'
 declare module '@config/*'
-
