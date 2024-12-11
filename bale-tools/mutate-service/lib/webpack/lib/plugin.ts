@@ -25,8 +25,6 @@ import OpenBrowserWebpackPlugin from '../plugins/browser/open'
 import Api from './api'
 import { IApiDllSettingOptions, IApiSettingOptions } from '../utils/type'
 import { Utils, Paths } from '@bale-tools/utils'
-import exports from "webpack";
-import require = exports.RuntimeGlobals.require;
 
 export default class Plugin {
   private readonly _api: Api
