@@ -2,7 +2,6 @@
   "dependencies": {
     "lib-flexible": "^0.3.2",
     "axios": "^1.7.9",
-    "crypto-js": "^4.2.0",
     "fastclick": "^1.0.6",
     "vant": "^4.9.10",
     "vue": "^3.2.37",
