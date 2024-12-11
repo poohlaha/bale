@@ -12,7 +12,6 @@ import InlineChunkHtmlPlugin from 'inline-chunk-html-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ProgressBarWebpackPlugin from 'progress-bar-webpack-plugin'
 // import PreloadWebpackPlugin from 'preload-webpack-plugin'
-import { VueLoaderPlugin } from 'vue-loader'
 import CompressionPlugin from 'compression-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
@@ -26,6 +25,8 @@ import OpenBrowserWebpackPlugin from '../plugins/browser/open'
 import Api from './api'
 import { IApiDllSettingOptions, IApiSettingOptions } from '../utils/type'
 import { Utils, Paths } from '@bale-tools/utils'
+import exports from "webpack";
+import require = exports.RuntimeGlobals.require;
 
 export default class Plugin {
   private readonly _api: Api
@@ -40,8 +41,9 @@ export default class Plugin {
   private readonly _raw: { [K: string]: any }
   private readonly _port: number
   private _plugins: Array<any>
+  private _languages: Array<any>
 
-  constructor(api: Api, output: string = '', plugins: Array<any> = []) {
+  constructor(api: Api, output: string = '', plugins: Array<any> = [], languages: Array<string> = []) {
     this._api = api
     this._appRootDir = api.getAppRootDir() || ''
     this._production = api.getProduction()
@@ -54,6 +56,7 @@ export default class Plugin {
     this._projectUrl = this._raw.PROJECT_URL || '/'
     this._script = api.getScript() || ''
     this._port = this._raw.PORT
+    this._languages = languages || []
     this._getPlugins()
   }
 
@@ -197,7 +200,19 @@ export default class Plugin {
   /**
    * vue loader plugin
    */
-  private _getVuePlugin(): VueLoaderPlugin {
+  private _getVuePlugin(): any {
+    let languages = this._languages || []
+    let hasVue: boolean = false
+    for(let language of languages) {
+      if ((language || '').toLowerCase().indexOf('vue') !== -1) {
+        hasVue = true
+        break
+      }
+    }
+    if (!hasVue) return null
+
+    // @ts-ignore
+    const { VueLoaderPlugin } = require('vue-loader')
     return new VueLoaderPlugin()
   }
 
@@ -371,7 +386,7 @@ export default class Plugin {
     // this._addPlugin(this._getPreloadPlugin())
     this._addPlugin(this._getPwaPlugin())
     this._addPlugin(this._getReportPlugin())
-    this._addPlugin(this._getVuePlugin())
+    // this._addPlugin(this._getVuePlugin())
     this._addPlugin(this._getOpenBrowserWebpackPlugin())
     this._addPlugin(new ProgressBarWebpackPlugin()) // progress bar
     this._plugins = this._plugins.concat(this._getDllPlugin())

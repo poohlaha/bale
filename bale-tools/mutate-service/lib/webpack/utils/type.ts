@@ -17,6 +17,7 @@ export interface IApiOptions {
   clean?: boolean // 是否清除文件夹
   settings?: IApiSettingOptions
   dllSettings?: IApiDllSettingOptions
+  languages?: Array<string>
 }
 
 // api settings

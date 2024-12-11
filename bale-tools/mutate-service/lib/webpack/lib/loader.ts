@@ -27,8 +27,9 @@ export default class Loader {
   private _loaders: Array<object>
   private readonly _jsLoader: string
   private readonly _jsLoaders: Array<string>
+  private readonly _languages: Array<string>
 
-  constructor(api: Api, loaders: Array<object> = []) {
+  constructor(api: Api, loaders: Array<object> = [], languages: Array<string> = []) {
     this._appRootDir = api.getAppRootDir() || ''
     this._settings = api.getSettings() || {}
     this._production = api.getProduction()
@@ -38,6 +39,7 @@ export default class Loader {
     this._loaders = loaders || []
     this._jsLoader = api.getJsLoader()
     this._jsLoaders = api.getJsLoaders()
+    this._languages = languages || []
     this._getLoaders()
   }
 
@@ -234,6 +236,16 @@ export default class Loader {
    * vue loader
    */
   private _getVueLoader(): object {
+    // 判断是否包含 vue
+    let languages = this._languages || []
+    let hasVue: boolean = false
+    for (let language of languages) {
+      if ((language || '').toLowerCase().indexOf('vue') !== -1) {
+        hasVue = true
+        break
+      }
+    }
+    if (!hasVue) return {}
     return {
       test: /\.vue$/,
       loader: 'vue-loader',

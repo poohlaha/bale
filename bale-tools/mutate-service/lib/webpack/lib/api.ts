@@ -91,8 +91,8 @@ export default class WebpackApi {
         level: 'none',
       },
       optimization: this._getOptimization(),
-      plugins: this._getPlugins(output.path || {}, clonedOpts.plugins || []),
-      module: this._getRules(clonedOpts.loaders || []),
+      plugins: this._getPlugins(output.path || {}, clonedOpts.plugins || [], clonedOpts.languages || []),
+      module: this._getRules(clonedOpts.loaders || [], clonedOpts.languages || []),
       resolve: {
         extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.toml', '.vue'],
         plugins: [new TsConfigPathsPlugin()],
@@ -498,11 +498,11 @@ export default class WebpackApi {
   }
    */
 
-  private _getPlugins(outputPath = '', plugins = []): Array<any> {
-    return new Plugin(this, outputPath || this._defaultOutput, plugins).getPlugins() || []
+  private _getPlugins(outputPath = '', plugins = [], languages: Array<string> = []): Array<any> {
+    return new Plugin(this, outputPath || this._defaultOutput, plugins, languages).getPlugins() || []
   }
 
-  private _getRules(loaders: Array<any> = []): object {
+  private _getRules(loaders: Array<any> = [], languages: Array<string> = []): object {
     let noParseSetting: Array<string> | Function = this._settings.noParse || []
     let noParse: RegExp | Function | null = null
     if (typeof noParseSetting === 'function') {
@@ -513,7 +513,7 @@ export default class WebpackApi {
     // vue-loader v15 不支持 oneOf, {oneOf: new Loader(this, loaders).loaders || []}
 
     const options: { [K: string]: any } = {
-      rules: new Loader(this, loaders).getLoaders() || [],
+      rules: new Loader(this, loaders, languages).getLoaders() || [],
     }
 
     if (noParse) {
