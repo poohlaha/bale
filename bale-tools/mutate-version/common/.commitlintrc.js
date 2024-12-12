@@ -2,8 +2,8 @@ module.exports = {
   parserPreset: {
     parserOpts: {
       headerPattern: /^(\w*)(?:\((.*)\))?:\s(.*)$/,
-      headerCorrespondence: ['type', 'scope', 'subject'],
-    },
+      headerCorrespondence: ['type', 'scope', 'subject']
+    }
   },
   rules: {
     'type-empty': [2, 'never'],
@@ -12,7 +12,7 @@ module.exports = {
     'type-enum': [
       2,
       'always',
-      ['build', 'feat', 'fix', 'update', 'docs', 'style', 'refactor', 'test', 'chore', 'revert', 'review'],
-    ],
-  },
+      ['build', 'feat', 'fix', 'update', 'docs', 'style', 'refactor', 'test', 'chore', 'revert', 'review']
+    ]
+  }
 }

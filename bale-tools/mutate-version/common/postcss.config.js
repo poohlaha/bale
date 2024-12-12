@@ -3,13 +3,13 @@ module.exports = {
     require('autoprefixer'),
     require('postcss-aspect-ratio-mini'),
     require('postcss-write-svg')({
-      utf8: false,
+      utf8: false
     }),
     require('cssnano')({
       'cssnano-preset-advanced': {
-        zindex: false,
-      },
-    }),
+        zindex: false
+      }
+    })
     /* antd-mobile 配置
     require('postcss-px-to-viewport-8-plugin')({
       // include: [/src/], // 如果设置了include，那将只有匹配到的文件才会被转换
@@ -30,5 +30,5 @@ module.exports = {
       // landscapeWidth: 1338, // 横屏时使用的视口宽度
     })
      */
-  ],
+  ]
 }
