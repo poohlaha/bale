@@ -201,7 +201,7 @@ export default class Plugin {
   private _getVuePlugin(): any {
     let languages = this._languages || []
     let hasVue: boolean = false
-    for(let language of languages) {
+    for (let language of languages) {
       if ((language || '').toLowerCase().indexOf('vue') !== -1) {
         hasVue = true
         break

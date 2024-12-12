@@ -135,7 +135,10 @@ export interface IApiOptions {
   externalsType?: string // 指定输出类型 默认为 commonjs https://webpack.docschina.org/configuration/externals/#externalstype
   externals?: object // externals
   alias?: object // 配置别名
+  clean?: boolean // 是否清除文件夹
   settings?: IApiSettingOptions
+  dllSettings?: IApiDllSettingOptions // dll 打包配置
+  languages?: Array<string> // ['react', 'vue']
 }
 
 // api settings
@@ -149,6 +152,7 @@ export interface IApiSettingOptions {
   useSourceMap?: boolean // 是否使用源码 生产环境默认为 false
   routerMode?: 'hash' | 'history' // 路由 hash | history 生产环境为 history
   noParse?: Array<string> | Function // noParse 属性
+  resolveFallback: object // resolve.fallback
   experiments?: IExperimentsOptions | undefined | boolean // experiments 配置 本地启动默认为 true, doc see `https://webpack.js.org/configuration/experiments/#experiments`
   generateReport?: boolean // 生产环境是否生成报告 默认为 true
   visitSuffixUrl?: string // 访问路径后缀
@@ -157,7 +161,7 @@ export interface IApiSettingOptions {
   jsLoader?: 'babel-loader' | 'esbuild-loader' | 'swc-loader' | undefined | null // js loader, default `babel-loader`
   jsLoaderInclude?: Array<any> // js loader include
   useMinimize?: boolean // 是否使用 min files(js、css、html) 生产环境默认为 true
-  imageMinimizer?: boolean | IImageMinimizerOptions | undefined // 图片压缩
+  // imageMinimizer?: boolean | IImageMinimizerOptions | undefined // 图片压缩
   compress?: boolean | ICompressOptions | undefined // 打包完成后是否使用压缩包 生产环境默认为 true
   useInlineChunkHtml?: boolean // 是否把较小的 chunk 打入到html中 默认为 true
   usePurgecssPlugin?: boolean // 是否使用 purgecssPlugin 插件 默认为 true
@@ -169,6 +173,7 @@ export interface IApiSettingOptions {
   usePreloadPlugin?: boolean // 生产环境 script 是否开启 preload 默认为 true 配合 useHtmlPlugin 使用
   useSplitChunks?: boolean // 是否使用 split chunks 默认为 true
   useRuntimeChunk?: boolean // 是否抽离多个使用入口到 runtime 中 默认为 true
+  useTerserWebpackPlugin?: boolean // 是否在生产环境中使用 terser-webpack-plugin 默认为 true
   htmlTemplatePath?: string // index.html 路径 默认为根目录下的 public/index.html
   usePreLoader?: boolean // 是否使用预加载 默认为 false
   threadLoader?: IRateThreadLoaderOptions // thread-loader
@@ -176,10 +181,23 @@ export interface IApiSettingOptions {
   resourceLoader?: IRateResourceLoaderOptions // 资源配置
 }
 
+// api dll settings
+export interface IApiDllSettingOptions {
+  output?: string
+  dllOutput?: string // dll output dir
+  fileList?: Array<string>
+  manifestList?: Array<string>
+}
+
 // image minimizer see https://www.npmjs.com/package/image-minimizer-webpack-plugin?activeTab=readme
 export interface IImageMinimizerOptions {
-  minimizer?: 'imagemin' | 'squoosh' | 'sharp' // default imagemin
-  options: object // options
+  mozjpeg?: { [K: string]: any }
+  optipng?: { [K: string]: any }
+  pngquant?: { [K: string]: any }
+  gifsicle?: { [K: string]: any }
+  jpegtran?: { [K: string]: any }
+  webp?: { [K: string]: any }
+  svgo?: { [K: string]: any }
 }
 
 // compress  config
@@ -230,6 +248,15 @@ interface IRateResourceLoaderOptions {
 interface IRateImageResourceOptions {
   useInline?: boolean // 是否打成内置的 base64 默认为打成图片
   limit?: number // 默认为 10000 字节
+}
+
+// dll
+export interface IDllOptions {
+  mode?: 'development' | 'production'
+  entry?: string | object // entry
+  output?: object // output
+  rootDir?: string // root dir
+  done?: Function // done function
 }
 ```
 
