@@ -84,7 +84,7 @@ export default class Environment {
       ROUTER_MODE: routerMode, // 路由 mode
       PROJECT_URL: projectUrl, // 路径
       PROJECT_NAME: projectName,
-      ...definePlugin,
+      ...definePlugin
     }
 
     // 注入环境变量
@@ -92,7 +92,7 @@ export default class Environment {
       'process.env': Object.keys(raw).reduce((env, key) => {
         env[key] = JSON.stringify(raw[key])
         return env
-      }, {}),
+      }, {})
     }
 
     return { raw, stringified }

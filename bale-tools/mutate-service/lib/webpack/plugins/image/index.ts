@@ -27,9 +27,9 @@ class ImageMinimizerPlugin extends Imager {
       minimizer: {
         implementation: this._imageminMinify,
         options: {
-          plugins: this._plugins || [],
-        },
-      },
+          plugins: this._plugins || []
+        }
+      }
     }
   }
 
@@ -55,8 +55,8 @@ class ImageMinimizerPlugin extends Imager {
       info: {
         ...original.info,
         minimized: true,
-        minimizedBy: ['imagemin', ...(original.info?.minimizedBy ?? [])],
-      },
+        minimizedBy: ['imagemin', ...(original.info?.minimizedBy ?? [])]
+      }
     }
   }
 
@@ -98,7 +98,7 @@ class ImageMinimizerPlugin extends Imager {
                 inputSource: source,
                 output,
                 cacheItem,
-                transformer,
+                transformer
               }
             }
 
@@ -130,7 +130,7 @@ class ImageMinimizerPlugin extends Imager {
           info,
           input,
           transformer,
-          generateFilename: compilation.getAssetPath.bind(compilation),
+          generateFilename: compilation.getAssetPath.bind(compilation)
         }
         output = await worker.transform(minifyOptions)
 
@@ -141,7 +141,7 @@ class ImageMinimizerPlugin extends Imager {
           info: output.info,
           filename: output.filename,
           warnings: output.warnings,
-          errors: output.errors,
+          errors: output.errors
         })
       }
 
@@ -173,7 +173,7 @@ class ImageMinimizerPlugin extends Imager {
           // 用某个靠后的资源处理阶段，
           // 确保所有资源已被插件添加到 compilation
           stage: Compilation.PROCESS_ASSETS_STAGE_OPTIMIZE_SIZE,
-          additionalAssets: true,
+          additionalAssets: true
         },
         async assets => {
           // "assets" 是一个包含 compilation 中所有资源(assets)的对象。

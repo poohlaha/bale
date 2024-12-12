@@ -18,7 +18,7 @@ enum Method {
   GET = 'get',
   POST = 'post',
   PUT = 'put',
-  DELETE = 'delete',
+  DELETE = 'delete'
 }
 
 export interface IHttpRequestProps {
@@ -72,26 +72,26 @@ enum RequestCache {
   NO_CACHE = 'no-cache',
   NO_STORE = 'no-store',
   ONLY_IF_CACHED = 'only-if-cached',
-  RELOAD = 'reload',
+  RELOAD = 'reload'
 }
 
 enum RequestCredentials {
   INCLUDE = 'include',
   OMIT = 'omit',
-  SAME_ORIGIN = 'same-origin',
+  SAME_ORIGIN = 'same-origin'
 }
 
 enum RequestMode {
   CORS = 'cors',
   NAVIGATE = 'navigate',
   NO_CORS = 'no-cors',
-  SAME_ORIGIN = 'same-origin',
+  SAME_ORIGIN = 'same-origin'
 }
 
 enum RequestRedirect {
   ERROR = 'error',
   FOLLOW = 'follow',
-  MANUAL = 'manual',
+  MANUAL = 'manual'
 }
 
 enum ReferrerPolicy {
@@ -103,7 +103,7 @@ enum ReferrerPolicy {
   SAME_ORIGIN = 'same-origin',
   STRICT_ORIGIN = 'strict-origin',
   STRICT_ORIGIN_WHEN_CROSS_ORIGIN = 'strict-origin-when-cross-origin',
-  UNSAFE_URL = 'unsafe-url',
+  UNSAFE_URL = 'unsafe-url'
 }
 
 export interface HttpResponse {
@@ -122,7 +122,7 @@ enum Type {
   FORM_DATA = '2',
   BLOB = '3',
   TEXT = '4',
-  HTML = '5',
+  HTML = '5'
 }
 
 enum CONTENT_TYPE_VALUE {
@@ -131,7 +131,7 @@ enum CONTENT_TYPE_VALUE {
   FORM_DATA = 'multipart/form-data',
   BLOB = 'application/octet-stream',
   TEXT = 'text/plain;charset=UTF-8',
-  HTML = 'text/html;charset=UTF-8',
+  HTML = 'text/html;charset=UTF-8'
 }
 
 const SUCCESS_CODE: number = 200
@@ -158,7 +158,7 @@ export class HttpRequest {
       status: SUCCESS_CODE,
       headers: new Map(),
       body: null,
-      error: '',
+      error: ''
     }
 
     // not support
@@ -207,7 +207,7 @@ export class HttpRequest {
     let opts: { [K: string]: any } = {
       method: props.method,
       headers: props.headers,
-      ...requestFetchProps,
+      ...requestFetchProps
     }
 
     // Request with GET/HEAD method cannot have bod
@@ -330,7 +330,7 @@ export class HttpRequest {
       responseType: Type.JSON,
       timeout: DEFAULT_TIMEOUT,
       success: null,
-      failed: null,
+      failed: null
     }
 
     // url
@@ -414,7 +414,7 @@ export class HttpRequest {
       redirect: RequestRedirect.FOLLOW,
       referrer: '',
       referrerPolicy: ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN,
-      signal: undefined,
+      signal: undefined
     }
 
     if (props === null || props === undefined) {

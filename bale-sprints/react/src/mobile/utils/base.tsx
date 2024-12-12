@@ -16,7 +16,7 @@ const EXIT = {
   exit: (props: any) => {
     setTimeout(() => {
       props.history.push({
-        pathname: RouterUrls.LOGIN_URL,
+        pathname: RouterUrls.LOGIN_URL
       })
     }, 300)
   },
@@ -68,7 +68,7 @@ const EXIT = {
   logout: (text: string = '', redirectUrl: string = '') => {
     USER.clearUserInfo()
     PAGE_JUMP.toLoginPage(text, redirectUrl)
-  },
+  }
 }
 
 // 用户相关
@@ -137,7 +137,7 @@ const USER = {
   getOpenId: () => {
     // 保存用户信息
     return Utils.getLocal(SYSTEM.OPEN_ID) || ''
-  },
+  }
 }
 
 // Toast
@@ -164,7 +164,7 @@ const TOAST = {
           maskClassName: className || CONSTANT.SKINS[0],
           afterClose: () => {
             onAfterClose?.()
-          },
+          }
         })
       } else if (type === 3) {
         // 失败
@@ -176,7 +176,7 @@ const TOAST = {
           maskClassName: className || CONSTANT.SKINS[0],
           afterClose: () => {
             onAfterClose?.()
-          },
+          }
         })
       } else if (type === 4) {
         // loading
@@ -188,7 +188,7 @@ const TOAST = {
           maskClassName: className || CONSTANT.SKINS[0],
           afterClose: () => {
             onAfterClose?.()
-          },
+          }
         })
       } else {
         // 默认提示
@@ -199,7 +199,7 @@ const TOAST = {
           maskClassName: className || CONSTANT.SKINS[0],
           afterClose: () => {
             onAfterClose?.()
-          },
+          }
         })
       }
     }
@@ -220,7 +220,7 @@ const TOAST = {
    */
   hide: () => {
     Toast.clear()
-  },
+  }
 }
 
 // 地址栏相关
@@ -238,7 +238,7 @@ const ADDRESS = {
       if (addresses.length === 2) {
         return {
           beforeAddressUrl: addresses[0] + projectUrl,
-          addressUrl: addresses[1],
+          addressUrl: addresses[1]
         }
       }
     }
@@ -254,7 +254,7 @@ const ADDRESS = {
       console.log('beforeAddressUrl:', address)
       return {
         addressUrl: '',
-        beforeAddressUrl: address,
+        beforeAddressUrl: address
       }
     }
 
@@ -287,7 +287,7 @@ const ADDRESS = {
       addressUrl,
       beforeAddressUrl,
       param,
-      params: ADDRESS.getUrlString(param),
+      params: ADDRESS.getUrlString(param)
     }
   },
 
@@ -337,7 +337,7 @@ const ADDRESS = {
       let otherParams = getQueryParams(prefixUrl)
       return {
         ...obj,
-        ...otherParams,
+        ...otherParams
       }
     }
 
@@ -357,7 +357,7 @@ const ADDRESS = {
     let r = decodeURI(after).match(reg)
     if (!r) return null
     return r[2]
-  },
+  }
 }
 
 // 存储相关
@@ -368,7 +368,7 @@ const STORAGE = {
   clear: () => {
     Utils.clearLocalStorage()
     Utils.clearSessionStorage()
-  },
+  }
 }
 
 // 页面跳转相关
@@ -402,7 +402,7 @@ const PAGE_JUMP = {
       TOAST.show({
         message: text,
         type: 1,
-        needTime: true,
+        needTime: true
       })
     }
   },
@@ -455,7 +455,7 @@ const PAGE_JUMP = {
     needPrefixAddress = true,
     needWindowJump = true,
     isReplace = true,
-    callback = null,
+    callback = null
   }) => {
     if (!jumpUrl) return
     const _needJumpBack = needJumpBack === null || needJumpBack === undefined ? true : needJumpBack
@@ -489,7 +489,7 @@ const PAGE_JUMP = {
       isReplace: _isReplace,
       text,
       needWindowJump: _needWindowJump,
-      callback,
+      callback
     })
   },
 
@@ -518,7 +518,7 @@ const PAGE_JUMP = {
         jumpUrl: Utils.encrypt(redirectUrl + paramUrl),
         needJumpBack: false,
         needDecryptJumpUrl: true,
-        isReplace,
+        isReplace
       })
     } else {
       PAGE_JUMP.goBack(props)
@@ -614,7 +614,7 @@ const PAGE_JUMP = {
     } else {
       window.location.href = url
     }
-  },
+  }
 }
 
 // 公共模块相关
@@ -635,7 +635,7 @@ const COMMON = {
     } catch (e) {
       return CONSTANT.LANGUAGES[0]
     }
-  },
+  }
 }
 
 export { EXIT, STORAGE, PAGE_JUMP, ADDRESS, USER, TOAST, COMMON }

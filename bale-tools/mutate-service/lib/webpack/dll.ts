@@ -49,10 +49,10 @@ class WebpackDllCompiler {
           new CleanWebpackPlugin(),
           new webpack.DllPlugin({
             path: path.join(this._output, '[name].manifest.json'),
-            name: '[name]_[fullhash]',
+            name: '[name]_[fullhash]'
             // context: this._output,
-          }),
-        ],
+          })
+        ]
       }
     }
   }
@@ -86,7 +86,7 @@ class WebpackDllCompiler {
     const defaultOutput = {
       path: path.join(this._defaultOutput, `${vendorDir}`),
       filename: '[name]_[fullhash].dll.js',
-      library: '[name]_[fullhash]', // 与webpack.DllPlugin中的 `name` 保持一致。
+      library: '[name]_[fullhash]' // 与webpack.DllPlugin中的 `name` 保持一致。
     }
 
     let opts: { [K: string]: any } = {}
@@ -198,7 +198,7 @@ class WebpackDllCompiler {
       this._done?.({
         output: this._output,
         fileList: this._dllFileNameList || [],
-        manifestList: this._dllManifestNameList || [],
+        manifestList: this._dllManifestNameList || []
       })
     }
 

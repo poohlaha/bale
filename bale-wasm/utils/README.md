@@ -89,23 +89,23 @@ let data = {
       url: 'http://www.google.com',
       callback: () => {
         console.log('test')
-      },
+      }
     },
     {
       name: 'Baidu',
       url: 'http://www.baidu.com',
       callback: () => {
         console.log('test')
-      },
+      }
     },
     {
       name: 'SoSo',
       url: 'http://www.SoSo.com',
       callback: () => {
         console.log('test')
-      },
-    },
-  ],
+      }
+    }
+  ]
 }
 let dataCloned = UtilsHandler.deep_copy(data) || {}
 dataCloned.name = 'zhangsan'
@@ -128,23 +128,23 @@ let arr = [
         url: 'http://www.google.com',
         callback: () => {
           console.log('test')
-        },
+        }
       },
       {
         name: 'Baidu',
         url: 'http://www.baidu.com',
         callback: () => {
           console.log('test')
-        },
+        }
       },
       {
         name: 'SoSo',
         url: 'http://www.SoSo.com',
         callback: () => {
           console.log('test')
-        },
-      },
-    ],
+        }
+      }
+    ]
   },
   {
     name: 'BeJson',
@@ -161,23 +161,23 @@ let arr = [
         url: 'http://www.google.com',
         callback: () => {
           console.log('test')
-        },
+        }
       },
       {
         name: 'Baidu',
         url: 'http://www.baidu.com',
         callback: () => {
           console.log('test')
-        },
+        }
       },
       {
         name: 'SoSo',
         url: 'http://www.SoSo.com',
         callback: () => {
           console.log('test')
-        },
-      },
-    ],
+        }
+      }
+    ]
   },
   {
     name: 'BeJson',
@@ -194,24 +194,24 @@ let arr = [
         url: 'http://www.google.com',
         callback: () => {
           console.log('test')
-        },
+        }
       },
       {
         name: 'Baidu',
         url: 'http://www.baidu.com',
         callback: () => {
           console.log('test')
-        },
+        }
       },
       {
         name: 'SoSo',
         url: 'http://www.SoSo.com',
         callback: () => {
           console.log('test')
-        },
-      },
-    ],
-  },
+        }
+      }
+    ]
+  }
 ]
 let arrCloned = UtilsHandler.deep_copy(arr) || []
 arr[0].name = 'zhangsan'
@@ -261,8 +261,8 @@ let data = {
   links: [
     { name: 'Google', url: 'http://www.google.com' },
     { name: 'Baidu', url: 'http://www.baidu.com' },
-    { name: 'SoSo', url: 'http://www.SoSo.com' },
-  ],
+    { name: 'SoSo', url: 'http://www.SoSo.com' }
+  ]
 }
 let encode = SignatureHandler.encode(JSON.stringify(data))
 let decode = SignatureHandler.decode(encode)
@@ -339,8 +339,8 @@ let localData1 = {
   links: [
     { name: 'Google', url: 'http://www.google.com' },
     { name: 'Baidu', url: 'http://www.baidu.com' },
-    { name: 'SoSo', url: 'http://www.SoSo.com' },
-  ],
+    { name: 'SoSo', url: 'http://www.SoSo.com' }
+  ]
 }
 let localDataSuccess1 = StorageHandler.set_local('localData1', localData1)
 let localDataValue1 = StorageHandler.get_local('localData1')
@@ -355,8 +355,8 @@ let localData2 = [
     links: [
       { name: 'Google', url: 'http://www.google.com' },
       { name: 'Baidu', url: 'http://www.baidu.com' },
-      { name: 'SoSo', url: 'http://www.SoSo.com' },
-    ],
+      { name: 'SoSo', url: 'http://www.SoSo.com' }
+    ]
   },
   {
     name: 'BeJson',
@@ -367,8 +367,8 @@ let localData2 = [
     links: [
       { name: 'Google', url: 'http://www.google.com' },
       { name: 'Baidu', url: 'http://www.baidu.com' },
-      { name: 'SoSo', url: 'http://www.SoSo.com' },
-    ],
+      { name: 'SoSo', url: 'http://www.SoSo.com' }
+    ]
   },
   {
     name: 'BeJson',
@@ -379,9 +379,9 @@ let localData2 = [
     links: [
       { name: 'Google', url: 'http://www.google.com' },
       { name: 'Baidu', url: 'http://www.baidu.com' },
-      { name: 'SoSo', url: 'http://www.SoSo.com' },
-    ],
-  },
+      { name: 'SoSo', url: 'http://www.SoSo.com' }
+    ]
+  }
 ]
 let localDataSuccess2 = StorageHandler.set_local('localData2', localData2)
 let localDataValue2 = StorageHandler.get_local('localData2')
@@ -399,8 +399,8 @@ let sessionData1 = {
   links: [
     { name: 'Google', url: 'http://www.google.com' },
     { name: 'Baidu', url: 'http://www.baidu.com' },
-    { name: 'SoSo', url: 'http://www.SoSo.com' },
-  ],
+    { name: 'SoSo', url: 'http://www.SoSo.com' }
+  ]
 }
 let sessionDataSuccess1 = StorageHandler.set_session('sessionData1', sessionData1)
 let sessionDataValue1 = StorageHandler.get_session('sessionData1')
@@ -415,8 +415,8 @@ let sessionData2 = [
     links: [
       { name: 'Google', url: 'http://www.google.com' },
       { name: 'Baidu', url: 'http://www.baidu.com' },
-      { name: 'SoSo', url: 'http://www.SoSo.com' },
-    ],
+      { name: 'SoSo', url: 'http://www.SoSo.com' }
+    ]
   },
   {
     name: 'BeJson',
@@ -427,8 +427,8 @@ let sessionData2 = [
     links: [
       { name: 'Google', url: 'http://www.google.com' },
       { name: 'Baidu', url: 'http://www.baidu.com' },
-      { name: 'SoSo', url: 'http://www.SoSo.com' },
-    ],
+      { name: 'SoSo', url: 'http://www.SoSo.com' }
+    ]
   },
   {
     name: 'BeJson',
@@ -439,9 +439,9 @@ let sessionData2 = [
     links: [
       { name: 'Google', url: 'http://www.google.com' },
       { name: 'Baidu', url: 'http://www.baidu.com' },
-      { name: 'SoSo', url: 'http://www.SoSo.com' },
-    ],
-  },
+      { name: 'SoSo', url: 'http://www.SoSo.com' }
+    ]
+  }
 ]
 let sessionDataSuccess2 = StorageHandler.set_session('sessionData2', sessionData2)
 let sessionDataValue2 = StorageHandler.get_session('sessionData2')
@@ -459,8 +459,8 @@ let cookieData1 = {
   links: [
     { name: 'Google', url: 'http://www.google.com' },
     { name: 'Baidu', url: 'http://www.baidu.com' },
-    { name: 'SoSo', url: 'http://www.SoSo.com' },
-  ],
+    { name: 'SoSo', url: 'http://www.SoSo.com' }
+  ]
 }
 let cookieDataSuccess1 = StorageHandler.set_cookie('cookieData1', cookieData1)
 let cookieDataValue1 = StorageHandler.get_cookie('cookieData1')
@@ -481,23 +481,23 @@ let cookieData2 = [
         url: 'http://www.google.com',
         callback: () => {
           console.log('test')
-        },
+        }
       },
       {
         name: 'Baidu',
         url: 'http://www.baidu.com',
         callback: () => {
           console.log('test')
-        },
+        }
       },
       {
         name: 'SoSo',
         url: 'http://www.SoSo.com',
         callback: () => {
           console.log('test')
-        },
-      },
-    ],
+        }
+      }
+    ]
   },
   {
     name: 'BeJson',
@@ -514,23 +514,23 @@ let cookieData2 = [
         url: 'http://www.google.com',
         callback: () => {
           console.log('test')
-        },
+        }
       },
       {
         name: 'Baidu',
         url: 'http://www.baidu.com',
         callback: () => {
           console.log('test')
-        },
+        }
       },
       {
         name: 'SoSo',
         url: 'http://www.SoSo.com',
         callback: () => {
           console.log('test')
-        },
-      },
-    ],
+        }
+      }
+    ]
   },
   {
     name: 'BeJson',
@@ -547,24 +547,24 @@ let cookieData2 = [
         url: 'http://www.google.com',
         callback: () => {
           console.log('test')
-        },
+        }
       },
       {
         name: 'Baidu',
         url: 'http://www.baidu.com',
         callback: () => {
           console.log('test')
-        },
+        }
       },
       {
         name: 'SoSo',
         url: 'http://www.SoSo.com',
         callback: () => {
           console.log('test')
-        },
-      },
-    ],
-  },
+        }
+      }
+    ]
+  }
 ]
 let cookieDataSuccess2 = StorageHandler.set_cookie('cookieData2', cookieData2)
 let cookieDataValue2 = StorageHandler.get_cookie('cookieData2')
@@ -596,8 +596,8 @@ StorageHandler.clear_cookie()
 module.exports = {
   // ...其他配置
   experiments: {
-    asyncWebAssembly: true,
-  },
+    asyncWebAssembly: true
+  }
 }
 ```
 

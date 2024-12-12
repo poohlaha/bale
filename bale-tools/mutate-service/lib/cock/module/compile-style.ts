@@ -28,7 +28,7 @@ class TildeResolver extends FileManager {
 const TildeResolverPlugin = {
   install(lessInstance, pluginManager) {
     pluginManager.addFileManager(new TildeResolver())
-  },
+  }
 }
 
 export default class CompileStyle {
@@ -69,7 +69,7 @@ export default class CompileStyle {
 
     return {
       ...postcssConfig,
-      plugins,
+      plugins
     }
   }
 
@@ -80,7 +80,7 @@ export default class CompileStyle {
     if (Utils.isBlank(source)) return ''
     const { css } = await less.render(source, {
       filename: this._filePath,
-      plugins: [TildeResolverPlugin],
+      plugins: [TildeResolverPlugin]
     })
 
     return css
@@ -101,7 +101,7 @@ export default class CompileStyle {
     if (Utils.isBlank(source)) return ''
     const config: { [K: string]: any } = this._resolvePostcssConfig() || {}
     const { css } = await postcss(config.plugins).process(source, {
-      from: undefined,
+      from: undefined
     })
 
     return new cleanCss().minify(css).styles

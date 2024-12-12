@@ -70,7 +70,7 @@ const encodeString =
         view.set(buf)
         return {
           read: arg.length,
-          written: buf.length,
+          written: buf.length
         }
       }
 

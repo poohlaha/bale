@@ -3,7 +3,7 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    node: true,
+    node: true
   },
   parser: '@typescript-eslint/parser',
   extends: ['eslint:recommended', 'plugin:prettier/recommended'],
@@ -12,8 +12,8 @@ module.exports = {
     sourceType: 'module',
     ecmaFeatures: {
       jsx: false,
-      experimentalObjectRestSpread: true,
-    },
+      experimentalObjectRestSpread: true
+    }
   },
   rules: {
     'prettier/prettier': 1, // 错误
@@ -22,6 +22,6 @@ module.exports = {
     'no-unused-vars': 0, // 不允许未定义的变量
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    camelcase: 'off',
-  },
+    camelcase: 'off'
+  }
 }

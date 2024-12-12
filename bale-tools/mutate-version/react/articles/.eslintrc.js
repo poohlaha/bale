@@ -6,32 +6,32 @@ module.exports = {
     es6: true,
     // "jquery": true
     jest: true,
-    'jsx-control-statements/jsx-control-statements': true,
+    'jsx-control-statements/jsx-control-statements': true
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
-      experimentalObjectRestSpread: true,
-    },
+      experimentalObjectRestSpread: true
+    }
   },
   globals: {
     // "wx": "readonly",
     $log: true,
     $http: true,
-    $paraphrase: true,
+    $paraphrase: true
   },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:jsx-control-statements/recommended', // 需要另外配合babel插件使用
-    'prettier',
+    'prettier'
   ],
   settings: {
     react: {
-      version: 'detect',
-    },
+      version: 'detect'
+    }
   },
   plugins: ['@typescript-eslint', 'react', 'jsx-control-statements', 'prettier', 'react-hooks'],
   rules: {
@@ -205,8 +205,8 @@ module.exports = {
     'no-duplicate-imports': [
       1,
       {
-        includeExports: true,
-      },
+        includeExports: true
+      }
     ], // 不允许重复导入
     'no-inline-comments': 0, // 禁止行内备注
     'no-trailing-spaces': 0, // 一行结束后面不要有空格
@@ -220,6 +220,6 @@ module.exports = {
     '@typescript-eslint/ban-types': 'off',
     'jsx-control-statements/jsx-use-if-tag': 0,
     'react-hooks/rules-of-hooks': 'error', // 检查 Hook 的规则
-    'react-hooks/exhaustive-deps': 'warn', // 检查 effect 的依赖
-  },
+    'react-hooks/exhaustive-deps': 'warn' // 检查 effect 的依赖
+  }
 }

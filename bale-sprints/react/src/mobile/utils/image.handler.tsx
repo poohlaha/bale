@@ -250,7 +250,7 @@ export default class ImageHandler {
           resolve({
             data,
             file: _file,
-            orientation: or,
+            orientation: or
           })
         }
       }

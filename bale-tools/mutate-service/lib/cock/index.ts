@@ -105,7 +105,7 @@ class CookCompile {
         outputDir: this._outputDir,
         excludes: this._excludes || [],
         ...this._tsSettings,
-        done,
+        done
       }).compile()
     }
   }
@@ -118,7 +118,7 @@ class CookCompile {
     return await new CompileJs({
       mode: this._mode,
       appRootDir: this._appRootDir,
-      filePath,
+      filePath
     }).compile()
   }
 
@@ -133,7 +133,7 @@ class CookCompile {
   private async _compileWithStyle(filePath: string = ''): Promise<void> {
     return await new CompileStyle({
       filePath,
-      appRootDir: this._appRootDir,
+      appRootDir: this._appRootDir
     }).compile()
   }
 
@@ -193,7 +193,7 @@ class CookCompile {
         // 删除 package.json
         fsExtra.removeSync(path.join(this._outputDir, 'package.json'))
         this._done?.()
-      },
+      }
     }).compile()
   }
 
@@ -253,7 +253,7 @@ class CookCompile {
         await this._compileFile(outputFile)
         await this._rollup({
           ...this._rollupSettings,
-          input: outputFile,
+          input: outputFile
         })
         Logger.info('End to Compile File .')
         return
@@ -265,7 +265,7 @@ class CookCompile {
         if (Paths.isDir(filePath)) continue
         tasks.push({
           task: () => this._compileFile(filePath),
-          callback: this._opts.callback,
+          callback: this._opts.callback
         })
       }
 

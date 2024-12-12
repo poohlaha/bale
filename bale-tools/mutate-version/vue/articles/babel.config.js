@@ -5,10 +5,10 @@ module.exports = {
       {
         useBuiltIns: 'usage',
         corejs: 3,
-        modules: false,
-      },
+        modules: false
+      }
     ],
-    '@vue/cli-plugin-babel/preset',
+    '@vue/cli-plugin-babel/preset'
   ],
-  plugins: [],
+  plugins: []
 }

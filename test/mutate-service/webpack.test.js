@@ -28,7 +28,7 @@ test('test webpack compiler: ', async t => {
         vue: 'Vue',
         'vue-router': 'VueRouter',
         Vuex: 'Vuex',
-        axios: 'axios',
+        axios: 'axios'
       },
       settings: {
         usePurgecssPlugin: false,
@@ -38,13 +38,13 @@ test('test webpack compiler: ', async t => {
         compress: {
           enable: true,
           deleteOutput: true,
-          suffix: '.zip',
-        },
-      },
+          suffix: '.zip'
+        }
+      }
     },
     done: () => {
       console.log('All Done.')
-    },
+    }
   })
 
   t.pass()

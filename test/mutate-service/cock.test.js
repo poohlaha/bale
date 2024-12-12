@@ -23,9 +23,9 @@ test('test webpack compiler: ', async t => {
   const rollupSettings = {
     formats: 'umd',
     output: {
-      file: path.join(outputDir, 'bale-utils.js'),
+      file: path.join(outputDir, 'bale-utils.js')
     },
-    min: true,
+    min: true
   }
 
   await CockCompiler('ts', {
@@ -34,11 +34,11 @@ test('test webpack compiler: ', async t => {
     outputDir,
     rollupSettings,
     tsSettings: {
-      useDeclaration: false,
+      useDeclaration: false
     },
     done: () => {
       console.log('Done .')
-    },
+    }
   })
 
   t.pass()

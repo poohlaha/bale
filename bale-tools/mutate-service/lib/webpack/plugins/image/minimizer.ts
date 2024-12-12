@@ -27,7 +27,7 @@ class ImageMinimizerLoader extends Imager {
 
     imagemin
       .buffer(this._content, {
-        plugins: this._plugins,
+        plugins: this._plugins
       })
       .then(data => {
         callback(null, data)

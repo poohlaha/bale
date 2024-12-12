@@ -64,9 +64,9 @@ class Version {
           default: 2, // default to help in order to avoid clicking straight through
           choices: [
             { key: 'y', name: 'Yes', value: true },
-            { key: 'n', name: 'No', value: false },
-          ],
-        },
+            { key: 'n', name: 'No', value: false }
+          ]
+        }
       ])
       .then((result: any = {}) => {
         done?.(result.confirm)

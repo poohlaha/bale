@@ -140,7 +140,7 @@ class Minimize {
     let tasks: Array<any> = []
     for (let file of fileList) {
       tasks.push({
-        task: () => this._compress(file), // compress
+        task: () => this._compress(file) // compress
       })
     }
 

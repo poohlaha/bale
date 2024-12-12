@@ -77,7 +77,7 @@ for (let i = 1; i <= 100; i++) {
     timeout: 10000,
     callback: () => {
       console.log('callback')
-    },
+    }
   })
 }
 
@@ -86,7 +86,7 @@ for (let i = 1; i <= 200; i++) {
   tasks2.push({
     task: () => {
       console.log('test2: ' + i)
-    },
+    }
   })
 }
 

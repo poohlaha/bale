@@ -34,15 +34,15 @@ export default class DevServer {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': '*',
-        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Allow-Headers': '*'
       },
       compress: true, // Enable gzip compression of generated files.
       static: {
         directory: this._resolve(publicDir),
         publicPath: [projectUrl || '/'],
         watch: {
-          ignored: this._ignoredFiles(this._resolve('src')),
-        },
+          ignored: this._ignoredFiles(this._resolve('src'))
+        }
       },
       hot: true,
       client: {
@@ -50,16 +50,16 @@ export default class DevServer {
         progress: true,
         overlay: {
           errors: true,
-          warnings: false,
-        },
+          warnings: false
+        }
       },
       historyApiFallback: {
         disableDotRule: true,
-        index: projectUrl || '/',
+        index: projectUrl || '/'
       },
       port: this._port,
       proxy, // 代理, 在proxy.json中配置
-      open: false,
+      open: false
     }
   }
 

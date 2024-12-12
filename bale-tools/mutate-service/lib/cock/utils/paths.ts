@@ -166,7 +166,7 @@ class Paths {
     return {
       entry: '--entry',
       output: '--output',
-      format: '--format',
+      format: '--format'
     }
   }
 

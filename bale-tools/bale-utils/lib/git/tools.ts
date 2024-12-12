@@ -125,7 +125,7 @@ export default class GitTools {
   private _startChildProcess(command, params): Promise<any> {
     return new Promise((resolve, reject) => {
       let process = childProcess.spawn(command, params, {
-        cwd: this._cwd,
+        cwd: this._cwd
       })
 
       let logMessage = `${command} ${params[0]}`

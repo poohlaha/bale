@@ -59,8 +59,8 @@ export default class Loader {
       options: {
         emitWarning: true,
         emitError: true,
-        fix: true, // 是否自动修复
-      },
+        fix: true // 是否自动修复
+      }
     }
   }
 
@@ -96,9 +96,9 @@ export default class Loader {
     const swcOptions: { [K: string]: any } = {
       test: /\.(js|mjs|jsx|ts|tsx)?$/,
       use: {
-        loader: 'swc-loader',
+        loader: 'swc-loader'
       },
-      ...this._getJsInclude(),
+      ...this._getJsInclude()
     }
 
     try {
@@ -112,7 +112,7 @@ export default class Loader {
               syntax: 'typescript',
               tsx: true,
               decorators: true,
-              dynamicImport: true,
+              dynamicImport: true
             },
             target: 'es2015',
             transform: {
@@ -121,11 +121,11 @@ export default class Loader {
                 pragma: 'React.createElement',
                 pragmaFrag: 'React.Fragment',
                 throwIfNamespace: true,
-                development: false,
-              },
-            },
+                development: false
+              }
+            }
           },
-          minify: this._production,
+          minify: this._production
         }
       }
     } catch (e) {
@@ -142,7 +142,7 @@ export default class Loader {
     if (this._jsLoader !== this._jsLoaders[1]) return {}
     let options: { [K: string]: any } = {
       charset: 'utf8',
-      loader: 'tsx',
+      loader: 'tsx'
     }
     let tsconfigPath: string = path.join(this._appRootDir, 'tsconfig.json') // 默认取根目录下的 tsconfig.json
     if (fsExtra.pathExistsSync(tsconfigPath)) {
@@ -155,7 +155,7 @@ export default class Loader {
       test: /\.(js|jsx|tsx|ts)?$/,
       // exclude: /node_modules/,
       loader: 'esbuild-loader',
-      options,
+      options
     }
 
     return { ...esbuildOptions, ...this._getJsInclude() }
@@ -171,8 +171,8 @@ export default class Loader {
       loader: 'babel-loader',
       // include: jsLoaderInclude,
       options: {
-        cacheDirectory: true, // 加快编译速度,
-      },
+        cacheDirectory: true // 加快编译速度,
+      }
     }
 
     try {
@@ -207,7 +207,7 @@ export default class Loader {
 
     // 判断是否有 src 目录
     let options: { [K: string]: any } = {
-      include: [],
+      include: []
     }
 
     if (!jsLoaderInclude.includes(appSrcDir)) {
@@ -250,8 +250,8 @@ export default class Loader {
       test: /\.vue$/,
       loader: 'vue-loader',
       options: {
-        hotReload: false, // disables Hot Reload
-      },
+        hotReload: false // disables Hot Reload
+      }
     }
   }
 
@@ -288,10 +288,10 @@ export default class Loader {
           ident: 'postcss',
           config: false,
           ...postcssConfig,
-          plugins,
+          plugins
         },
-        sourceMap: this._production,
-      },
+        sourceMap: this._production
+      }
     }
   }
 
@@ -318,8 +318,8 @@ export default class Loader {
         // 池分配给 worker 的工作数量,默认为 200, 降低这个数值会降低总体的效率，但是会提升工作分布更均
         poolParallelJobs: threadLoader.poolParallelJobs || 200,
         // 池的名称, 可以修改名称来创建其余选项都一样的池
-        name: `${threadLoader.name || Utils.generateUUID()}-pool`,
-      },
+        name: `${threadLoader.name || Utils.generateUUID()}-pool`
+      }
     }
   }
 
@@ -337,19 +337,19 @@ export default class Loader {
             prettier: false,
             svgo: false,
             svgoConfig: {
-              plugins: [{ removeViewBox: false }],
+              plugins: [{ removeViewBox: false }]
             },
             titleProp: true,
-            ref: true,
-          },
+            ref: true
+          }
         },
         {
           loader: 'file-loader',
           options: {
-            name: `${MutatePaths.getStaticDir()}/media/[name].[hash:8].[ext]`,
-          },
-        },
-      ],
+            name: `${MutatePaths.getStaticDir()}/media/[name].[hash:8].[ext]`
+          }
+        }
+      ]
     }
   }
 
@@ -362,8 +362,8 @@ export default class Loader {
       exclude: /node_modules/,
       type: 'json',
       parser: {
-        parse: toml.parse,
-      },
+        parse: toml.parse
+      }
     }
   }
 
@@ -379,7 +379,7 @@ export default class Loader {
       if (this._projectUrl === '/') options.publicPath = '../../' // 两层
       loaders.push({
         loader: MiniCssExtractPlugin.loader,
-        options,
+        options
       })
     } else {
       loaders.push({ loader: 'style-loader' })
@@ -401,9 +401,9 @@ export default class Loader {
     const cssOptions: object = {
       loader: 'css-loader',
       options: {
-        modules: false,
+        modules: false
         // publicPath: '../../' // 两层
-      },
+      }
     }
 
     loaders.push(cssOptions) // css
@@ -414,8 +414,8 @@ export default class Loader {
         loader: 'px2rem-loader',
         options: {
           remUint: px2remLoader.remUint || 75,
-          remPrecision: px2remLoader.remPrecision || 8,
-        },
+          remPrecision: px2remLoader.remPrecision || 8
+        }
       }
 
       loaders.push(px2remOptions) // px2rem-loader
@@ -427,16 +427,16 @@ export default class Loader {
       loader: 'less-loader',
       options: {
         lessOptions: {
-          javascriptEnabled: true,
-        },
-      },
+          javascriptEnabled: true
+        }
+      }
     }
 
     loaders.push(lessLoader) // less
 
     return {
       test: /\.(less|css)$/i,
-      use: loaders,
+      use: loaders
     }
   }
 
@@ -451,19 +451,19 @@ export default class Loader {
         {
           loader: 'css-loader',
           options: {
-            modules: false,
-          },
+            modules: false
+          }
         },
         {
           loader: 'sass-loader',
           options: {
             sourceMap: false,
             sassOptions: {
-              outputStyle: 'compressed', // 压缩
-            },
-          },
-        },
-      ],
+              outputStyle: 'compressed' // 压缩
+            }
+          }
+        }
+      ]
     }
   }
 
@@ -478,11 +478,11 @@ export default class Loader {
         {
           loader: 'css-loader',
           options: {
-            modules: false,
-          },
+            modules: false
+          }
         },
-        'style-loader',
-      ],
+        'style-loader'
+      ]
     }
 
     // no esbuild loader for css
@@ -514,16 +514,16 @@ export default class Loader {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/i,
         type: 'asset/resource', // javascript/auto, asset/resource
         generator: {
-          filename: `${staticDir}/fonts/[hash:8][ext][query]`,
-        },
+          filename: `${staticDir}/fonts/[hash:8][ext][query]`
+        }
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource', // javascript/auto, asset/resource
         generator: {
-          filename: `${staticDir}/fonts/[hash:8][ext][query]`,
-        },
-      },
+          filename: `${staticDir}/fonts/[hash:8][ext][query]`
+        }
+      }
     ]
 
     let imageType: string = 'asset/resource'
@@ -550,10 +550,10 @@ export default class Loader {
       type: imageType, // javascript/auto, asset/resource
       parser: {
         dataUrlCondition: {
-          maxSize: maxImageInlineSize,
-        },
+          maxSize: maxImageInlineSize
+        }
       },
-      generator: imageGenerator,
+      generator: imageGenerator
     }
 
     // image minimizer
@@ -590,9 +590,9 @@ export default class Loader {
       use: [
         {
           loader: path.resolve(__dirname, '../plugins/image/minimizer.js'),
-          options,
-        },
-      ],
+          options
+        }
+      ]
     }
   }
 

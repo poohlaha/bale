@@ -205,7 +205,7 @@ export default class Rollup {
         'process.env.NODE_ENV': JSON.stringify(replacement),
         __buildDate__: () => JSON.stringify(new Date()),
         // __buildVersion: 15,
-        preventAssignment: true,
+        preventAssignment: true
       })
       // Remove transform hook. It will have warning when using in output
       delete plugin.transform
@@ -216,10 +216,10 @@ export default class Rollup {
     return {
       plugins: [nodeResolvePlugin(), rollupCommonJs(), rollUpJson()].concat(plugins),
       treeshake: {
-        moduleSideEffects: false, // code from imported modules will only be retained if at least one exported value is used
+        moduleSideEffects: false // code from imported modules will only be retained if at least one exported value is used
       },
       input: this._input,
-      output: this._getOutputOpts(format),
+      output: this._getOutputOpts(format)
     }
   }
 

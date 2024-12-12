@@ -85,8 +85,8 @@ let opts: IHttpRequestProps = {
   url: 'https://api.github.com/repos/rustwasm/wasm-bindgen/branches/master',
   method: 'get',
   headers: {
-    Accept: 'application/vnd.github.v3+json',
-  },
+    Accept: 'application/vnd.github.v3+json'
+  }
 }
 
 let response: HttpResponse = await HttpRequest.send(opts)
@@ -102,14 +102,14 @@ let opts: IHttpRequestProps = {
   url: 'https://api.github.com/repos/rustwasm/wasm-bindgen/branches/master',
   method: 'get',
   headers: {
-    Accept: 'application/vnd.github.v3+json',
+    Accept: 'application/vnd.github.v3+json'
   },
   success: (response: HttpResponse) => {
     console.log('success: ', response)
   },
   failed: (response: HttpResponse) => {
     console.error('failed: ', response)
-  },
+  }
 }
 
 await HttpRequest.send(opts)
@@ -126,21 +126,21 @@ let fetchOps: IHttpRequestFetchProps = {
   mode: 'CORS',
   redirect: '',
   referrer: 'origin-when-cross-origin',
-  referrerPolicy: 'origin-when-cross-origin',
+  referrerPolicy: 'origin-when-cross-origin'
 }
 
 let opts: IHttpRequestProps = {
   url: 'https://api.github.com/repos/rustwasm/wasm-bindgen/branches/master',
   method: 'get',
   headers: {
-    Accept: 'application/vnd.github.v3+json',
+    Accept: 'application/vnd.github.v3+json'
   },
   success: (response: HttpResponse) => {
     console.log('success: ', response)
   },
   failed: (response: HttpResponse) => {
     console.error('failed: ', response)
-  },
+  }
 }
 
 await HttpRequest.send(opts, fetchOps)
@@ -161,7 +161,7 @@ let updateOpts: any = {
   method: 'post',
   data: formData,
   type: '2',
-  responseType: '2',
+  responseType: '2'
 }
 
 let response = await HttpRequest.send(opts)

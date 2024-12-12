@@ -95,7 +95,7 @@ export default class CompileTs {
       module: this._mode, // commonjs | ES2015
       rootDir: this._entryDir,
       outDir: this._outputDir,
-      declaration: this._useDeclaration,
+      declaration: this._useDeclaration
     }
 
     if (this._useDeclaration) {
@@ -109,13 +109,13 @@ export default class CompileTs {
         patterns: [`${this._appRootDir}/**/*.ts`, `${this._appRootDir}/**/*.tsx`],
         // patterns: [path.join(this._appRootDir, '**', '*') + '.ts', path.join(this._appRootDir, '**', '*') + '.tsx'],
         cwd: this._appRootDir,
-        ignore: [`${this._appRootDir}/**/types/**/*`].concat(ignore),
+        ignore: [`${this._appRootDir}/**/types/**/*`].concat(ignore)
         // ignore: [path.join(this._appRootDir, '**', 'types', '**', '*')].concat(ignore),
       },
       transformOptions: {
         filesGlobby: { patterns: ['**/*.js'], ignore, cwd: this._outputDir },
         // filesGlobby: { patterns: [path.join('**', '*') + '.js'], ignore, cwd: this._outputDir },
-        transformDev: true,
+        transformDev: true
       },
       before: async () => {
         // fsExtra.removeSync(this.tempDir)
@@ -124,7 +124,7 @@ export default class CompileTs {
       after: async () => {
         // fsExtra.moveSync(this.tempDir, this.outputDir) // 重合名为项目
         this._done?.()
-      },
+      }
     }
   }
 
@@ -146,7 +146,7 @@ export default class CompileTs {
     let compilerOptions: { [K: string]: any } = {
       ...this._readTsConfig()?.compilerOptions,
       ...compilerOptionsOverride,
-      sourceMap: false,
+      sourceMap: false
     }
 
     await this._runTsCompile(ts, compilerOptions, srcPathList)
@@ -192,7 +192,7 @@ export default class CompileTs {
           filename: path.extname(filePath),
           plugins: [],
           compact: false,
-          sourceMaps: false,
+          sourceMaps: false
         })
         code = result.code
       }

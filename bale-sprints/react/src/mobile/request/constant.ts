@@ -2,20 +2,20 @@ export enum MethodEnum {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
-  DELETE = 'DELETE',
+  DELETE = 'DELETE'
 }
 
 export enum RequestTypeEnum {
   'REQUEST' = 'REQUEST',
   'REFRESH' = 'REFRESH',
   'UPLOAD' = 'UPLOAD',
-  'NONE' = 'NONE',
+  'NONE' = 'NONE'
 }
 
 export enum IdentEnum {
   LOGIN = 0,
   LOGOUT = 1,
-  OTHER = -1,
+  OTHER = -1
 }
 
 type Method = MethodEnum

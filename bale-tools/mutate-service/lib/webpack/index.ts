@@ -152,7 +152,7 @@ class WebpackCompiler {
     let tasks: Array<any> = []
     for (let file of fileList) {
       tasks.push({
-        task: () => new Minimize(file), // compress
+        task: () => new Minimize(file) // compress
       })
     }
 
@@ -254,7 +254,7 @@ class WebpackCompiler {
     const watching = compiler.watch(
       {
         aggregateTimeout: 300, // 监听到变化等待300ms 再去执行文件防止文件更新太快导致编译频繁
-        poll: undefined,
+        poll: undefined
       },
       (err, stats: Stats | undefined) => {
         console.log(stats)

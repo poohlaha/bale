@@ -17,7 +17,7 @@ class Handler {
   finish(output) {
     process.send?.({
       type: 'done',
-      data: output,
+      data: output
     })
 
     __messageHandlers = {}

@@ -6,7 +6,7 @@ const cachedTextDecoder =
     : {
         decode: () => {
           throw Error('TextDecoder not available')
-        },
+        }
       }
 
 if (typeof TextDecoder !== 'undefined') {
@@ -66,7 +66,7 @@ const cachedTextEncoder =
     : {
         encode: () => {
           throw Error('TextEncoder not available')
-        },
+        }
       }
 
 const encodeString =
@@ -79,7 +79,7 @@ const encodeString =
         view.set(buf)
         return {
           read: arg.length,
-          written: buf.length,
+          written: buf.length
         }
       }
 

@@ -37,8 +37,8 @@ let opts: { [K: string]: any } = {
   url: 'https://api.github.com/repos/rustwasm/wasm-bindgen/branches/master',
   method: 'get',
   headers: {
-    Accept: 'application/vnd.github.v3+json',
-  },
+    Accept: 'application/vnd.github.v3+json'
+  }
 }
 await send(opts)
 ```
@@ -54,7 +54,7 @@ formData.set('files', '/usr/local/test.zip')
 let opts: { [K: string]: any } = {
   url: 'https://example.com/upload/',
   method: 'post',
-  form: formData,
+  form: formData
 }
 await send_form_data(opts)
 ```
@@ -67,8 +67,8 @@ await send_form_data(opts)
 module.exports = {
   // ...其他配置
   experiments: {
-    asyncWebAssembly: true,
-  },
+    asyncWebAssembly: true
+  }
 }
 ```
 

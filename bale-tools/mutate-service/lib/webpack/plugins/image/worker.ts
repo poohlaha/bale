@@ -15,7 +15,7 @@ export default class Worker {
       typeof options.generateFilename === 'function'
     ) {
       result.filename = options.generateFilename(filenameTemplate, {
-        filename: result.filename,
+        filename: result.filename
       })
 
       result.filename = result.filename.replace(/\[width\]/gi, result.info.width).replace(/\[height\]/gi, result.info.height)
@@ -38,8 +38,8 @@ export default class Worker {
             ? options.info.sourceFilename
             : typeof options.filename === 'string'
             ? options.filename
-            : undefined,
-      },
+            : undefined
+      }
     }
 
     if (!result.data) {

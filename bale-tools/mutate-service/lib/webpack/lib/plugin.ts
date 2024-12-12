@@ -68,7 +68,7 @@ export default class Plugin {
     return new MiniCssExtractPlugin({
       ignoreOrder: true,
       filename: `${MutatePaths.getStaticDir()}/css/[name].[contenthash].css`,
-      chunkFilename: `${MutatePaths.getStaticDir()}/css/[id].[contenthash].css`,
+      chunkFilename: `${MutatePaths.getStaticDir()}/css/[id].[contenthash].css`
     })
   }
 
@@ -115,7 +115,7 @@ export default class Plugin {
       dllPlugins.push(
         new webpack.DllReferencePlugin({
           // context: output,
-          manifest: require(manifestFile),
+          manifest: require(manifestFile)
         })
       )
     }
@@ -137,7 +137,7 @@ export default class Plugin {
       // dll 引用路径
       publicPath: path.join(this._projectUrl, path.basename(this._dllSettings.dllOutput || '')),
       // dll最终输出的目录
-      outputPath: path.basename(this._dllSettings.dllOutput || './') || './',
+      outputPath: path.basename(this._dllSettings.dllOutput || './') || './'
     })
   }
 
@@ -182,8 +182,8 @@ export default class Plugin {
       minify: {
         // 压缩html
         collapseWhitespace: true, // 压缩空白
-        removeComments: true, // 去除注释
-      },
+        removeComments: true // 去除注释
+      }
     })
   }
 
@@ -229,7 +229,7 @@ export default class Plugin {
       test: /\.(css|js)$/,
       minRatio: 0.8, // 压缩前后比例
       threshold: 0, // 文件大于多少字节时开始压缩
-      algorithm: 'gzip',
+      algorithm: 'gzip'
     })
   }
 
@@ -255,9 +255,9 @@ export default class Plugin {
         // 配置路由请求缓存
         {
           urlPattern: /.*\.js/, // 匹配文件
-          handler: 'NetworkFirst', // 网络优先
-        },
-      ],
+          handler: 'NetworkFirst' // 网络优先
+        }
+      ]
     })
   }
 
@@ -302,7 +302,7 @@ export default class Plugin {
     return new BundleAnalyzerPlugin({
       analyzerMode: MutatePaths.getStaticDir(),
       openAnalyzer: false,
-      reportFilename: path.join(this._output, MutatePaths.getReportName()),
+      reportFilename: path.join(this._output, MutatePaths.getReportName())
     })
   }
 
@@ -351,11 +351,11 @@ export default class Plugin {
           globOptions: {
             dot: true,
             // gitignore: true,
-            ignore: ['**/index.html'],
+            ignore: ['**/index.html']
           },
-          to: '[name][ext]',
-        },
-      ],
+          to: '[name][ext]'
+        }
+      ]
     })
   }
 

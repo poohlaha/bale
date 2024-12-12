@@ -18,10 +18,10 @@ const babelImportPlugins = {
     {
       libraryName: 'vant',
       libraryDirectory: 'es',
-      style: true,
+      style: true
     },
-    'vant',
-  ],
+    'vant'
+  ]
 }
 /*
   interface MutateOptions {
@@ -75,7 +75,7 @@ MutateVersion.prototype.getConfigAndFiles = function () {
   const fileList = [...commonFileList, ...languageFileList]
   return {
     config,
-    fileList,
+    fileList
   }
 }
 

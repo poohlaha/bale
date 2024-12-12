@@ -14,5 +14,5 @@ export default {
   TASK: Symbol(), // task
   KILLSIGINT: Symbol(), // killsigint
   TIMER: Symbol(), // timer
-  HANDLER: Symbol(), // handler
+  HANDLER: Symbol() // handler
 }

@@ -59,7 +59,7 @@ class MutateService {
       entry,
       output,
       projectUrl: commander.url || '/',
-      port: MutatePaths.getPort(commander.port),
+      port: MutatePaths.getPort(commander.port)
     }
   }
 
@@ -77,9 +77,9 @@ class MutateService {
         output,
         settings: {
           port,
-          projectUrl,
-        },
-      },
+          projectUrl
+        }
+      }
     })
   }
 }

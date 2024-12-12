@@ -92,8 +92,8 @@ let opts: { [K: string]: any } = {
   url: 'https://api.github.com/repos/rustwasm/wasm-bindgen/branches/master',
   method: 'get',
   headers: {
-    Accept: 'application/vnd.github.v3+json',
-  },
+    Accept: 'application/vnd.github.v3+json'
+  }
 }
 
 let response = await send(opts, null)
@@ -111,7 +111,7 @@ formData.append('text', '测试')
 let updateOpts: any = {
   url: 'https://example.com/api/upload/',
   method: 'post',
-  form: formData,
+  form: formData
 }
 
 let response = await send(opts, null)

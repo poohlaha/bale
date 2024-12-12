@@ -28,7 +28,7 @@ const Popup = React.forwardRef<PopupRef, IPopupProps>((props: IPopupProps, ref: 
   const elementRef = useRef<any>()
 
   useImperativeHandle(ref, () => ({
-    getElement: () => elementRef.current,
+    getElement: () => elementRef.current
   }))
 
   const getDocument = (element?: HTMLElement) => {
@@ -58,7 +58,7 @@ const Popup = React.forwardRef<PopupRef, IPopupProps>((props: IPopupProps, ref: 
         className="portal-content"
         style={{
           left: `${props.point?.x}px`,
-          top: `${props.point?.y}px`,
+          top: `${props.point?.y}px`
         }}
       >
         {props.content || props.children}

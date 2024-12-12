@@ -28,7 +28,7 @@ test('test thread pool: ', async t => {
         console.log(loggerPrefix + `Processed ${i}`)
       },
       // timeout: 10000,
-      callback: () => {},
+      callback: () => {}
     })
   }
 

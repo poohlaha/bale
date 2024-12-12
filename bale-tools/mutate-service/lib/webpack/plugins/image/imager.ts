@@ -30,29 +30,29 @@ const schema = {
   properties: {
     mozjpeg: {
       additionalProperties: true,
-      type: 'object',
+      type: 'object'
     },
     optipng: {
       additionalProperties: true,
-      type: 'object',
+      type: 'object'
     },
     pngquant: {
       additionalProperties: true,
-      type: 'object',
+      type: 'object'
     },
     gifsicle: {
       additionalProperties: true,
-      type: 'object',
+      type: 'object'
     },
     webp: {
       additionalProperties: true,
-      type: 'object',
+      type: 'object'
     },
     svgo: {
       additionalProperties: true,
-      type: 'object',
-    },
-  },
+      type: 'object'
+    }
+  }
 }
 
 export default class Imager {
@@ -60,16 +60,16 @@ export default class Imager {
   public _plugins: Array<any> = []
   public readonly _defaultOpts: IImageMinimizerOptions = {
     mozjpeg: {
-      progressive: true,
+      progressive: true
     },
     optipng: {
-      optimizationLevel: 5,
+      optimizationLevel: 5
     },
     gifsicle: {
-      interlaced: true,
+      interlaced: true
     },
     jpegtran: {
-      progressive: true,
+      progressive: true
     },
     webp: {},
     svgo: {
@@ -81,14 +81,14 @@ export default class Imager {
               removeViewBox: false,
               addAttributesToSVGElement: {
                 params: {
-                  attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }],
-                },
-              },
-            },
-          },
-        },
-      ],
-    },
+                  attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }]
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
   }
 
   constructor(opts: boolean | IImageMinimizerOptions | undefined, name: string = '') {
@@ -125,7 +125,7 @@ export default class Imager {
 
     // @ts-ignore
     validate(schema, opts, {
-      name,
+      name
     })
 
     // mozjpeg

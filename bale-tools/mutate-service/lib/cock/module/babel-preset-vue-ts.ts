@@ -18,7 +18,7 @@ export default declare(() => ({
 
         return false
       },
-      plugins: [require('@babel/plugin-transform-typescript')],
-    },
-  ],
+      plugins: [require('@babel/plugin-transform-typescript')]
+    }
+  ]
 }))

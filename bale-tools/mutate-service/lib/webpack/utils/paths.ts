@@ -130,7 +130,7 @@ class Paths {
       output: '--output',
       env: '--env',
       url: '--url',
-      port: '--port',
+      port: '--port'
     }
   }
 

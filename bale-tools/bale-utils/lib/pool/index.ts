@@ -81,7 +81,7 @@ export default class ThreadPool {
         this[Symbols.TASK_QUEUE].push({
           task,
           resolve: resolve,
-          reject: reject,
+          reject: reject
         })
 
         // Logger.info(`New task waiting for idle thread. ${chalk.cyan(this[symbols.TASK_QUEUE].length)} tasks waiting.`)
@@ -101,7 +101,7 @@ export default class ThreadPool {
     const params: { [K: string]: any } = {
       type: 'task',
       data: task,
-      isFunction: false,
+      isFunction: false
     }
     if (typeof task === 'string') {
       // file

@@ -6,10 +6,10 @@ module.exports = {
       {
         useBuiltIns: 'usage',
         corejs: 3,
-        modules: false,
-      },
+        modules: false
+      }
     ],
-    '@babel/preset-typescript',
+    '@babel/preset-typescript'
   ],
-  plugins: ['@babel/plugin-syntax-dynamic-import', ['@babel/plugin-proposal-decorators', { legacy: true }], ['@babel/plugin-proposal-class-properties'], ['@babel/plugin-syntax-jsx']],
+  plugins: ['@babel/plugin-syntax-dynamic-import', ['@babel/plugin-proposal-decorators', { legacy: true }], ['@babel/plugin-proposal-class-properties'], ['@babel/plugin-syntax-jsx']]
 }

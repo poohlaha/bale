@@ -147,8 +147,8 @@ export default class CompileJs {
           babelPluginTransformRuntime,
           {
             corejs: false,
-            useESModules,
-          },
+            useESModules
+          }
         ])
       }
     }
@@ -170,7 +170,7 @@ export default class CompileJs {
         filename: this._filePath,
         presets,
         babelrc: false,
-        plugins,
+        plugins
       })
 
       if (!result) {

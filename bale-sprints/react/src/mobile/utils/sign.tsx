@@ -27,7 +27,7 @@ const Signature = {
     return CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(data), CryptoJS.enc.Utf8.parse(publicKey), {
       iv: CryptoJS.enc.Utf8.parse(iv),
       mode: CryptoJS.mode.CBC,
-      padding: CryptoJS.pad.Pkcs7,
+      padding: CryptoJS.pad.Pkcs7
     }).toString()
   },
 
@@ -38,10 +38,10 @@ const Signature = {
     let decrypt = CryptoJS.AES.decrypt(data, CryptoJS.enc.Utf8.parse(publicKey), {
       iv: CryptoJS.enc.Utf8.parse(iv),
       mode: CryptoJS.mode.CBC,
-      padding: CryptoJS.pad.Pkcs7,
+      padding: CryptoJS.pad.Pkcs7
     })
     return CryptoJS.enc.Utf8.stringify(decrypt).toString()
-  },
+  }
 }
 
 /**

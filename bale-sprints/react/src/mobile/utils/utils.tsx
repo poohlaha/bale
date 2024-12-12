@@ -14,7 +14,7 @@ const Utils = {
     if (needExpTime) {
       data = {
         data: item,
-        time: new Date().getTime(),
+        time: new Date().getTime()
       }
     } else {
       data = item
@@ -53,7 +53,7 @@ const Utils = {
     if (needExpTime) {
       let data: string = JSON.stringify({
         data: item,
-        time: new Date().getTime(),
+        time: new Date().getTime()
       })
 
       window.sessionStorage.setItem(name, Utils.encrypt(data))
@@ -146,7 +146,7 @@ const Utils = {
       dd: ('' + (date.getDate() + 100)).substr(1),
       HH: ('' + (date.getHours() + 100)).substr(1),
       mm: ('' + (date.getMinutes() + 100)).substr(1),
-      ss: ('' + (date.getSeconds() + 100)).substr(1),
+      ss: ('' + (date.getSeconds() + 100)).substr(1)
     }
     return format.replace(/(yyyy|MM?|dd?|HH?|ss?|mm?)/g, function () {
       // @ts-ignore
@@ -319,7 +319,7 @@ const Utils = {
    */
   isAndroid: () => {
     return navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Linux') > -1
-  },
+  }
 }
 
 export default Utils

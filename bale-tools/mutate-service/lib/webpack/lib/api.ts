@@ -88,7 +88,7 @@ export default class WebpackApi {
       entry,
       output,
       infrastructureLogging: {
-        level: 'none',
+        level: 'none'
       },
       optimization: this._getOptimization(),
       plugins: this._getPlugins(output.path || {}, clonedOpts.plugins || [], clonedOpts.languages || []),
@@ -99,11 +99,11 @@ export default class WebpackApi {
         symlinks: false, // 项目不使用 symlinks（例如 npm link 或者 yarn link）
         fallback: {
           crypto: false,
-          ...(this._settings.resolveFallback || {}),
+          ...(this._settings.resolveFallback || {})
         },
-        alias: clonedOpts.alias || {},
+        alias: clonedOpts.alias || {}
       },
-      externals: clonedOpts.externals || {},
+      externals: clonedOpts.externals || {}
       // experiments: this._getExperiments() || {},
     }
 
@@ -161,8 +161,8 @@ export default class WebpackApi {
       store: 'pack',
       buildDependencies: {
         defaultWebpack: ['webpack/lib/'],
-        config: [__filename],
-      },
+        config: [__filename]
+      }
     }
   }
 
@@ -181,7 +181,7 @@ export default class WebpackApi {
         filename: defaultOutputFileName,
         chunkFilename: defaultChuckFileName,
         assetModuleFilename: defaultAssetModuleFilename,
-        clean: this._clean, // 在生成文件之前清空 output 目录
+        clean: this._clean // 在生成文件之前清空 output 目录
       }
 
       return output
@@ -198,7 +198,7 @@ export default class WebpackApi {
         filename: defaultOutputFileName,
         chunkFilename: defaultChuckFileName,
         assetModuleFilename: defaultAssetModuleFilename,
-        clean: this._clean, // 在生成文件之前清空 output 目录
+        clean: this._clean // 在生成文件之前清空 output 目录
       }
     } else if (_.isObject(output)) {
       // object
@@ -262,16 +262,16 @@ export default class WebpackApi {
           // 这会导致更大的初始下载量并减慢页面加载速度
           // name: 'vendors',
           enforce: true,
-          chunks: 'all',
-        },
-      },
+          chunks: 'all'
+        }
+      }
     }
 
     const splitChunks: { [K: string]: any } | boolean = useSplitChunks ? splitChunksConfig : false
     const opts: { [K: string]: any } = {
       // 不论是否添加任何新的本地依赖，对于多次构建，vendor hash 都应该保持一致
       moduleIds: 'deterministic',
-      splitChunks,
+      splitChunks
     }
 
     let useRuntimeChunk = MutatePaths.getBooleanValue(this._settings.useRuntimeChunk, true)
@@ -306,7 +306,7 @@ export default class WebpackApi {
             minifyWhitespace: true, // 去掉空格
             minifyIdentifiers: true, // 缩短标识符
             minifySyntax: true, // 缩短语法
-            legalComments: 'none', // 去掉注释
+            legalComments: 'none' // 去掉注释
           })
         )
       }
@@ -325,17 +325,17 @@ export default class WebpackApi {
                 comparisons: false,
                 inline: 2,
                 drop_console: true,
-                drop_debugger: true,
+                drop_debugger: true
               },
               mangle: {
-                safari10: true,
+                safari10: true
               },
               output: {
                 ecma: 5,
                 comments: false,
-                ascii_only: true,
-              },
-            },
+                ascii_only: true
+              }
+            }
           })
         )
       }
@@ -513,7 +513,7 @@ export default class WebpackApi {
     // vue-loader v15 不支持 oneOf, {oneOf: new Loader(this, loaders).loaders || []}
 
     const options: { [K: string]: any } = {
-      rules: new Loader(this, loaders, languages).getLoaders() || [],
+      rules: new Loader(this, loaders, languages).getLoaders() || []
     }
 
     if (noParse) {
@@ -535,8 +535,8 @@ export default class WebpackApi {
         return {
           lazyCompilation: {
             imports: false,
-            entries: true,
-          },
+            entries: true
+          }
         }
       }
 

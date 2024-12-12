@@ -47,7 +47,7 @@ function publish() {
 
       return {
         filePath: projectPath,
-        command: 'npm publish --access public',
+        command: 'npm publish --access public'
       }
     }
 
@@ -96,8 +96,8 @@ function confirm(choices = [], done) {
         name: 'option',
         message: '请选择要 publish 的项目?',
         default: 0, // default to help in order to avoid clicking straight through
-        choices,
-      },
+        choices
+      }
     ])
     .then((result = {}) => {
       done?.(result.option)

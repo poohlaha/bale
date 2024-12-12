@@ -63,7 +63,7 @@ function addEventListenerWrap(target: any, eventType: any, callback: Function, o
       if (target.removeEventListener) {
         target.removeEventListener(eventType, callback)
       }
-    },
+    }
   }
 }
 
@@ -145,7 +145,7 @@ const PortalComponent: React.FC<IPortalComponentProps> = (props: PropsWithChildr
 
     let point = {
       x: 0,
-      y: 0,
+      y: 0
     }
 
     if (!Utils.isObjectNull(props.position)) {
@@ -184,7 +184,7 @@ const PortalComponent: React.FC<IPortalComponentProps> = (props: PropsWithChildr
     const newChildProps: any = {
       className: props.className || '',
       ref: composeRef(triggerRef, (child as any).ref),
-      onClick: onChildClick,
+      onClick: onChildClick
     }
 
     let trigger = React.cloneElement(child, newChildProps)
@@ -201,7 +201,7 @@ const PortalComponent: React.FC<IPortalComponentProps> = (props: PropsWithChildr
 }
 
 PortalComponent.defaultProps = {
-  nodeId: '', // popup-root
+  nodeId: '' // popup-root
 }
 
 export default PortalComponent

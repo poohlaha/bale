@@ -58,14 +58,14 @@ export default class CockService {
       entry,
       outputDir: output,
       rollupSettings: {
-        formats: format,
+        formats: format
       },
       tsSettings: {
-        useDeclaration: false,
+        useDeclaration: false
       },
       done: () => {
         Logger.info('End to build file .')
-      },
+      }
     })
   }
 }

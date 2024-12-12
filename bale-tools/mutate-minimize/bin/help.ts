@@ -8,7 +8,7 @@ import { program } from 'commander'
 let commands = {
   entry: '--entry',
   update: '--update',
-  exts: '--exts',
+  exts: '--exts'
 }
 
 export default function () {

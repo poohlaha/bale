@@ -2,12 +2,12 @@ module.exports = {
   root: true,
   env: {
     es6: true,
-    node: true,
+    node: true
   },
   parser: 'vue-eslint-parser',
   extends: ['plugin:vue/essential', 'plugin:vue/strongly-recommended', 'eslint:recommended', '@vue/typescript/recommended', 'plugin:prettier/recommended'],
   parserOptions: {
-    parser: '@typescript-eslint/parser',
+    parser: '@typescript-eslint/parser'
   },
   plugins: ['@typescript-eslint', 'vue', 'prettier'],
   rules: {
@@ -181,8 +181,8 @@ module.exports = {
     'no-duplicate-imports': [
       1,
       {
-        includeExports: true,
-      },
+        includeExports: true
+      }
     ], // 不允许重复导入
     'no-inline-comments': 0, // 禁止行内备注
     'no-trailing-spaces': 0, // 一行结束后面不要有空格
@@ -205,11 +205,11 @@ module.exports = {
         html: {
           void: 'always',
           normal: 'any',
-          component: 'any',
+          component: 'any'
         },
         svg: 'always',
-        math: 'always',
-      },
-    ],
-  },
+        math: 'always'
+      }
+    ]
+  }
 }

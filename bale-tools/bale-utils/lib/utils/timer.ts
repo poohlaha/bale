@@ -32,7 +32,7 @@ const Timer = function (promise, milliseconds, fallback, options) {
 
     options = {
       customTimers: { setTimeout, clearTimeout },
-      ...options,
+      ...options
     }
 
     timer = options.customTimers.setTimeout.call(

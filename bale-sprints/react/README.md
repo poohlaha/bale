@@ -117,7 +117,7 @@ import commonStore from './base/common.store'
 
 export function createStore() {
   return {
-    commonStore,
+    commonStore
   }
 }
 

@@ -81,7 +81,7 @@ export default class Request {
       responseType: config.responseType || '',
       baseURL: config.baseURL || process.env.API_ROOT,
       headers: config.headers || {},
-      type: config.type || 'json',
+      type: config.type || 'json'
     }
   }
 
@@ -122,7 +122,7 @@ export default class Request {
         message: COMMON.getLanguageText('LOADING'),
         type: 4,
         needTime: false,
-        duration: 0,
+        duration: 0
       }) // loading
     }
 
@@ -217,7 +217,7 @@ export default class Request {
           if (resData.code !== SYSTEM.TOKEN_EXPIRED_CODE) {
             TOAST.show({
               message: Request.getResponseErrorMessage(resData).reason || COMMON.getLanguageText('ERROR_MESSAGE'),
-              type: 4,
+              type: 4
             })
           }
 
@@ -255,7 +255,7 @@ export default class Request {
         if (config.showError !== false) {
           TOAST.show({
             message: Request.getResponseErrorMessage(res.data).reason || COMMON.getLanguageText('ERROR_MESSAGE'),
-            type: 3,
+            type: 3
           })
         }
       }
@@ -307,7 +307,7 @@ export default class Request {
 
     return {
       contentType,
-      fileName: decodeURI(fileName).replace(/"/g, ''),
+      fileName: decodeURI(fileName).replace(/"/g, '')
     }
   }
 
@@ -340,7 +340,7 @@ export default class Request {
       if (!data) {
         return {
           reason: COMMON.getLanguageText('ERROR_MESSAGE'),
-          code: 500,
+          code: 500
         }
       }
 
@@ -360,7 +360,7 @@ export default class Request {
 
     return {
       reason: reason,
-      code: code,
+      code: code
     }
   }
 
