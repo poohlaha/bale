@@ -9,9 +9,20 @@ module.exports = {
   parserOptions: {
     parser: '@typescript-eslint/parser'
   },
-  plugins: ['@typescript-eslint', 'vue', 'prettier'],
+  plugins: ['@typescript-eslint', 'vue', 'prettier', 'unused-imports'],
   rules: {
     'prettier/prettier': 1, // 错误
+    'unused-imports/no-unused-imports': 'warn',
+    // 检测未使用的变量
+    'unused-imports/no-unused-vars': [
+      'warn',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',   // 忽略以下划线开头的变量
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+      },
+    ],
     'no-alert': 0, // 禁止使用alert confirm prompt
     'no-array-constructor': 2, // 禁止使用数组构造器
     'no-async-promise-executor': 'off',
