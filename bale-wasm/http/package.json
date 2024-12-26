@@ -1,6 +1,6 @@
 {
   "name": "@bale-wasm/http",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "poohlaha",
   "description": "use `rust` develop `wasm` `http` by `Web API Request`.",
   "license": "MIT/Apache-2.0",

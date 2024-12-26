@@ -97,7 +97,7 @@ export interface IExperimentsOptions {
   futureDefaults?: boolean // Use defaults of the next major webpack and show warnings in any problematic places.
   lazyCompilation?: boolean | object // Compile entrypoints and dynamic imports only when they are in use. It can be used for either Web or Node.js.
   outputModule?: boolean // Once enabled, webpack will output ECMAScript module syntax whenever possible. For instance, import() to load chunks, ESM exports to expose chunk data, among others.
-  asyncWebAssembly?: boolean // upport the new WebAssembly according to the updated specification, it makes a WebAssembly module an async module. And it is enabled by default when
+  asyncWebAssembly?: boolean // Support the new WebAssembly according to the updated specification, it makes a WebAssembly module an async module. And it is enabled by default when
   layers?: boolean // Enable module and chunk layers.
   syncWebAssembly?: boolean // Support the old WebAssembly like in webpack 4.
   topLevelAwait?: boolean // Support the Top Level Await Stage 3 proposal, it makes the module an async module when await is used on the top-level. And it is enabled by default when experiments.futureDefaults is set to true.
