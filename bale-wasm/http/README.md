@@ -2,6 +2,14 @@
 
 use `rust` develop `wasm` `http` by `Web API Request`。
 
+## Webpack5
+
+```js
+experiments: {
+  asyncWebAssembly: true
+}
+```
+
 ## Usage
 
 It is necessary to determine whether the browser supports `wasm`：

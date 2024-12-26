@@ -1,6 +1,6 @@
 {
   "name": "@bale-tools/mutate-minimize",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "poohlaha",
   "description": "mutate minimize files.",
   "license": "MIT",
@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "commander": "^9.4.1",
-    "@bale-tools/utils": "^2.0.7",
     "chalk": "^4.1.2",
     "fs-extra": "^10.1.0",
     "clean-css": "^5.3.1",

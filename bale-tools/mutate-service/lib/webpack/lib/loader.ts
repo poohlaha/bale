@@ -55,7 +55,7 @@ export default class Loader {
       exclude: /@babel(?:\/|\\{1,2})runtime/,
       // exclude: /node_modules/,
       // include: [paths.resolve('src')],
-      loader: 'source-map-loader', // eslint-loader
+      loader: 'source-map-loader',
       options: {
         emitWarning: true,
         emitError: true,

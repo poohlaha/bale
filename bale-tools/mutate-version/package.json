@@ -1,6 +1,6 @@
 {
   "name": "@bale-tools/mutate-version",
-  "version": "2.3.0",
+  "version": "2.3.2",
   "author": "poohlaha",
   "keywords": [
     "react",
@@ -19,7 +19,6 @@
     "format": "npx prettier --write ."
   },
   "dependencies": {
-    "@bale-tools/utils": "^2.0.3",
     "lodash": "^4.17.21",
     "fs-extra": "^11.1.0"
   },

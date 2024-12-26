@@ -18,10 +18,10 @@ module.exports = {
       'warn',
       {
         vars: 'all',
-        varsIgnorePattern: '^_',   // 忽略以下划线开头的变量
+        varsIgnorePattern: '^_', // 忽略以下划线开头的变量
         args: 'after-used',
-        argsIgnorePattern: '^_',
-      },
+        argsIgnorePattern: '^_'
+      }
     ],
     'no-alert': 0, // 禁止使用alert confirm prompt
     'no-array-constructor': 2, // 禁止使用数组构造器

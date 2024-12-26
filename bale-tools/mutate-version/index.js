@@ -104,7 +104,18 @@ MutateVersion.prototype.copy = function () {
   const hasWrite = this.validatePackage()
   if (hasWrite) {
     // install
-    BaleUtils.Paths.install()
+    // 判断项目下是否有 .npmrc 文件, 如果有则使用 pnpm 安装
+    let needPnpm = false
+    if (fsExtra.pathExistsSync(path.join(this.appRootDir, '.npmrc'))) {
+      needPnpm = true
+    }
+
+    // pnpm
+    if (needPnpm) {
+      BaleUtils.Paths.execInstall('pnpm')
+    } else {
+      BaleUtils.Paths.install()
+    }
   }
 
   // end
@@ -145,8 +156,10 @@ MutateVersion.prototype.readDir = function (dir) {
 MutateVersion.prototype.validatePackage = function () {
   const appPackageJson = require(path.join(this.appRootDir, 'package.json'))
   const appPackage = _.cloneDeep(appPackageJson) || {}
+  const peerDependencies = appPackage.peerDependencies || {}
   const dependencies = appPackage.dependencies || {}
   const devDependencies = appPackage.devDependencies || {}
+  let configPeerDependencies = this.config.peerDependencies || {}
   let configDependencies = this.config.dependencies || {}
   let configDevDependencies = this.config.devDependencies || {}
 
@@ -171,9 +184,10 @@ MutateVersion.prototype.validatePackage = function () {
     return hasWrite
   }
 
+  let hasPeerDependenciesWrite = rewriteDependencies(peerDependencies, configPeerDependencies || {})
   let hasDependenciesWrite = rewriteDependencies(dependencies, configDependencies || {})
   let hasDevDependenciesWrite = rewriteDependencies(devDependencies, configDevDependencies || {})
-  let flag = hasDependenciesWrite || hasDevDependenciesWrite
+  let flag = hasPeerDependenciesWrite || hasDependenciesWrite || hasDevDependenciesWrite
 
   // judge `husky` and `lint-staged`
   const appPackageHusky = appPackage['husky'] || {}

@@ -243,10 +243,41 @@ class Paths {
   }
 
   /**
+   * 是否有 pnpm
+   */
+  public hasPnpm(): boolean {
+    return shell.which('pnpm')
+  }
+
+  /**
    * 安装依赖
    */
   public install() {
     shell.exec(`${this.hasYarn() ? 'yarn' : 'npm'} install`)
+  }
+
+  /**
+   * 执行安装依赖
+   */
+  public execInstall(command: string = '') {
+    let cmd = ''
+    if (command === 'pnpm') {
+      if (this.hasPnpm()) {
+        cmd = 'pnpm'
+      }
+    }
+
+    if (command === 'yarn') {
+      if (this.hasYarn()) {
+        cmd = 'yarn'
+      }
+    }
+
+    if (Utils.isBlank(cmd || '')) {
+      cmd = 'npm'
+    }
+
+    shell.exec(`${cmd} install`)
   }
 
   /**
@@ -263,6 +294,8 @@ class Paths {
     let command = ''
     if (this.hasYarn()) {
       command = `yarn ${isGlobal ? 'global' : ''} add ${packageName}`
+    } else if (this.hasPnpm()) {
+      command = `pnpm add ${packageName} ${isGlobal ? '-g' : ''}`
     } else {
       command = `npm install ${isGlobal ? '-g' : ''} ${packageName}`
     }
