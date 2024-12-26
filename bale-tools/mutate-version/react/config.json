@@ -1,8 +1,8 @@
 {
   "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-router-dom": "^7.1.1"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.10.0"
   },
   "dependencies": {
     "lib-flexible": "^0.3.2",
@@ -32,8 +32,8 @@
   },
   "tsDependencies": {
     "typescript": "^5.7.2",
-    "@types/react": "^19.0.2",
-    "@types/react-dom": "^19.0.2"
+    "@types/react": "^18.0.12",
+    "@types/react-dom": "^18.0.5"
   },
   "tsDevDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.18.2",
