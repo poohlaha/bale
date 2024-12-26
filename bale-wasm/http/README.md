@@ -4,7 +4,8 @@ use `rust` develop `wasm` `http` by `Web API Request`。
 
 ## Webpack5
 
-```js
+```
+target: ['web', 'es2020'],
 experiments: {
   asyncWebAssembly: true
 }
