@@ -1,3 +1,3 @@
 /* tslint:disable */
 /* eslint-disable */
-export function send(opts: any, request: any): Promise<any>
+export function send(opts: any, request: any): Promise<any>;
