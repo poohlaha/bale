@@ -33,6 +33,7 @@ export default class Rollup {
     this._appRootDir = Paths.getAppRootDir(clonedOpts.appRootDir || '')
     this._defaultFormats = ['umd', 'es', 'amd', 'iife', 'cjs', 'system']
     this._input = this._getInputOpts(clonedOpts.input || '')
+    this._input = this._input.replaceAll('\\', '/')
     this._formats = this._getFormats(clonedOpts.formats)
     this._min = _.isNil(clonedOpts.min) ? true : clonedOpts.min // 最小化压缩
     this._output = opts.output || {}
