@@ -25,6 +25,7 @@ export default class Rollup {
   private readonly _formats: Array<string>
   private readonly _min: boolean
   private readonly _output: { [K: string]: any }
+  private readonly _external: any
   private readonly _plugins: Array<any>
   private readonly _done: Function | null
 
@@ -37,6 +38,7 @@ export default class Rollup {
     this._formats = this._getFormats(clonedOpts.formats)
     this._min = _.isNil(clonedOpts.min) ? true : clonedOpts.min // 最小化压缩
     this._output = opts.output || {}
+    this._external = opts.external || []
     this._plugins = opts.plugins || []
     this._done = opts.done || null
   }
@@ -177,8 +179,10 @@ export default class Rollup {
     // file
     rollupOutput.file = getOutputFile(rollupOutput.file)
 
-    // name, 自动添加 `__`
-    rollupOutput.name = '__' + fileName.toUpperCase() + '__'
+    if (Utils.isBlank(rollupOutput.name || '')) {
+      // name, 自动添加 `__`
+      rollupOutput.name = '__' + fileName.toUpperCase() + '__'
+    }
 
     // format
     rollupOutput.format = format || this._defaultFormats[0]
@@ -219,6 +223,7 @@ export default class Rollup {
       treeshake: {
         moduleSideEffects: false // code from imported modules will only be retained if at least one exported value is used
       },
+      external: this._external || [],
       input: this._input,
       output: this._getOutputOpts(format)
     }

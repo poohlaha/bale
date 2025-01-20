@@ -10,5 +10,6 @@ export interface IRollupOptions {
   output?: { [K: string]: any } // rollup 输出
   min?: boolean // 是否最小化, 默认为 true
   plugins?: Array<any> // rollup plugins
+  external?: Array<any> // rollup external
   done?: Function // 完成后的回调
 }
