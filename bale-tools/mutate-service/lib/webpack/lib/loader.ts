@@ -434,6 +434,14 @@ export default class Loader {
 
     loaders.push(lessLoader) // less
 
+    let useCssLoader = MutatePaths.getBooleanValue(this._settings.useCssLoader, false)
+    if (!useCssLoader) {
+      return {
+        test: /\.(less)$/i,
+        use: loaders
+      }
+    }
+
     return {
       test: /\.(less|css)$/i,
       use: loaders
@@ -471,6 +479,8 @@ export default class Loader {
    * css loader
    */
   private _getCssLoader(): object {
+    let useCssLoader = MutatePaths.getBooleanValue(this._settings.useCssLoader, false)
+    if (!useCssLoader) return {}
     const options: { [K: string]: any } = {
       test: /\.css$/i,
       exclude: /node_modules/,
@@ -481,7 +491,8 @@ export default class Loader {
             modules: false
           }
         },
-        'style-loader'
+        'style-loader',
+        'postcss-loader'
       ]
     }
 
@@ -603,9 +614,11 @@ export default class Loader {
     if (Utils.isObjectNull(loader)) return
 
     if (Array.isArray(loader)) {
-      this._loaders = this._loaders.concat(loader)
+      for (let l of loader) {
+        this._loaders.unshift(l)
+      }
     } else {
-      this._loaders.push(loader)
+      this._loaders.unshift(loader)
     }
   }
 
@@ -618,9 +631,9 @@ export default class Loader {
     this._addLoader(this._getThreadLoader()) // thread loader
     this._addLoader(this._getSvgLoader()) // svg loader
     this._addLoader(this._getTomlLoader()) // toml loader
+    this._addLoader(this._getCssLoader()) // css loader
     this._addLoader(this._getLessLoader()) // less css loader
     this._addLoader(this._getSassLoader()) // sass loader
-    this._addLoader(this._getCssLoader()) // css loader
     this._addLoader(this._getResourceLoaders()) // resource
   }
 

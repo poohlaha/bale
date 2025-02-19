@@ -55,6 +55,7 @@ export interface IApiSettingOptions {
   useTerserWebpackPlugin?: boolean // 是否在生产环境中使用 terser-webpack-plugin 默认为 true
   htmlTemplatePath?: string // index.html 路径 默认为根目录下的 public/index.html
   usePreLoader?: boolean // 是否使用预加载 默认为 false
+  useCssLoader?: boolean // 是否使用 css 加载器 默认为 true
   threadLoader?: IRateThreadLoaderOptions // thread-loader
   px2remLoader?: IRatePx2remLoaderOptions // 是否使用 px2rem-loader
   resourceLoader?: IRateResourceLoaderOptions // 资源配置

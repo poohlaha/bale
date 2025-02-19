@@ -40,7 +40,7 @@ class WebpackCompiler {
     const webpackApi: WebpackApI = new WebpackApI(clonedOpts.script, clonedOpts.opts || {})
     let webpackOpts: { [K: string]: any } = webpackApi.getOpts() || {}
 
-    Logger.info(`Current Environment is ${chalk.cyan(webpackApi.getMode() || MutatePaths.getModes[0])} .`)
+    Logger.info(`Current Environment is ${chalk.cyan(webpackApi.getMode() || MutatePaths.getModes()[0])} .`)
 
     if (_.isNil(webpackOpts) || _.isEmpty(webpackOpts)) {
       Logger.throw('Webpack Configuration Is Empty !')
