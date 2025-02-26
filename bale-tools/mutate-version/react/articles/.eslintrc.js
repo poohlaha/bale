@@ -14,7 +14,7 @@ module.exports = {
   plugins: [
     'prettier', // 启用 prettier 插件
     'unused-imports', // 启用 unused-imports 插件
-    'react-hooks', // 启用 react-hooks 插件
+    'react-hooks' // 启用 react-hooks 插件
   ],
   parserOptions: {
     ecmaVersion: 'latest', // 启用 ECMAScript 最新的语法
@@ -231,13 +231,13 @@ module.exports = {
     'jsx-control-statements/jsx-use-if-tag': 0,
     'react-hooks/rules-of-hooks': 'error', // 检查 Hook 的规则
     'react-hooks/exhaustive-deps': 'off', // 检查 effect 的依赖
-    "react/jsx-uses-react": "off",  // React 17 不再需要显示导入 React
-    "react/react-in-jsx-scope": "off",  // React 17 不再需要 JSX scope
-    "no-restricted-globals": ["error", "event", "fdescribe"],
-    "react/jsx-filename-extension": [
-      "error",
+    'react/jsx-uses-react': 'off',  // React 17 不再需要显示导入 React
+    'react/react-in-jsx-scope': 'off',  // React 17 不再需要 JSX scope
+    'no-restricted-globals': ['error', 'event', 'fdescribe'],
+    'react/jsx-filename-extension': [
+      'error',
       {
-        "extensions": [".tsx", ".jsx"]
+        'extensions': ['.tsx', '.jsx']
       }
     ]
   }
