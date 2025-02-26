@@ -10,11 +10,13 @@ module.exports = {
     'plugin:react/recommended', // 启用 React 的推荐规则
     'airbnb', // 引入 Airbnb 的配置，包括 React 相关的规则
     'plugin:@typescript-eslint/recommended', // 启用 TypeScript 插件的推荐规则
+    'plugin:jsx-a11y/recommended'
   ],
   plugins: [
     'prettier', // 启用 prettier 插件
     'unused-imports', // 启用 unused-imports 插件
-    'react-hooks' // 启用 react-hooks 插件
+    'react-hooks', // 启用 react-hooks 插件
+    'jsx-a11y'
   ],
   parserOptions: {
     ecmaVersion: 'latest', // 启用 ECMAScript 最新的语法
@@ -46,7 +48,7 @@ module.exports = {
         argsIgnorePattern: '^_'
       }
     ],
-    'no-restricted-syntax': ['error', 'ForOfStatement'],
+    'no-restricted-syntax': ['off'],
     'no-alert': 0, // 禁止使用alert confirm prompt
     'no-array-constructor': 2, // 禁止使用数组构造器
     'no-async-promise-executor': 'off',
@@ -54,7 +56,7 @@ module.exports = {
     'no-caller': 1, // 禁止使用arguments.caller或arguments.callee
     'no-catch-shadow': 2, // 禁止catch子句参数与外部作用域变量同名
     'no-class-assign': 2, // 禁止给类赋值
-    'no-cond-assign': 2, // 禁止在条件表达式中使用赋值语句
+    'no-cond-assign': 'off', // 禁止在条件表达式中使用赋值语句
     'no-const-assign': 2, // 禁止修改const声明的变量
     'no-constant-condition': 2, // 禁止在条件中使用常量表达式 if(true) if(1)
     'no-continue': 0, // 禁止使用continue
@@ -169,7 +171,7 @@ module.exports = {
     'guard-for-in': 0, //for in循环要用if语句过滤
     'handle-callback-err': 0, // nodejs 处理错误
     'id-length': 0, // 变量名长度
-    // indent: [2, 4], // 缩进风格
+    'indent': 'off',
     'init-declarations': 0, // 声明时必须赋初值
     'key-spacing': [0, { beforeColon: false, afterColon: true }], // 对象字面量中冒号的前后空格
     'lines-around-comment': 0, // 行前/行后备注
@@ -228,12 +230,60 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-inferrable-types': 'off',
     '@typescript-eslint/ban-types': 'off',
+    'import/no-cycle': 'off', // 禁用循环依赖检查
+    '@typescript-eslint/no-explicit-any': 'warn',
+    'arrow-body-style': ['off'], // 使用块语句
+    'object-curly-newline': ['off'], // 禁用该规则
+    'react/no-array-index-key': 'off',
+    'react/jsx-wrap-multilines': ['error', {
+      'declaration': 'parens',
+      'assignment': 'parens',
+      'return': 'parens'
+    }],
+    'react/destructuring-assignment': 'off',
+    'react/function-component-definition': 'off', // 强制使用函数声明来定义组件
     'jsx-control-statements/jsx-use-if-tag': 0,
     'react-hooks/rules-of-hooks': 'error', // 检查 Hook 的规则
     'react-hooks/exhaustive-deps': 'off', // 检查 effect 的依赖
     'react/jsx-uses-react': 'off',  // React 17 不再需要显示导入 React
     'react/react-in-jsx-scope': 'off',  // React 17 不再需要 JSX scope
     'no-restricted-globals': ['error', 'event', 'fdescribe'],
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-noninteractive-element-to-interactive-role': 'off',
+    'jsx-a11y/no-noninteractive-element-interactions': 'off',
+    'import/prefer-default-export': 'off',
+    'no-multiple-classes': 'off',
+    'max-classes-per-file': 'off',
+    'class-methods-use-this': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
+    '@typescript-eslint/no-unsafe-function-type': 'off',
+    'react/self-closing-comp': 'off',
+    'for-direction': 'off',
+    'no-unreachable-loop': 'off',
+    'import/newline-after-import': 'off',
+    'import/no-unresolved': ['off'],
+    'lines-between-class-members': 'off',
+    'default-param-last': 'off',
+    'no-return-await': 'off',
+    'prefer-destructuring': 'off',
+    'import/named': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'import/no-duplicates': 'off',
+    'import/order': 'off',
+    'import/no-self-import': 'off',
+    'import/no-relative-packages': 'off',
+    'import/no-named-as-default': 'off',
+    'import/no-named-as-default-member': 'off',
+    'import/extensions': 'off',
+    '@typescript-eslint/no-require-imports': 'off',
+    'import/no-useless-path-segments': 'off',
+    'import/no-dynamic-require': 'off',
+    'global-require': 'off',
+    'no-empty-function': 'off',
+    'jsx-a11y/alt-text': 'off',
+    'react/jsx-closing-tag-location': 'off',
+    'react/no-unescaped-entities': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
     'react/jsx-filename-extension': [
       'error',
       {
