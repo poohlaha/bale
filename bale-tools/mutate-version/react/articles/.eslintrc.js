@@ -1,41 +1,39 @@
 module.exports = {
   root: true,
   env: {
-    browser: true,
     node: true,
-    es6: true,
-    // "jquery": true
-    jest: true,
-    'jsx-control-statements/jsx-control-statements': true
-  },
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-      experimentalObjectRestSpread: true
-    }
-  },
-  globals: {
-    // "wx": "readonly",
-    $log: true,
-    $http: true,
-    $paraphrase: true
+    browser: true,
+    es6: true
   },
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:jsx-control-statements/recommended', // 需要另外配合babel插件使用
-    'prettier'
+    'eslint:recommended', // 使用 ESLint 的默认推荐规则
+    'plugin:react/recommended', // 启用 React 的推荐规则
+    'airbnb', // 引入 Airbnb 的配置，包括 React 相关的规则
+    'plugin:@typescript-eslint/recommended', // 启用 TypeScript 插件的推荐规则
   ],
+  plugins: [
+    'prettier', // 启用 prettier 插件
+    'unused-imports', // 启用 unused-imports 插件
+    'react-hooks', // 启用 react-hooks 插件
+  ],
+  parserOptions: {
+    ecmaVersion: 'latest', // 启用 ECMAScript 最新的语法
+    sourceType: 'module',  // 允许使用模块化代码（import/export）
+    jsx: true
+  },
+  parser: '@typescript-eslint/parser', // 使用 TypeScript 的解析器
   settings: {
+    'import/resolver': {
+      typescript: {
+        project: './tsconfig.json'
+      }
+    },
     react: {
       version: 'detect'
     }
   },
-  plugins: ['@typescript-eslint', 'react', 'jsx-control-statements', 'prettier', 'react-hooks', 'unused-imports'],
   rules: {
-    'prettier/prettier': 1,
+    'prettier/prettier': 'warn',
     eqeqeq: ['error', 'allow-null'], //要求使用 === 和 !==
     'unused-imports/no-unused-imports': 'warn',
     // 检测未使用的变量
@@ -48,6 +46,7 @@ module.exports = {
         argsIgnorePattern: '^_'
       }
     ],
+    'no-restricted-syntax': ['error', 'ForOfStatement'],
     'no-alert': 0, // 禁止使用alert confirm prompt
     'no-array-constructor': 2, // 禁止使用数组构造器
     'no-async-promise-executor': 'off',
@@ -231,6 +230,15 @@ module.exports = {
     '@typescript-eslint/ban-types': 'off',
     'jsx-control-statements/jsx-use-if-tag': 0,
     'react-hooks/rules-of-hooks': 'error', // 检查 Hook 的规则
-    'react-hooks/exhaustive-deps': 'warn' // 检查 effect 的依赖
+    'react-hooks/exhaustive-deps': 'off', // 检查 effect 的依赖
+    "react/jsx-uses-react": "off",  // React 17 不再需要显示导入 React
+    "react/react-in-jsx-scope": "off",  // React 17 不再需要 JSX scope
+    "no-restricted-globals": ["error", "event", "fdescribe"],
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [".tsx", ".jsx"]
+      }
+    ]
   }
 }

@@ -189,14 +189,14 @@ MutateVersion.prototype.validatePackage = function () {
   let hasDevDependenciesWrite = rewriteDependencies(devDependencies, configDevDependencies || {})
   let flag = hasPeerDependenciesWrite || hasDependenciesWrite || hasDevDependenciesWrite
 
-  // judge `husky` and `lint-staged`
-  const appPackageHusky = appPackage['husky'] || {}
+  // judge `husky` and `lint-staged`, husky 9 以后不需要在 package.json 中配置 husky
+  // const appPackageHusky = appPackage['husky'] || {}
   const appPackageLintStaged = appPackage['lint-staged'] || {}
-  let configFlag = _.isEqual(appPackageHusky, this.config['husky']) && _.isEqual(appPackageLintStaged, this.config['lint-staged'])
+  let configFlag = _.isEqual(appPackageLintStaged, this.config['lint-staged'])
   const hasWrite = flag || !configFlag
 
   if (hasWrite) {
-    appPackage['husky'] = this.config['husky'] || {}
+    // appPackage['husky'] = this.config['husky'] || {}
     appPackage['lint-staged'] = this.config['lint-staged'] || {}
     fsExtra.writeFileSync(path.join(this.appRootDir, 'package.json'), JSON.stringify(appPackage, null, 2) + os.EOL)
   }
