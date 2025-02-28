@@ -284,6 +284,14 @@ module.exports = {
     'react/jsx-closing-tag-location': 'off',
     'react/no-unescaped-entities': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/no-children-prop': 'off',
+    'react/jsx-curly-newline': 'off',
+    'jsx-a11y/no-noninteractive-tabindex': 'off',
+    'jsx-a11y/tabindex-no-positive': 'off',
+    'react/jsx-one-expression-per-line': 'off',
+    'implicit-arrow-linebreak': 'off',
+    'react/no-unknown-property': 'off',
     'react/jsx-filename-extension': [
       'error',
       {
