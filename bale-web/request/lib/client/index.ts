@@ -122,7 +122,8 @@ enum Type {
   FORM_DATA = '2',
   BLOB = '3',
   TEXT = '4',
-  HTML = '5'
+  HTML = '5',
+  READER = '6',
 }
 
 enum CONTENT_TYPE_VALUE {
@@ -286,6 +287,14 @@ export class HttpRequest {
       } else if (props.responseType === Type.BLOB) {
         try {
           httpResponse.body = await response.blob()
+          isSuccess = true
+        } catch (err: any) {
+          console.error('Error while get response:', err)
+          httpResponse.error = `Error while get response: ${err.message}`
+        }
+      }  else if (props.responseType === Type.READER) {
+        try {
+          httpResponse.body = response
           isSuccess = true
         } catch (err: any) {
           console.error('Error while get response:', err)

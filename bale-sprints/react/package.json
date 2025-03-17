@@ -1,6 +1,6 @@
 {
   "name": "@bale-sprint/react",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "keywords": [
     "react",
     "react",
@@ -20,8 +20,8 @@
   },
   "scripts": {},
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.10.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.3.0"
   }
 }

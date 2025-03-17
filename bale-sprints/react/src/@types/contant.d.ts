@@ -5,6 +5,7 @@
  */
 declare module 'react'
 declare module 'react-dom'
+declare module 'react-router'
 declare module 'react-router-dom'
 declare module 'react-fastclick'
 declare module 'mobx-react-lite'

@@ -1,11 +1,9 @@
 {
-  "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.10.0"
-  },
+  "peerDependencies": {},
   "dependencies": {
-    "lib-flexible": "^0.3.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.3.0",
     "@bale-web/request": "^0.1.6",
     "crypto-js": "^4.0.0",
     "mobx": "^5.15.7",
@@ -34,19 +32,13 @@
     "postcss-write-svg": "^3.0.1"
   },
   "tsDependencies": {
-    "typescript": "^5.7.2",
-    "@types/react": "^18.0.12",
-    "@types/react-dom": "^18.0.5"
+    "typescript": "^5.8.2",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4"
   },
   "tsDevDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.18.2",
     "@typescript-eslint/parser": "^8.18.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
   },
   "lint-staged": {
     "src/**/*.{vue,jsx,js,tsx,ts,json,css,md}": ["prettier --write"],

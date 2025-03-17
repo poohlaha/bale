@@ -40,7 +40,7 @@
 - 在 `communal` 下创建 `layout.tsx` 文件, 编写路由, 参考如下:
 
 ```typescript
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router'
 const RenderRoutes = (routes: RouteInterface[]) => {
   // 判断没用的路由, 跳转到404
   let usedRoutes: Array<RouteInterface> = []

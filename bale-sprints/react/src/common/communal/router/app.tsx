@@ -6,7 +6,7 @@
 //   /!\ DO NOT MODIFY THIS FILE /!\
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 import React from 'react'
-import { BrowserRouter, HashRouter, Route } from 'react-router-dom'
+import { BrowserRouter, HashRouter, Route } from 'react-router'
 import Exception from '../exception'
 import Layout from '@srcCommunal/layout'
 import ScrollToTop from '@router/scrollToTop'

@@ -61,7 +61,7 @@ module.exports = {
     'no-constant-condition': 2, // 禁止在条件中使用常量表达式 if(true) if(1)
     'no-continue': 0, // 禁止使用continue
     'no-control-regex': 2, // 禁止在正则表达式中使用控制字符
-    'no-console': 'warn',
+    'no-console': 'off',
     'no-debugger': 'warn',
     'no-div-regex': 1, // 不能使用看起来像除法的正则表达式/=foo/
     'prefer-const': 0, // 建议使用 const 关闭
@@ -137,7 +137,7 @@ module.exports = {
     'no-unexpected-multiline': 2, // 避免多行表达式
     'no-underscore-dangle': 0, // 标识符不能以_开头或结尾
     'no-unneeded-ternary': 2, // 禁止不必要的嵌套 var isYes = answer === 1 ? true : false;
-    'no-unreachable': 2, // 不能有无法执行的代码
+    'no-unreachable': 'off', // 不能有无法执行的代码
     'no-unused-expressions': 0, // 禁止无用的表达式
     'no-unused-vars': [0, { vars: 'all', args: 'after-used' }], // 不能有声明后未被使用的变量或参数
     'no-use-before-define': 0, // 未定义前不能使用
@@ -292,6 +292,7 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'implicit-arrow-linebreak': 'off',
     'react/no-unknown-property': 'off',
+    'semi-style': 'off',
     'react/jsx-filename-extension': [
       'error',
       {
