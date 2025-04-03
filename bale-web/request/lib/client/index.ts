@@ -124,6 +124,7 @@ enum Type {
   TEXT = '4',
   HTML = '5',
   READER = '6',
+  CUSTOMER = '7'
 }
 
 enum CONTENT_TYPE_VALUE {
@@ -198,7 +199,7 @@ export class HttpRequest {
     let body = props.body || null
     let requestBody: string | Blob | FormData | ArrayBuffer | URLSearchParams = ''
     if (body !== null && body !== undefined) {
-      if (body instanceof Blob || body instanceof FormData || body instanceof ArrayBuffer || body instanceof URLSearchParams) {
+      if (body instanceof Blob || body instanceof FormData || body instanceof ArrayBuffer || body instanceof URLSearchParams || props.type === Type['CUSTOMER']) {
         requestBody = body
       } else {
         requestBody = JSON.stringify(body)
