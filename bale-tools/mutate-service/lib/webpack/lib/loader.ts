@@ -434,7 +434,7 @@ export default class Loader {
 
     loaders.push(lessLoader) // less
 
-    let useCssLoader = MutatePaths.getBooleanValue(this._settings.useCssLoader, false)
+    let useCssLoader = MutatePaths.getBooleanValue(this._settings.useCssLoader, true)
     if (!useCssLoader) {
       return {
         test: /\.(less)$/i,
@@ -479,7 +479,7 @@ export default class Loader {
    * css loader
    */
   private _getCssLoader(): object {
-    let useCssLoader = MutatePaths.getBooleanValue(this._settings.useCssLoader, false)
+    let useCssLoader = MutatePaths.getBooleanValue(this._settings.useCssLoader, true)
     if (!useCssLoader) return {}
     const options: { [K: string]: any } = {
       test: /\.css$/i,
