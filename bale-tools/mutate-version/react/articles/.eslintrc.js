@@ -293,6 +293,12 @@ module.exports = {
     'implicit-arrow-linebreak': 'off',
     'react/no-unknown-property': 'off',
     'semi-style': 'off',
+    'react/no-unstable-nested-components': 'off',
+    'react/prop-types': 'off',
+    'no-await-in-loop': 'off',
+    'jsx-a11y/anchor-is-valid': 'off',
+    'prefer-rest-params': 'off',
+    'jsx-a11y/mouse-events-have-key-events': 'off',
     'react/jsx-filename-extension': [
       'error',
       {
