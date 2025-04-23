@@ -299,6 +299,7 @@ module.exports = {
     'jsx-a11y/anchor-is-valid': 'off',
     'prefer-rest-params': 'off',
     'jsx-a11y/mouse-events-have-key-events': 'off',
+    '@typescript-eslint/no-unused-expressions': 'off',
     'react/jsx-filename-extension': [
       'error',
       {
