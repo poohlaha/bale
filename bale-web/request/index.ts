@@ -4,8 +4,8 @@
  * @author poohlaha
  */
 
-import { HttpRequest } from './lib/client'
+import { HttpRequest, HttpRequestAbort } from './lib/client'
 
-export { HttpRequest }
+export { HttpRequest, HttpRequestAbort }
 
-export type { IHttpRequestProps, IHttpRequestFetchProps, HttpResponse } from './lib/client'
+export type { IHttpRequestProps, IHttpRequestFetchProps, HttpResponse } from './lib/client/types'
