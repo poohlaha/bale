@@ -444,6 +444,10 @@ export class Client {
    * 中断
    */
   public abort() {
-    this.controller?.abort()
+    try {
+      this.controller?.abort()
+    } catch (_) {
+      console.log()
     }
+  }
 }
