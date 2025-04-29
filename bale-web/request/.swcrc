@@ -1,0 +1,16 @@
+{
+  "jsc": {
+    "baseUrl": ".",
+    "parser": {
+      "syntax": "typescript"
+    },
+    "target": "es2020"
+  },
+  "module": {
+    "type": "es6"
+  },
+  "exclude": ["node_modules"],
+  "sourceMaps": false,
+  "isModule": true,
+  "minify": false
+}

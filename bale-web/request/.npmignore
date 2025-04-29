@@ -1,0 +1,10 @@
+/build
+/.idea
+.gitignore
+yarn.lock
+package-lock.json
+node_modules
+yarn-error.log
+.swcrc
+scripts
+

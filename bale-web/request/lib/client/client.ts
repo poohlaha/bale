@@ -25,7 +25,13 @@ import {
   ReferrerPolicy,
   CONTENT_TYPE_VALUE,
   Type,
-  IRequestProps, IHttpRequestProps, Method, DEFAULT_TIMEOUT, FOREVER_TIMEOUT, CONTENT_TYPE, SUCCESS_CODE
+  IRequestProps,
+  IHttpRequestProps,
+  Method,
+  DEFAULT_TIMEOUT,
+  FOREVER_TIMEOUT,
+  CONTENT_TYPE,
+  SUCCESS_CODE
 } from './types'
 
 export class ClientHandler {
@@ -263,7 +269,7 @@ export class ClientHandler {
 }
 
 export class Client {
-    private controller: AbortController | null = null
+  private controller: AbortController | null = null
 
   /**
    * 发送请求

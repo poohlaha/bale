@@ -12,13 +12,8 @@
  * @date 2023-12-05
  * @author poohlaha
  */
-import {
-  HttpResponse,
-  IHttpRequestFetchProps,
-  IHttpRequestProps,
-} from './types'
-import {Client} from './client'
-
+import { HttpResponse, IHttpRequestFetchProps, IHttpRequestProps } from './types'
+import { Client } from './client'
 
 export class HttpRequest {
   /**
@@ -34,7 +29,6 @@ export class HttpRequest {
 }
 
 export class HttpRequestAbort {
-
   private client: Client | null = null
 
   /**
@@ -44,7 +38,7 @@ export class HttpRequestAbort {
    */
   // @ts-ignore
   public async send(props: IHttpRequestProps, fetchProps?: IHttpRequestFetchProps): Promise<HttpResponse> {
-   this.client = new Client()
+    this.client = new Client()
     return await this.client?.send(props, fetchProps)
   }
 

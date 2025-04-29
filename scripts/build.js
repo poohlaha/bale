@@ -60,6 +60,5 @@ function build(packageName = '') {
 function run() {
   fsExtra.removeSync(outputPath)
   build('bale-tools')
-  build('bale-web')
 }
 module.exports = run()
