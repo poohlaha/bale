@@ -481,20 +481,42 @@ export default class Loader {
   private _getCssLoader(): object {
     let useCssLoader = MutatePaths.getBooleanValue(this._settings.useCssLoader, true)
     if (!useCssLoader) return {}
-    const options: { [K: string]: any } = {
+
+    let excludeCssLoaderNodeModules = MutatePaths.getBooleanValue(this._settings.excludeCssLoaderNodeModules, true)
+    let options: { [K: string]: any } = {
       test: /\.css$/i,
-      exclude: /node_modules/,
-      use: [
-        {
-          loader: 'css-loader',
-          options: {
-            modules: false
-          }
-        },
-        'style-loader',
-        'postcss-loader'
-      ]
+      use: []
     }
+
+    const loaders: Array<object | string> = []
+
+    let useMiniCssPlugin: boolean = MutatePaths.getBooleanValue(this._settings.useMiniCssPlugin, this._production)
+    if (useMiniCssPlugin) {
+      let opts: { [K: string]: any } = {}
+      if (this._projectUrl === '/') opts.publicPath = '../../' // 两层
+      loaders.push({
+        loader: MiniCssExtractPlugin.loader,
+        options
+      })
+    } else if (excludeCssLoaderNodeModules) {
+      loaders.push({ loader: 'style-loader' })
+    }
+
+    loaders.push({
+      loader: 'css-loader',
+      options: {
+        modules: false,
+        importLoaders: 1 // 让 @import 的 CSS 也能走 postcss
+      }
+    })
+
+    loaders.push('postcss-loader')
+
+    if (excludeCssLoaderNodeModules) {
+      options.exclude = /node_modules/
+    }
+
+    options.use = loaders || []
 
     // no esbuild loader for css
     /*

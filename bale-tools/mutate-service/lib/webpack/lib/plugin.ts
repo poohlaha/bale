@@ -353,7 +353,7 @@ export default class Plugin {
             // gitignore: true,
             ignore: ['**/index.html']
           },
-          to: '[name][ext]'
+          to: '[path][name][ext]'
         }
       ]
     })

@@ -263,6 +263,12 @@ export default class WebpackApi {
           // name: 'vendors',
           enforce: true,
           chunks: 'all'
+        },
+        styles: {
+          name: 'styles',
+          type: 'css/mini-extract',
+          chunks: 'all',
+          enforce: true
         }
       }
     }
@@ -283,7 +289,8 @@ export default class WebpackApi {
     if (this._production) {
       // 生产环境
       opts.usedExports = true // 标记不被使用的函数, 用于 webpack5 的 tree sharking
-      opts.minimize = true //
+      opts.minimize = true
+      opts.sideEffects = true
     }
 
     opts.minimizer = this._getMinimizer()
