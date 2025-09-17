@@ -29,6 +29,8 @@ const babelImportPlugins = {
     useTypescript: Boolean, // 是否使用 typescript
     babelImportPluginName: '', // antd-mobile | vant
     babelImportPluginOpts: [], // other plugins array
+    needUpdatePackageJson: true, // 是否更改 package.json, 默认为 true
+    excludeFiles: [], // 过滤文件
   }
  */
 const MutateVersion = function MutateVersion(opts = {}) {
@@ -40,6 +42,8 @@ const MutateVersion = function MutateVersion(opts = {}) {
   this.useTypescript = this.needTypescript(this.opts.useTypescript)
   this.babelImportPluginName = this.getBabelImportPlugin(this.opts.babelImportPluginName)
   this.babelFileName = 'babel.config.js'
+  this.needUpdatePackageJson = this.getNeedUpdatePackageJson(this.opts.needUpdatePackageJson)
+  this.excludeFiles = this.opts.excludeFiles || []
   this.init()
 }
 
@@ -95,8 +99,10 @@ MutateVersion.prototype.copy = function () {
   // 判断是否需要重新写入 .babelrc 文件
   this.rewriteBabelConfig()
 
-  if (_.isNil(this.config) || BaleUtils.Utils.isObjectNull(this.config)) {
-    Logger.info('All files have been copied .')
+  if (_.isNil(this.config) || BaleUtils.Utils.isObjectNull(this.config) || !this.needUpdatePackageJson) {
+    // Logger.info('All files have been copied .')
+    const endTime = new Date().getTime()
+    Logger.info(`Finished ${chalk.cyan('copy files')} after ${chalk.magenta(`${endTime - startTime} ms`)}`, 'whiteBright')
     return
   }
 
@@ -138,6 +144,10 @@ MutateVersion.prototype.readDir = function (dir) {
   let filePathList = []
   for (let file of fileList) {
     const basename = path.basename(file)
+    // 过滤文件
+    if (this.excludeFiles.includes(basename)) {
+      continue
+    }
     if (!this.useTypescript) {
       if (basename !== 'tsconfig.json' && !ignoreFileList.includes(basename)) {
         filePathList.push(file)
@@ -202,6 +212,13 @@ MutateVersion.prototype.validatePackage = function () {
   }
 
   return hasWrite
+}
+
+// 判断是否需要更改 package.json 文件
+MutateVersion.prototype.getNeedUpdatePackageJson = function (updatePackageJson) {
+  if (_.isNil(updatePackageJson)) return true
+  if (typeof updatePackageJson !== 'boolean') return Boolean(updatePackageJson)
+  return updatePackageJson
 }
 
 // 判断是否需要 typescript
