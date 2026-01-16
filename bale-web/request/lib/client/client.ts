@@ -167,7 +167,7 @@ export class ClientHandler {
     if (type === Type.FORM_SUBMIT) {
       requestHeaders.append(CONTENT_TYPE, CONTENT_TYPE_VALUE.FORM_SUBMIT)
     } else if (type === Type.FORM_DATA) {
-      requestHeaders.append(CONTENT_TYPE, CONTENT_TYPE_VALUE.FORM_DATA)
+      // requestHeaders.append(CONTENT_TYPE, CONTENT_TYPE_VALUE.FORM_DATA)
     } else if (type === Type.BLOB) {
       requestHeaders.append(CONTENT_TYPE, CONTENT_TYPE_VALUE.BLOB)
     } else if (type === Type.TEXT) {
